@@ -2,50 +2,44 @@
 
 Updated 9 November 2026. Owner: Abdullah (`Abdullah-SE-bit`).
 
-## Current phase and task
+## Current task and readiness
 
-P01-A1 [#32](https://github.com/Artfever/AI_PROJECT/issues/32): establish the shared repository and package folders. Technical scaffold and local verification complete; READY FOR REVIEW. Task and shared P01 gate remain open pending actual acceptance.
-Branch: `chore/P01-A1-repo-structure`, based on `45b8279` from current `main`.
-No uncommitted work existed at session start; `git pull --ff-only origin main` reported already up to date before branching.
+P01-A2 [#108](https://github.com/Artfever/AI_PROJECT/issues/108): editable package installation, repository-relative paths, ignore rules, and one supported Python version. Work is on `chore/P01-A2-portable-setup`, from current `main` at `64fb041`. Working tree was clean before switching branches; `git pull --ff-only origin main` fast-forwarded safely.
 
-## Inspected inputs and evidence
+P01-A1 is accepted and merged: [PR #268](https://github.com/Artfever/AI_PROJECT/pull/268), squash commit `64fb041253052695f30b96db3220258c83bac900`, approved by Shaheer (`Artfever`) on final head `c165a4e`, merged 9 November 2026 (Asia/Karachi). Issue #32 is CLOSED. Its final PR CI run 42515325539 and [post-merge run 42515693647](https://github.com/Artfever/AI_PROJECT/actions/runs/42515693647) passed. Earlier work commits were `50649a2`, `f313dd0`, and `c165a4e`; no hash-only commit was made.
 
-- Read root AGENTS, README, CONTRIBUTING, BRANCHING_AND_REVIEWS, ISSUE_BACKLOG, DEPENDENCIES_AND_MERGE_ORDER, COURSE_COMPLIANCE, all three handoffs, and the supplied local Abdullah/master-plan guidance for P01 and shared contracts. Checked P01-A1's exact record in `planning/backlog.json` against live #32.
-- `gh api repos/Artfever/AI_PROJECT/issues/32/dependencies/blocked_by` returned `[]`; P01 has no predecessor phase. #32 is open and assigned to Abdullah.
-- Base `45b8279` already tracked `src/fleetpulse/__init__.py`, `app/Home.py`, `tests/test_bootstrap.py`, docs, pyproject, ignore rules, and CI. Six planned package subfolders plus `app/pages`, root data, and artifacts were absent.
-- Existing scaffold came from PR #1 (`f72039a`); backlog PR #266 (`f9ada9f`) supplied planning and governance, not acceptance of Abdullah's tasks.
-- GitHub repository API reports owner `Artfever`, default `main`; branch API reports `protected: true`. Collaborator API shows Artfever owner/admin and Abdullah-SE-bit / TahaSohail-Goat with write access.
-- Abdullah explicitly confirmed team agreement to keep `Artfever/AI_PROJECT`, use Python 3.12 and the planned folder names, and working access for all three teammates. Distribution `fleetpulse-ai` and import `fleetpulse` remain intact. No repository rename, new repository, or invitation is needed.
+Native blockers for #108 list only CLOSED #32, with no predecessor phase. Reviewed package/data/artifact markers are present in merged source. The issue, backlog, and local P01 guide all put A2 next, followed by A3. P01-A3 and Shaheer's P01-S1 require reviewed A2 output; neither is complete merely because bootstrap tests already exist.
 
-## Changed files and downstream interface
+## Inspected state and decisions
 
-- Six `src/fleetpulse/{data,features,models,evaluation,optimization,services}/__init__.py` markers, with docstrings explicitly stating implementation is pending.
-- Empty markers: `app/pages/.gitkeep`, `data/{raw,demo}/.gitkeep`, and `artifacts/{development,final,experiments}/.gitkeep`.
-- `.gitignore`: allow those nested directory markers while still ignoring other data and artifact contents. Local private guides stay ignored.
-- `docs/REPOSITORY_LAYOUT.md`: before/after inventory, naming decision, package versus local-data distinction, and repeatable inspection commands.
-- README links the layout; this handoff records observed work.
-- No data, trained models, metrics, later-phase functions, or actual Streamlit pages were added. P01-T1 remains Taha's work. P01-A2 consumes this directory structure; P01-A3 follows A2. Shaheer's P01-S1 waits for reviewed A2 output.
+- Read AGENTS, current README and contribution/review rules, P01 backlog and dependency order, all handoffs, #108 and native blockers, the manifest's exact P01-A2 record, and supplied local Abdullah/master-plan P01 guidance. Private guides stay ignored.
+- Existing `pyproject.toml` already defines setuptools discovery under `src`, distribution `fleetpulse-ai` 0.1.0, Python `>=3.12,<3.13`, Streamlit 1.67.0, and dev pytest 8.4.2 / Ruff 0.17.4. Existing `PROJECT_ROOT = Path(__file__).resolve().parents[2]` points to the editable source checkout. Existing ignore rules cover environments, caches, metadata, guides, data, and artifacts.
+- Preserve these existing working interfaces. No new path helper, duplicate dependency pins, scientific fixtures, or later-phase feature is needed for A2.
+- Abdullah previously confirmed team agreement on `Artfever/AI_PROJECT`, Python 3.12, folder names, and working access for all three members. GitHub permissions were independently verified in A1.
+- Checked official Streamlit documentation on 9 November 2026: https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy supports selecting Python 3.12. https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/app-dependencies routes bare pyproject.toml to Poetry. Our build uses setuptools; P07's deployment owner must explicitly validate cloud package installation. No cloud deployment is claimed or configured here.
 
-## Checks and actual results
+## Changed files and contract
 
-- `git status --short --branch`: clean `main...origin/main` before work.
-- `git ls-files src/fleetpulse app tests docs data artifacts`: new markers are tracked in the index. A Python stdin audit asserted all 16 expected scaffold files exist and are not ignored, then asserted all 16 are in `git ls-files`.
-- Ignore audit: 14 hypothetical data/artifact paths (including nested files) and both supplied private guides remain ignored. Repeatable check: `git check-ignore data/raw/train_FD001.txt data/demo/example.csv artifacts/development/model.pkl artifacts/final/model.pkl artifacts/experiments/result.json Abdullah.md FleetPulse_Phase_Implementation_Plan.md` printed all seven paths. No probe dataset/model files were created.
-- Default `python --version`: 3.14.6 (outside project's supported range). `uv venv --python 3.12 .venv` created a new, ignored CPython 3.12.16 environment; `uv pip install --python .venv/Scripts/python.exe pip` installed pip 26.3.
-- `.venv/Scripts/python.exe -m pip install -e '.[dev]'`: PASS, exit 0, built and installed `fleetpulse-ai 0.1.0` in the freshly created Python 3.12.16 environment. Installed Streamlit 1.67.0, pytest 8.4.2, Ruff 0.17.4.
-- With `.venv/Scripts` prepended to this shell's PATH, `ruff check .`: PASS, `All checks passed!` (Ruff 0.17.4).
-- With `.venv/Scripts` prepended to PATH, `python -m pytest -q`: PASS, `2 passed in 1.58s`; JUnit output is ignored at `reports/junit.xml`. This includes the existing Home empty-state AppTest.
-- `.venv/Scripts/python.exe -m pip check`: PASS, `No broken requirements found.` An installed-package Python `-c` check imported all six new `fleetpulse` namespaces, verified their installed versions, and printed the actual repository root via `PROJECT_ROOT`.
-- `git diff --check` and `git diff --cached --check`: PASS.
-- `streamlit run app/Home.py`: NOT RUN; no app behavior changed in P01-A1. The existing pytest AppTest and PR Streamlit smoke CI provide separate checks; the shared P01 gate still requires evidence on each teammate's environment.
-- Detailed protection API (`gh api repos/Artfever/AI_PROJECT/branches/main/protection`): HTTP 404 for this account. Exact configured requirements could not be freshly audited. Protected status is independently confirmed; follow repository review rules and GitHub's merge controls.
+- `docs/SETUP.md`: actual Python 3.12 environment/install commands for PowerShell and Linux/macOS, explicit interpreter usage, editable-install semantics, `PROJECT_ROOT` examples, CWD versus CLI path behavior, ignored-file policy, and cited deployment-version compatibility/limitations.
+- README and `docs/CONTRIBUTING.md` link the setup guide.
+- This handoff records A1 acceptance and A2's actual verification. Runtime/package/ignore configuration was inspected and reused, not recreated.
+- `PROJECT_ROOT / 'data' / 'raw'` and `PROJECT_ROOT / 'artifacts'` are filesystem locations, not loaded datasets or bundles. No aircraft readings or synthetic numeric results apply to this setup-only task. Issue #108's generic engine-identity/past-only/units checks are not applicable; actual package/root invariants are the focused evidence.
 
-## Commits, PR, blockers and exact next steps
+## Checks and observed results
 
-- Work commit `50649a2` pushed to `origin/chore/P01-A1-repo-structure`. [PR #268](https://github.com/Artfever/AI_PROJECT/pull/268) is OPEN against protected `main`, authored by `Abdullah-SE-bit`, with `Closes #32`. #32 remains open until accepted completion/merge.
-- CLI authentication is Abdullah-SE-bit. The connected GitHub plugin reports TahaSohail-Goat, so publishing used the authenticated local `gh`/Git route to preserve Abdullah's authorship. No teammate message or explicit review request was sent. GitHub automatically lists Artfever and Taha as requested reviewers through CODEOWNERS.
-- Documentation commit `f313dd0` records the PR. Initial PR CI run 42515161615 was superseded/cancelled after that push. [CI run 42515192384](https://github.com/Artfever/AI_PROJECT/actions/runs/42515192384) on `f313dd0` PASSED all five jobs: branch-policy (5s), quality (24s), unit-and-contract-tests (29s), streamlit-smoke (27s), ci-gate (4s). `gh run watch 42515192384 --repo Artfever/AI_PROJECT --exit-status --interval 10` exited 0; `gh pr checks 268 --repo Artfever/AI_PROJECT` confirmed all five pass.
-- Read-only GraphQL review-thread inspection returned no threads. No human approval exists; GitHub reports `REVIEW_REQUIRED` / `BLOCKED`. A Copilot comment reported insufficient review quota and is not approval. Exact branch-protection settings remain unavailable as noted above.
-- This substantive evidence update records the completed CI and review audit before its commit. Monitor the new head's required checks after pushing it; the preceding run proves `f313dd0`, not a later revision. Closure remains conditional on peer acceptance and required CI at merge. Record this evidence commit's hash in the next substantive handoff update, rather than creating a hash-only commit.
-- One actual current-revision approval from Shaheer (`Artfever`) OR Taha (`TahaSohail-Goat`), required CI, and resolved conversations are still needed. Abdullah should inspect the diff and command output and share reviewed output with teammates personally. Do not self-approve or bypass merge controls.
-- After reviewed A1 completion and merged output is available, update from main and inspect P01-A2 [#108](https://github.com/Artfever/AI_PROJECT/issues/108) and its native blockers. Then inspect P01-A3 [#185](https://github.com/Artfever/AI_PROJECT/issues/185) after reviewed A2. Neither downstream task was implemented or declared done.
+- Existing clone, Python 3.12.16 environment with `.venv/Scripts` prepended to PATH: `ruff check .` PASS; `python -m pytest -q` PASS, **2 passed in 0.89s**. Existing Home AppTest included. `git diff --check` PASS.
+- Python stdin link audit: all relative Markdown links in changed docs resolve.
+- Python stdin Git audit: environment, reports, editable-install egg-info, both private guides, raw-data and final-model probes are ignored; no .venv or reports files tracked.
+- Fresh-checkout experiment: exported tracked source at `64fb041` using `git archive --format=zip HEAD` to a temporary `FleetPulse P01-A2 .../relocated checkout` directory containing spaces, outside the working clone. It contains no editor settings, local guides, or original virtual environment. `uv venv --python 3.12 --seed <relocated checkout>/.venv` PASS (Python 3.12.16, pip 26.3).
+- Fresh environment `<relocated checkout>/.venv/Scripts/python.exe -m pip install -e '.[dev]'`, from that checkout with PYTHONPATH unset: PASS, exit 0. Local diagnostic paths and install log are ignored at `reports/p01-a2-location.json` and `reports/p01-a2-install.log`.
+- In the relocated checkout, `<venv python> -m pytest -q`: PASS, **2 passed in 1.17s**; `<venv python> -m pip check`: PASS, no broken requirements.
+- From its parent directory (an unrelated CWD), `<venv python> -c <portability assertions> <checkout>` with PYTHONPATH unset: PASS. Asserted PROJECT_ROOT equals the relocated checkout, all six package namespaces load source from that copy, and pyproject, Home, raw-data marker and final-artifact marker exist under it. No sys.path modifications or editor configuration used.
+- Installed metadata check using `importlib.metadata` and `packaging.specifiers`: PASS, Requires-Python accepts 3.12.16 and excludes 3.13/3.14. Runtime files were unchanged, so the exported merged base is the runtime under review; the new changes are documentation and evidence.
+- Local `streamlit run app/Home.py`: NOT RUN because no app code changed; existing AppTest and required PR smoke CI are separate evidence. Linux/macOS shell commands were NOT RUN on this Windows machine. Cross-laptop verification remains Shaheer P01-S1 and the shared phase gate, not an asserted A2 result.
+
+## Commits, PR, remaining checks, and next steps
+
+- Local A2 verification is complete: READY FOR REVIEW. Commit this focused documentation/evidence change, push only the task branch, and open a PR to protected main with `Closes #108`. Record its commit/PR and current review state in the next substantive update. No source change was manufactured to replace existing passing setup.
+- Local `gh` is authenticated as Abdullah-SE-bit; use it for publishing. The GitHub connector was previously authenticated as Taha; do not publish through that identity. No teammate messages or explicit review requests are authorized.
+- One actual approval from Shaheer (`Artfever`) OR Taha (`TahaSohail-Goat`), all required CI on the current revision, and resolved conversations are required. Abdullah should read the commands/diff and hand over evidence personally. A2 stays open until accepted completion/merge; P01 shared gate remains open.
+- After reviewed/merged A2 output exists, update from main and inspect P01-A3 [#185](https://github.com/Artfever/AI_PROJECT/issues/185), its native blockers, and existing tests against its own acceptance criteria. Do not stack A3 implementation on unreviewed A2. Shaheer can independently verify A2 through P01-S1 [#186](https://github.com/Artfever/AI_PROJECT/issues/186) once it is available.
