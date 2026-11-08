@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: read
+  issues: read
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -30,7 +31,16 @@ jobs:
         run: |
           [[ "$BASE" == main ]] || { echo 'PRs must target main'; exit 1; }
           [[ "$HEAD_REPO" == "$BASE_REPO" ]] || { echo 'Use a branch in this repository'; exit 1; }
-          [[ "$HEAD" =~ ^(feat|fix|chore)/[a-z0-9_-]+/[a-z0-9_-]+$ ]] || { echo 'Use feat/fix/chore/<person>/<task>'; exit 1; }
+          [[ "$HEAD" =~ ^(feat|fix|chore)/P[0-9]{2}-[AST][123]-[a-z0-9-]+$ || "$HEAD" == chore/shaheer/issue-backlog ]] || { echo 'Use feat/fix/chore/<task-id>-<description>'; exit 1; }
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        if: github.event_name == 'pull_request'
+      - name: Check linked task and hard blockers
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_HEAD: ${{ github.event.pull_request.head.ref }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: python scripts/check_pr_issue.py
 
   quality:
     runs-on: ubuntu-latest

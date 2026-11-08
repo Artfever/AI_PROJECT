@@ -1,0 +1,1308 @@
+{
+  "repository": "Artfever/AI_PROJECT",
+  "source_sha256": "7937cfbeb384c98e569ef0c6fcca6ec4621f3a6689c774b017a152a68ac455b0",
+  "phases": {
+    "P01": {
+      "id": 6273910810,
+      "number": 6,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/6"
+    },
+    "P02": {
+      "id": 6273911319,
+      "number": 7,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/7"
+    },
+    "P03": {
+      "id": 6273911636,
+      "number": 8,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/8"
+    },
+    "P04": {
+      "id": 6273912002,
+      "number": 9,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/9"
+    },
+    "P05": {
+      "id": 6273912292,
+      "number": 10,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/10"
+    },
+    "P06": {
+      "id": 6273912597,
+      "number": 11,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/11"
+    },
+    "P07": {
+      "id": 6273912891,
+      "number": 12,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/12"
+    },
+    "P08": {
+      "id": 6273913237,
+      "number": 13,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/13"
+    },
+    "P09": {
+      "id": 6273913531,
+      "number": 14,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/14"
+    },
+    "P10": {
+      "id": 6273913908,
+      "number": 15,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/15"
+    },
+    "P11": {
+      "id": 6273916084,
+      "number": 20,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/20"
+    },
+    "P12": {
+      "id": 6273916835,
+      "number": 22,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/22"
+    },
+    "P13": {
+      "id": 6273917188,
+      "number": 23,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/23"
+    },
+    "P14": {
+      "id": 6273914627,
+      "number": 16,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/16"
+    },
+    "P15": {
+      "id": 6273915024,
+      "number": 17,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/17"
+    },
+    "P16": {
+      "id": 6273915323,
+      "number": 18,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/18"
+    },
+    "P17": {
+      "id": 6273917679,
+      "number": 24,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/24"
+    },
+    "P18": {
+      "id": 6273915630,
+      "number": 19,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/19"
+    },
+    "P19": {
+      "id": 6273916456,
+      "number": 21,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/21"
+    },
+    "P20": {
+      "id": 6273918173,
+      "number": 25,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/25"
+    },
+    "P21": {
+      "id": 6273918566,
+      "number": 26,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/26"
+    },
+    "P22": {
+      "id": 6273918911,
+      "number": 27,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/27"
+    },
+    "P23": {
+      "id": 6273919233,
+      "number": 28,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/28"
+    },
+    "P24": {
+      "id": 6273919497,
+      "number": 29,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/29"
+    },
+    "P25": {
+      "id": 6273919917,
+      "number": 30,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/30"
+    },
+    "P26": {
+      "id": 6273920189,
+      "number": 31,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/31"
+    }
+  },
+  "tasks": {
+    "P01-A1": {
+      "id": 6273920610,
+      "number": 32,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/32"
+    },
+    "P01-A2": {
+      "id": 6273981579,
+      "number": 108,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/108"
+    },
+    "P01-A3": {
+      "id": 6274036134,
+      "number": 185,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/185"
+    },
+    "P01-S1": {
+      "id": 6274036505,
+      "number": 186,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/186"
+    },
+    "P01-S2": {
+      "id": 6274058912,
+      "number": 238,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/238"
+    },
+    "P01-S3": {
+      "id": 6274069536,
+      "number": 264,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/264"
+    },
+    "P01-T1": {
+      "id": 6273921213,
+      "number": 33,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/33"
+    },
+    "P01-T2": {
+      "id": 6273982111,
+      "number": 109,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/109"
+    },
+    "P01-T3": {
+      "id": 6274036881,
+      "number": 187,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/187"
+    },
+    "P02-A1": {
+      "id": 6273921739,
+      "number": 34,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/34"
+    },
+    "P02-A2": {
+      "id": 6273982749,
+      "number": 110,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/110"
+    },
+    "P02-A3": {
+      "id": 6274037213,
+      "number": 188,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/188"
+    },
+    "P02-S1": {
+      "id": 6273922474,
+      "number": 35,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/35"
+    },
+    "P02-S2": {
+      "id": 6273983334,
+      "number": 111,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/111"
+    },
+    "P02-S3": {
+      "id": 6274037550,
+      "number": 189,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/189"
+    },
+    "P02-T1": {
+      "id": 6273923076,
+      "number": 36,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/36"
+    },
+    "P02-T2": {
+      "id": 6273984351,
+      "number": 112,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/112"
+    },
+    "P02-T3": {
+      "id": 6274037976,
+      "number": 190,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/190"
+    },
+    "P03-A1": {
+      "id": 6273923655,
+      "number": 37,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/37"
+    },
+    "P03-A2": {
+      "id": 6274004763,
+      "number": 113,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/113"
+    },
+    "P03-A3": {
+      "id": 6274038365,
+      "number": 191,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/191"
+    },
+    "P03-S1": {
+      "id": 6273924155,
+      "number": 38,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/38"
+    },
+    "P03-S2": {
+      "id": 6274005286,
+      "number": 114,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/114"
+    },
+    "P03-S3": {
+      "id": 6274038711,
+      "number": 192,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/192"
+    },
+    "P03-T1": {
+      "id": 6273924665,
+      "number": 39,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/39"
+    },
+    "P03-T2": {
+      "id": 6274005794,
+      "number": 115,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/115"
+    },
+    "P03-T3": {
+      "id": 6274039050,
+      "number": 193,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/193"
+    },
+    "P04-A1": {
+      "id": 6273925735,
+      "number": 40,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/40"
+    },
+    "P04-A2": {
+      "id": 6274006276,
+      "number": 116,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/116"
+    },
+    "P04-A3": {
+      "id": 6274039414,
+      "number": 194,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/194"
+    },
+    "P04-S1": {
+      "id": 6273940130,
+      "number": 41,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/41"
+    },
+    "P04-S2": {
+      "id": 6274006644,
+      "number": 117,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/117"
+    },
+    "P04-S3": {
+      "id": 6274059235,
+      "number": 239,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/239"
+    },
+    "P04-T1": {
+      "id": 6273940602,
+      "number": 42,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/42"
+    },
+    "P04-T2": {
+      "id": 6274007172,
+      "number": 118,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/118"
+    },
+    "P04-T3": {
+      "id": 6274059554,
+      "number": 240,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/240"
+    },
+    "P05-A1": {
+      "id": 6273941193,
+      "number": 43,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/43"
+    },
+    "P05-A2": {
+      "id": 6274007607,
+      "number": 119,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/119"
+    },
+    "P05-A3": {
+      "id": 6274039821,
+      "number": 195,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/195"
+    },
+    "P05-S1": {
+      "id": 6274008012,
+      "number": 120,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/120"
+    },
+    "P05-S2": {
+      "id": 6274040158,
+      "number": 196,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/196"
+    },
+    "P05-S3": {
+      "id": 6274059933,
+      "number": 241,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/241"
+    },
+    "P05-T1": {
+      "id": 6273941753,
+      "number": 44,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/44"
+    },
+    "P05-T2": {
+      "id": 6274008448,
+      "number": 121,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/121"
+    },
+    "P05-T3": {
+      "id": 6274069914,
+      "number": 265,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/265"
+    },
+    "P06-A1": {
+      "id": 6273942247,
+      "number": 45,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/45"
+    },
+    "P06-A2": {
+      "id": 6274009063,
+      "number": 122,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/122"
+    },
+    "P06-A3": {
+      "id": 6274040704,
+      "number": 197,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/197"
+    },
+    "P06-S1": {
+      "id": 6273942783,
+      "number": 46,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/46"
+    },
+    "P06-S2": {
+      "id": 6274009688,
+      "number": 123,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/123"
+    },
+    "P06-S3": {
+      "id": 6274060331,
+      "number": 242,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/242"
+    },
+    "P06-T1": {
+      "id": 6273943276,
+      "number": 47,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/47"
+    },
+    "P06-T2": {
+      "id": 6274010195,
+      "number": 124,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/124"
+    },
+    "P06-T3": {
+      "id": 6274060670,
+      "number": 243,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/243"
+    },
+    "P07-A1": {
+      "id": 6273943723,
+      "number": 48,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/48"
+    },
+    "P07-A2": {
+      "id": 6274010937,
+      "number": 125,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/125"
+    },
+    "P07-A3": {
+      "id": 6274041033,
+      "number": 198,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/198"
+    },
+    "P07-S1": {
+      "id": 6273944229,
+      "number": 49,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/49"
+    },
+    "P07-S2": {
+      "id": 6274011536,
+      "number": 126,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/126"
+    },
+    "P07-S3": {
+      "id": 6274061001,
+      "number": 244,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/244"
+    },
+    "P07-T1": {
+      "id": 6273944894,
+      "number": 50,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/50"
+    },
+    "P07-T2": {
+      "id": 6274011959,
+      "number": 127,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/127"
+    },
+    "P07-T3": {
+      "id": 6274061399,
+      "number": 245,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/245"
+    },
+    "P08-A1": {
+      "id": 6273945363,
+      "number": 51,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/51"
+    },
+    "P08-A2": {
+      "id": 6274012333,
+      "number": 128,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/128"
+    },
+    "P08-A3": {
+      "id": 6274041687,
+      "number": 199,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/199"
+    },
+    "P08-S1": {
+      "id": 6273945834,
+      "number": 52,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/52"
+    },
+    "P08-S2": {
+      "id": 6274012765,
+      "number": 129,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/129"
+    },
+    "P08-S3": {
+      "id": 6274061725,
+      "number": 246,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/246"
+    },
+    "P08-T1": {
+      "id": 6273946335,
+      "number": 53,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/53"
+    },
+    "P08-T2": {
+      "id": 6274013175,
+      "number": 130,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/130"
+    },
+    "P08-T3": {
+      "id": 6274062102,
+      "number": 247,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/247"
+    },
+    "P09-A1": {
+      "id": 6273946868,
+      "number": 54,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/54"
+    },
+    "P09-A2": {
+      "id": 6274013543,
+      "number": 131,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/131"
+    },
+    "P09-A3": {
+      "id": 6274062496,
+      "number": 248,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/248"
+    },
+    "P09-S1": {
+      "id": 6273947292,
+      "number": 55,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/55"
+    },
+    "P09-S2": {
+      "id": 6274013940,
+      "number": 132,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/132"
+    },
+    "P09-S3": {
+      "id": 6274062906,
+      "number": 249,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/249"
+    },
+    "P09-T1": {
+      "id": 6273947747,
+      "number": 56,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/56"
+    },
+    "P09-T2": {
+      "id": 6274014318,
+      "number": 133,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/133"
+    },
+    "P09-T3": {
+      "id": 6274042033,
+      "number": 200,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/200"
+    },
+    "P10-A1": {
+      "id": 6273948238,
+      "number": 57,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/57"
+    },
+    "P10-A2": {
+      "id": 6274014689,
+      "number": 134,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/134"
+    },
+    "P10-A3": {
+      "id": 6274063295,
+      "number": 250,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/250"
+    },
+    "P10-S1": {
+      "id": 6273948699,
+      "number": 58,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/58"
+    },
+    "P10-S2": {
+      "id": 6274015086,
+      "number": 135,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/135"
+    },
+    "P10-S3": {
+      "id": 6274042437,
+      "number": 201,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/201"
+    },
+    "P10-T1": {
+      "id": 6273949319,
+      "number": 59,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/59"
+    },
+    "P10-T2": {
+      "id": 6274015426,
+      "number": 136,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/136"
+    },
+    "P10-T3": {
+      "id": 6274063707,
+      "number": 251,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/251"
+    },
+    "P11-A1": {
+      "id": 6273949847,
+      "number": 60,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/60"
+    },
+    "P11-A2": {
+      "id": 6274015964,
+      "number": 137,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/137"
+    },
+    "P11-A3": {
+      "id": 6274043216,
+      "number": 202,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/202"
+    },
+    "P11-S1": {
+      "id": 6273950343,
+      "number": 61,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/61"
+    },
+    "P11-S2": {
+      "id": 6274016312,
+      "number": 138,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/138"
+    },
+    "P11-S3": {
+      "id": 6274043792,
+      "number": 203,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/203"
+    },
+    "P11-T1": {
+      "id": 6273950794,
+      "number": 62,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/62"
+    },
+    "P11-T2": {
+      "id": 6274016692,
+      "number": 139,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/139"
+    },
+    "P11-T3": {
+      "id": 6274064049,
+      "number": 252,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/252"
+    },
+    "P12-A1": {
+      "id": 6273951258,
+      "number": 63,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/63"
+    },
+    "P12-A2": {
+      "id": 6274017026,
+      "number": 140,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/140"
+    },
+    "P12-A3": {
+      "id": 6274044212,
+      "number": 204,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/204"
+    },
+    "P12-S1": {
+      "id": 6273951773,
+      "number": 64,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/64"
+    },
+    "P12-S2": {
+      "id": 6274017501,
+      "number": 141,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/141"
+    },
+    "P12-S3": {
+      "id": 6274045468,
+      "number": 205,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/205"
+    },
+    "P12-T1": {
+      "id": 6273952260,
+      "number": 65,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/65"
+    },
+    "P12-T2": {
+      "id": 6274017865,
+      "number": 142,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/142"
+    },
+    "P12-T3": {
+      "id": 6274064431,
+      "number": 253,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/253"
+    },
+    "P13-A1": {
+      "id": 6273952846,
+      "number": 66,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/66"
+    },
+    "P13-A2": {
+      "id": 6274018277,
+      "number": 143,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/143"
+    },
+    "P13-A3": {
+      "id": 6274045912,
+      "number": 206,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/206"
+    },
+    "P13-S1": {
+      "id": 6273953329,
+      "number": 67,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/67"
+    },
+    "P13-S2": {
+      "id": 6274018604,
+      "number": 144,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/144"
+    },
+    "P13-S3": {
+      "id": 6274046555,
+      "number": 207,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/207"
+    },
+    "P13-T1": {
+      "id": 6273953803,
+      "number": 68,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/68"
+    },
+    "P13-T2": {
+      "id": 6274019020,
+      "number": 145,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/145"
+    },
+    "P13-T3": {
+      "id": 6274064777,
+      "number": 254,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/254"
+    },
+    "P14-A1": {
+      "id": 6273954294,
+      "number": 69,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/69"
+    },
+    "P14-A2": {
+      "id": 6274019713,
+      "number": 146,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/146"
+    },
+    "P14-A3": {
+      "id": 6274047038,
+      "number": 208,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/208"
+    },
+    "P14-S1": {
+      "id": 6273954795,
+      "number": 70,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/70"
+    },
+    "P14-S2": {
+      "id": 6274020238,
+      "number": 147,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/147"
+    },
+    "P14-S3": {
+      "id": 6274047462,
+      "number": 209,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/209"
+    },
+    "P14-T1": {
+      "id": 6273955290,
+      "number": 71,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/71"
+    },
+    "P14-T2": {
+      "id": 6274020595,
+      "number": 148,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/148"
+    },
+    "P14-T3": {
+      "id": 6274065158,
+      "number": 255,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/255"
+    },
+    "P15-A1": {
+      "id": 6273955802,
+      "number": 72,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/72"
+    },
+    "P15-A2": {
+      "id": 6274020977,
+      "number": 149,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/149"
+    },
+    "P15-A3": {
+      "id": 6274047840,
+      "number": 210,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/210"
+    },
+    "P15-S1": {
+      "id": 6273956274,
+      "number": 73,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/73"
+    },
+    "P15-S2": {
+      "id": 6274021380,
+      "number": 150,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/150"
+    },
+    "P15-S3": {
+      "id": 6274048209,
+      "number": 211,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/211"
+    },
+    "P15-T1": {
+      "id": 6273956778,
+      "number": 74,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/74"
+    },
+    "P15-T2": {
+      "id": 6274022075,
+      "number": 151,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/151"
+    },
+    "P15-T3": {
+      "id": 6274065557,
+      "number": 256,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/256"
+    },
+    "P16-A1": {
+      "id": 6273957312,
+      "number": 75,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/75"
+    },
+    "P16-A2": {
+      "id": 6274022454,
+      "number": 152,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/152"
+    },
+    "P16-A3": {
+      "id": 6274048598,
+      "number": 212,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/212"
+    },
+    "P16-S1": {
+      "id": 6273957908,
+      "number": 76,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/76"
+    },
+    "P16-S2": {
+      "id": 6274022854,
+      "number": 153,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/153"
+    },
+    "P16-S3": {
+      "id": 6274049040,
+      "number": 213,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/213"
+    },
+    "P16-T1": {
+      "id": 6273958358,
+      "number": 77,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/77"
+    },
+    "P16-T2": {
+      "id": 6274023207,
+      "number": 154,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/154"
+    },
+    "P16-T3": {
+      "id": 6274065947,
+      "number": 257,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/257"
+    },
+    "P17-A1": {
+      "id": 6273958773,
+      "number": 78,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/78"
+    },
+    "P17-A2": {
+      "id": 6274023770,
+      "number": 155,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/155"
+    },
+    "P17-A3": {
+      "id": 6274049409,
+      "number": 214,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/214"
+    },
+    "P17-S1": {
+      "id": 6273959265,
+      "number": 79,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/79"
+    },
+    "P17-S2": {
+      "id": 6274024172,
+      "number": 156,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/156"
+    },
+    "P17-S3": {
+      "id": 6274049826,
+      "number": 215,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/215"
+    },
+    "P17-T1": {
+      "id": 6273959723,
+      "number": 80,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/80"
+    },
+    "P17-T2": {
+      "id": 6274024565,
+      "number": 157,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/157"
+    },
+    "P17-T3": {
+      "id": 6274066323,
+      "number": 258,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/258"
+    },
+    "P18-A1": {
+      "id": 6273960267,
+      "number": 81,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/81"
+    },
+    "P18-A2": {
+      "id": 6274025042,
+      "number": 158,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/158"
+    },
+    "P18-A3": {
+      "id": 6274050264,
+      "number": 216,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/216"
+    },
+    "P18-S1": {
+      "id": 6273960831,
+      "number": 82,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/82"
+    },
+    "P18-S2": {
+      "id": 6274025799,
+      "number": 159,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/159"
+    },
+    "P18-S3": {
+      "id": 6274050710,
+      "number": 217,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/217"
+    },
+    "P18-T1": {
+      "id": 6273961272,
+      "number": 83,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/83"
+    },
+    "P18-T2": {
+      "id": 6274026208,
+      "number": 160,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/160"
+    },
+    "P18-T3": {
+      "id": 6274051098,
+      "number": 218,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/218"
+    },
+    "P19-A1": {
+      "id": 6273962317,
+      "number": 84,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/84"
+    },
+    "P19-A2": {
+      "id": 6274026746,
+      "number": 161,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/161"
+    },
+    "P19-A3": {
+      "id": 6274066858,
+      "number": 259,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/259"
+    },
+    "P19-S1": {
+      "id": 6273962840,
+      "number": 85,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/85"
+    },
+    "P19-S2": {
+      "id": 6274027178,
+      "number": 162,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/162"
+    },
+    "P19-S3": {
+      "id": 6274051467,
+      "number": 219,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/219"
+    },
+    "P19-T1": {
+      "id": 6273963384,
+      "number": 86,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/86"
+    },
+    "P19-T2": {
+      "id": 6274027577,
+      "number": 163,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/163"
+    },
+    "P19-T3": {
+      "id": 6274051831,
+      "number": 220,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/220"
+    },
+    "P20-A1": {
+      "id": 6273964066,
+      "number": 87,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/87"
+    },
+    "P20-A2": {
+      "id": 6274027961,
+      "number": 164,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/164"
+    },
+    "P20-A3": {
+      "id": 6274052218,
+      "number": 221,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/221"
+    },
+    "P20-S1": {
+      "id": 6273964640,
+      "number": 88,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/88"
+    },
+    "P20-S2": {
+      "id": 6274028323,
+      "number": 165,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/165"
+    },
+    "P20-S3": {
+      "id": 6274052558,
+      "number": 222,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/222"
+    },
+    "P20-T1": {
+      "id": 6273965493,
+      "number": 89,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/89"
+    },
+    "P20-T2": {
+      "id": 6274028754,
+      "number": 166,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/166"
+    },
+    "P20-T3": {
+      "id": 6274067239,
+      "number": 260,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/260"
+    },
+    "P21-A1": {
+      "id": 6273965982,
+      "number": 90,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/90"
+    },
+    "P21-A2": {
+      "id": 6274029160,
+      "number": 167,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/167"
+    },
+    "P21-A3": {
+      "id": 6274052920,
+      "number": 223,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/223"
+    },
+    "P21-S1": {
+      "id": 6273966683,
+      "number": 91,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/91"
+    },
+    "P21-S2": {
+      "id": 6274029556,
+      "number": 168,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/168"
+    },
+    "P21-S3": {
+      "id": 6274053292,
+      "number": 224,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/224"
+    },
+    "P21-T1": {
+      "id": 6273967256,
+      "number": 92,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/92"
+    },
+    "P21-T2": {
+      "id": 6274029909,
+      "number": 169,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/169"
+    },
+    "P21-T3": {
+      "id": 6274053695,
+      "number": 225,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/225"
+    },
+    "P22-A1": {
+      "id": 6273968121,
+      "number": 93,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/93"
+    },
+    "P22-A2": {
+      "id": 6274030287,
+      "number": 170,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/170"
+    },
+    "P22-A3": {
+      "id": 6274054106,
+      "number": 226,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/226"
+    },
+    "P22-S1": {
+      "id": 6273969151,
+      "number": 94,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/94"
+    },
+    "P22-S2": {
+      "id": 6274030666,
+      "number": 171,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/171"
+    },
+    "P22-S3": {
+      "id": 6274054617,
+      "number": 227,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/227"
+    },
+    "P22-T1": {
+      "id": 6273969640,
+      "number": 95,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/95"
+    },
+    "P22-T2": {
+      "id": 6274031070,
+      "number": 172,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/172"
+    },
+    "P22-T3": {
+      "id": 6274055015,
+      "number": 228,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/228"
+    },
+    "P23-A1": {
+      "id": 6273970111,
+      "number": 96,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/96"
+    },
+    "P23-A2": {
+      "id": 6274031477,
+      "number": 173,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/173"
+    },
+    "P23-A3": {
+      "id": 6274067745,
+      "number": 261,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/261"
+    },
+    "P23-S1": {
+      "id": 6273970652,
+      "number": 97,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/97"
+    },
+    "P23-S2": {
+      "id": 6274031841,
+      "number": 174,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/174"
+    },
+    "P23-S3": {
+      "id": 6274068411,
+      "number": 262,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/262"
+    },
+    "P23-T1": {
+      "id": 6273971660,
+      "number": 98,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/98"
+    },
+    "P23-T2": {
+      "id": 6274032251,
+      "number": 175,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/175"
+    },
+    "P23-T3": {
+      "id": 6274055430,
+      "number": 229,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/229"
+    },
+    "P24-A1": {
+      "id": 6273973372,
+      "number": 99,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/99"
+    },
+    "P24-A2": {
+      "id": 6274032627,
+      "number": 176,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/176"
+    },
+    "P24-A3": {
+      "id": 6274055775,
+      "number": 230,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/230"
+    },
+    "P24-S1": {
+      "id": 6273974293,
+      "number": 100,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/100"
+    },
+    "P24-S2": {
+      "id": 6274033050,
+      "number": 177,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/177"
+    },
+    "P24-S3": {
+      "id": 6274056178,
+      "number": 231,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/231"
+    },
+    "P24-T1": {
+      "id": 6273975127,
+      "number": 101,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/101"
+    },
+    "P24-T2": {
+      "id": 6274033460,
+      "number": 178,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/178"
+    },
+    "P24-T3": {
+      "id": 6274056542,
+      "number": 232,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/232"
+    },
+    "P25-A1": {
+      "id": 6273977234,
+      "number": 102,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/102"
+    },
+    "P25-A2": {
+      "id": 6274033847,
+      "number": 179,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/179"
+    },
+    "P25-A3": {
+      "id": 6274056923,
+      "number": 233,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/233"
+    },
+    "P25-S1": {
+      "id": 6273977738,
+      "number": 103,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/103"
+    },
+    "P25-S2": {
+      "id": 6274034207,
+      "number": 180,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/180"
+    },
+    "P25-S3": {
+      "id": 6274057318,
+      "number": 234,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/234"
+    },
+    "P25-T1": {
+      "id": 6273978389,
+      "number": 104,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/104"
+    },
+    "P25-T2": {
+      "id": 6274034572,
+      "number": 181,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/181"
+    },
+    "P25-T3": {
+      "id": 6274057709,
+      "number": 235,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/235"
+    },
+    "P26-A1": {
+      "id": 6273979326,
+      "number": 105,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/105"
+    },
+    "P26-A2": {
+      "id": 6274034948,
+      "number": 182,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/182"
+    },
+    "P26-A3": {
+      "id": 6274058120,
+      "number": 236,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/236"
+    },
+    "P26-S1": {
+      "id": 6273980112,
+      "number": 106,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/106"
+    },
+    "P26-S2": {
+      "id": 6274035360,
+      "number": 183,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/183"
+    },
+    "P26-S3": {
+      "id": 6274058509,
+      "number": 237,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/237"
+    },
+    "P26-T1": {
+      "id": 6273980750,
+      "number": 107,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/107"
+    },
+    "P26-T2": {
+      "id": 6274035679,
+      "number": 184,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/184"
+    },
+    "P26-T3": {
+      "id": 6274069025,
+      "number": 263,
+      "url": "https://github.com/Artfever/AI_PROJECT/issues/263"
+    }
+  }
+}
