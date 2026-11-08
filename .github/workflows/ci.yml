@@ -1,0 +1,111 @@
+name: Development CI
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review, edited]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  branch-policy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Validate PR route
+        if: github.event_name == 'pull_request'
+        env:
+          BASE: ${{ github.event.pull_request.base.ref }}
+          HEAD: ${{ github.event.pull_request.head.ref }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          BASE_REPO: ${{ github.repository }}
+        run: |
+          [[ "$BASE" == main ]] || { echo 'PRs must target main'; exit 1; }
+          [[ "$HEAD_REPO" == "$BASE_REPO" ]] || { echo 'Use a branch in this repository'; exit 1; }
+          [[ "$HEAD" =~ ^(feat|fix|chore)/[a-z0-9_-]+/[a-z0-9_-]+$ ]] || { echo 'Use feat/fix/chore/<person>/<task>'; exit 1; }
+
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: python -m pip install -e '.[dev]'
+      - run: ruff check .
+
+  unit-and-contract-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: python -m pip install -e '.[dev]'
+      - name: Run pytest
+        run: python -m pytest -q
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: pytest-junit-${{ github.run_id }}
+          path: reports/junit.xml
+          if-no-files-found: warn
+
+  streamlit-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: python -m pip install -e .
+      - name: Start and health-check Streamlit
+        run: |
+          streamlit run app/Home.py --server.headless true --server.port 8501 > streamlit.log 2>&1 &
+          app_pid=$!
+          trap 'cat streamlit.log; kill "$app_pid" 2>/dev/null || true' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent http://localhost:8501/_stcore/health; then exit 0; fi
+            sleep 1
+          done
+          echo 'Streamlit did not become healthy within 30 seconds'
+          exit 1
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: failure()
+        with:
+          name: streamlit-log-${{ github.run_id }}
+          path: streamlit.log
+          if-no-files-found: warn
+
+  ci-gate:
+    if: always()
+    needs: [branch-policy, quality, unit-and-contract-tests, streamlit-smoke]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Summarize and enforce checks
+        env:
+          RESULTS: ${{ toJSON(needs) }}
+          SHA: ${{ github.sha }}
+        run: |
+          echo "### Development CI" >> "$GITHUB_STEP_SUMMARY"
+          echo "Commit: $SHA; Python: 3.12; config: pyproject.toml" >> "$GITHUB_STEP_SUMMARY"
+          echo "$RESULTS" | jq -r 'to_entries[] | "- \(.key): \(.value.result)"' >> "$GITHUB_STEP_SUMMARY"
+          echo "$RESULTS" | jq -e 'all(.[]; .result == "success")' > /dev/null

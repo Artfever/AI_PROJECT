@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=75,<81"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fleetpulse-ai"
+version = "0.1.0"
+description = "FleetPulse AI bootstrap"
+requires-python = ">=3.12,<3.13"
+dependencies = ["streamlit==1.67.0"]
+
+[project.optional-dependencies]
+dev = ["pytest==8.4.2", "ruff==0.17.4"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--junitxml=reports/junit.xml"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
