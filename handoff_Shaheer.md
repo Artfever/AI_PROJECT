@@ -1,5 +1,7 @@
 # Shaheer handoff
 
+Temporary verification branch `chore/shaheer/verify-ci-failure`: this commit adds an intentionally failing test to demonstrate that required unit tests and `ci-gate` block merging. The draft PR will be closed and the branch deleted after evidence is captured; do not merge this branch.
+
 Read this file when resuming work. Status: P01-S3 repository verification and governance setup; FleetPulse application remains a bootstrap preview. No scientific model or final result is complete.
 
 ## Verified work and evidence
