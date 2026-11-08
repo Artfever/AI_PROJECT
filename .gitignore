@@ -21,8 +21,23 @@ build/
 # Local datasets and trained artifacts
 data/*
 !data/.gitkeep
+!data/raw/
+data/raw/*
+!data/raw/.gitkeep
+!data/demo/
+data/demo/*
+!data/demo/.gitkeep
 artifacts/*
 !artifacts/.gitkeep
+!artifacts/development/
+artifacts/development/*
+!artifacts/development/.gitkeep
+!artifacts/final/
+artifacts/final/*
+!artifacts/final/.gitkeep
+!artifacts/experiments/
+artifacts/experiments/*
+!artifacts/experiments/.gitkeep
 
 # Editor and OS files
 .idea/
