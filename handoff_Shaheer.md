@@ -6,7 +6,7 @@ Read this file when resuming. Current focus: repository governance verification 
 
 - `main` is the only long-lived branch and default branch. The old `dev` had no unique commits and was deleted. `Artfever` is Shaheer; `Abdullah-SE-bit` and `TahaSohail-Goat` have write access.
 - Setup [PR #1](https://github.com/Artfever/AI_PROJECT/pull/1) merged into `main` at `f72039a` after Abdullah's real approval on `962357e`. [Post-merge CI](https://github.com/Artfever/AI_PROJECT/actions/runs/42505106971) passed all five jobs. GitHub API confirms `main` requires one approval, current CI, current review after changes, resolved conversations, and an up-to-date branch; admins are included and force pushes/deletion are disabled.
-- Local editable install worked; `python -m pytest -q` passed 2 tests and `ruff check .` passed. CI uploads JUnit XML and logs. `Shaheer.md` and `FleetPulse_Phase_Implementation_Plan.md` remain ignored and untracked.
+- Local editable install worked; `python -m pytest -q` passed 2 tests and `ruff check .` passed. CI uploads JUnit XML and logs. `Shaheer.md` and `FleetPulse_Phase_Implementation_Plan.md` remain ignored and untracked. For the current change, `git check-ignore -v` confirms `Abdullah.md` and `Taha.md` match `.gitignore`; neither file exists locally or is tracked.
 - Negative checks: [PR #3](https://github.com/Artfever/AI_PROJECT/pull/3) at `638f618` made `unit-and-contract-tests` and `ci-gate` fail ([run](https://github.com/Artfever/AI_PROJECT/actions/runs/42505100210)); [PR #4](https://github.com/Artfever/AI_PROJECT/pull/4) at `7510c88` made `branch-policy` and `ci-gate` fail ([run](https://github.com/Artfever/AI_PROJECT/actions/runs/42505166505)). Both temporary PRs closed without merge and their branches were deleted.
 
 ## Files and decisions
@@ -15,7 +15,7 @@ Setup changed `.gitignore`, `README.md`, `pyproject.toml`, `src/fleetpulse/__ini
 
 ## Blockers and exact next steps
 
-1. Post-merge handoff commit `ec8f12d` opened [PR #5](https://github.com/Artfever/AI_PROJECT/pull/5) to `main`. This update records that PR opening. Verify its final CI and obtain one teammate's approval; do not bypass review.
+1. Post-merge handoff commit `ec8f12d` opened [PR #5](https://github.com/Artfever/AI_PROJECT/pull/5) to `main`; `ebc2fec` recorded that PR link. PR #5 was updated to include the two teammate-plan ignore rules. This commit changes `.gitignore` and this handoff. Verify its final CI and obtain one teammate's approval; do not bypass review.
 2. After PR #5 merges, verify post-merge `main` CI and remove the short-lived setup and handoff branches. Record the completed commit hash in the next substantive update, without making commits solely to record their own hashes.
 3. Streamlit Community Cloud remains unconfigured/not verified. Configure repository `Artfever/AI_PROJECT`, branch `main`, entrypoint `app/Home.py`, Python 3.12; observe the live commit and health before claiming deployment.
 4. For later P01 work, confirm the official course statement, create only agreed Issues, and complete the synthetic engine fixture and any remaining teammate packets.
