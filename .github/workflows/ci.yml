@@ -2,10 +2,10 @@ name: Development CI
 
 on:
   pull_request:
-    branches: [dev, main]
+    branches: [main]
     types: [opened, synchronize, reopened, ready_for_review, edited]
   push:
-    branches: [dev, main]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -28,13 +28,9 @@ jobs:
           HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
           BASE_REPO: ${{ github.repository }}
         run: |
-          if [[ "$BASE" == main ]]; then
-            [[ "$HEAD" == dev && "$HEAD_REPO" == "$BASE_REPO" ]] || { echo 'main accepts only this repository dev branch'; exit 1; }
-          elif [[ "$BASE" == dev ]]; then
-            [[ "$HEAD" =~ ^(feat|fix|chore)/[a-z0-9_-]+/[a-z0-9_-]+$ ]] || { echo 'dev accepts feat/fix/chore/<person>/<task>'; exit 1; }
-          else
-            echo "Unsupported base: $BASE"; exit 1
-          fi
+          [[ "$BASE" == main ]] || { echo 'PRs must target main'; exit 1; }
+          [[ "$HEAD_REPO" == "$BASE_REPO" ]] || { echo 'Use a branch in this repository'; exit 1; }
+          [[ "$HEAD" =~ ^(feat|fix|chore)/[a-z0-9_-]+/[a-z0-9_-]+$ ]] || { echo 'Use feat/fix/chore/<person>/<task>'; exit 1; }
 
   quality:
     runs-on: ubuntu-latest

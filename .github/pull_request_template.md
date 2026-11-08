@@ -1,5 +1,7 @@
 ## Phase / task and responsible person
 
+## Linked Issue (or reason none applies)
+
 ## Behavior changed
 
 ## Tests run and actual results
@@ -10,6 +12,6 @@
 
 ## Scientific and scope impact
 
-## Required reviewers (both other teammates)
+## Required reviewer (one other teammate)
 
 ## Remaining manual checks
