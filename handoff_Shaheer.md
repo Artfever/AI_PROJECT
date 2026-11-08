@@ -1,21 +1,21 @@
-# Shaheer handoff
+﻿# Shaheer handoff
 
-Read this file when resuming. Current focus: repository governance verification for P01-S3. The app remains a bootstrap preview; P01-S2's synthetic engine fixture and later data/model work are not complete. No Issues were invented or created for setup.
+Read this file on resumption. Current focus: issue backlog and main-only integration workflow. This work creates planning records and CI policy; it does not implement or close P01-S1/S2/S3 or later product work.
 
-## Verified completion
+## Verified work and decisions
 
-- `main` is the only long-lived branch and default branch. The old `dev` had no unique commits and was deleted. `Artfever` is Shaheer; `Abdullah-SE-bit` and `TahaSohail-Goat` have write access.
-- Setup [PR #1](https://github.com/Artfever/AI_PROJECT/pull/1) merged into `main` at `f72039a` after Abdullah's real approval on `962357e`. [Post-merge CI](https://github.com/Artfever/AI_PROJECT/actions/runs/42505106971) passed all five jobs. GitHub API confirms `main` requires one approval, current CI, current review after changes, resolved conversations, and an up-to-date branch; admins are included and force pushes/deletion are disabled.
-- Local editable install worked; `python -m pytest -q` passed 2 tests and `ruff check .` passed. CI uploads JUnit XML and logs. `Shaheer.md` and `FleetPulse_Phase_Implementation_Plan.md` remain ignored and untracked. For the current change, `git check-ignore -v` confirms `Abdullah.md` and `Taha.md` match `.gitignore`; neither file exists locally or is tracked.
-- Negative checks: [PR #3](https://github.com/Artfever/AI_PROJECT/pull/3) at `638f618` made `unit-and-contract-tests` and `ci-gate` fail ([run](https://github.com/Artfever/AI_PROJECT/actions/runs/42505100210)); [PR #4](https://github.com/Artfever/AI_PROJECT/pull/4) at `7510c88` made `branch-policy` and `ci-gate` fail ([run](https://github.com/Artfever/AI_PROJECT/actions/runs/42505166505)). Both temporary PRs closed without merge and their branches were deleted.
+- Repository: `Artfever/AI_PROJECT`, default/protected `main`; `Artfever` = Shaheer, `Abdullah-SE-bit` = Abdullah, `TahaSohail-Goat` = Taha, all with write access. The old `dev` had no unique commits and was deleted earlier at the owner's request. No other collaborators were present when checked.
+- [PR #1](https://github.com/Artfever/AI_PROJECT/pull/1) merged as `f72039a` after Abdullah's approval; post-merge five-job CI passed. [PR #5](https://github.com/Artfever/AI_PROJECT/pull/5) merged as `c23bfa7`, recording teammate-plan ignore rules and the prior handoff. Negative checks: closed [PR #3](https://github.com/Artfever/AI_PROJECT/pull/3) failed tests and `ci-gate`; closed [PR #4](https://github.com/Artfever/AI_PROJECT/pull/4) failed branch policy and `ci-gate`.
+- GitHub protection currently requires a PR to `main`, one approving review from another write-access teammate (for Shaheer: Abdullah or Taha), dismissal of stale approvals, approval after the latest push, resolved conversations, five named CI checks, and an up-to-date branch. Admin enforcement is on; force push and branch deletion are off. A reviewer still needs to approve the backlog PR before it can merge.
+- Local source extraction validated 26 phases, 234 task IDs, 78 assigned to each person, 37 phase edges, 189 task edges, and an acyclic graph. GitHub issue creation returned 26 parent and 234 task records, all open. A read-only remote audit verified the 78/78/78 single assignees, 234 native sub-issues, 226 native blocker edges, parent checklists, labels, and open states. All 260 were new; none reused or missing. The issue map and indexes carry actual links.
+- Local checks: `ruff check .` passed; `python -m pytest -q` passed 2 tests; `python scripts/backlog.py validate` passed; workflow YAML parsed with five expected jobs. Read-only dependency policy accepted an unblocked P01 task, rejected a wrong issue reference, and rejected P02-A1 with open P01 gate, showing its issue URL. The extended remote audit also matched every issue body to the generated source. PR CI is pending.
 
-## Files and decisions
+## Files in this governance change
 
-Setup changed `.gitignore`, `README.md`, `pyproject.toml`, `src/fleetpulse/__init__.py`, `app/Home.py`, `tests/test_bootstrap.py`, `.github/workflows/ci.yml`, `.github/pull_request_template.md`, `.github/CODEOWNERS`, and `docs/`. The earlier two-review workflow was removed in `803e82a`. This handoff was added in `803e82a`; verification notes continued in `962357e`, `513484e`, and `06f7b5f`. No trained artifacts, measured model results, or public deployment are claimed.
+`scripts/backlog.py`, `scripts/sync_issues.py`, `scripts/render_backlog.py`, `scripts/check_pr_issue.py`; `planning/backlog.json`, `planning/issue-map.json`, `planning/README.md`; `docs/ISSUE_BACKLOG.md`, `docs/DEPENDENCIES_AND_MERGE_ORDER.md`, `docs/ISSUE_WORKFLOW_MIGRATION.md`; issue/PR templates, CI workflow, README, and contribution/branch/CI docs. The ignored master plan and personal guides remain local. No trained data/model artifacts, official metrics, or deployment are claimed.
 
-## Blockers and exact next steps
+## Blockers and next steps
 
-1. Post-merge handoff commit `ec8f12d` opened [PR #5](https://github.com/Artfever/AI_PROJECT/pull/5) to `main`; `ebc2fec` recorded that PR link. PR #5 was updated to include the two teammate-plan ignore rules. This commit changes `.gitignore` and this handoff. Verify its final CI and obtain one teammate's approval; do not bypass review.
-2. After PR #5 merges, verify post-merge `main` CI and remove the short-lived setup and handoff branches. Record the completed commit hash in the next substantive update, without making commits solely to record their own hashes.
-3. Streamlit Community Cloud remains unconfigured/not verified. Configure repository `Artfever/AI_PROJECT`, branch `main`, entrypoint `app/Home.py`, Python 3.12; observe the live commit and health before claiming deployment.
-4. For later P01 work, confirm the official course statement, create only agreed Issues, and complete the synthetic engine fixture and any remaining teammate packets.
+1. Commit this audited backlog on `chore/shaheer/issue-backlog`, push, and open a PR to `main`. Record the PR link and completed work commit hash in the next handoff update.
+2. Obtain one approval from Abdullah or Taha and required CI before merge. The task dependency script is locally exercised; task-branch CI enforcement still needs its first real PR run after this change merges.
+3. P01-A1 [#32](https://github.com/Artfever/AI_PROJECT/issues/32) and P01-T1 [#33](https://github.com/Artfever/AI_PROJECT/issues/33) have no hard issue blocker but only partial work; Shaheer's P01-S1 [#186](https://github.com/Artfever/AI_PROJECT/issues/186) waits for P01-A2 [#108](https://github.com/Artfever/AI_PROJECT/issues/108), and S2/S3 follow. The official course statement and live Streamlit deployment remain unverified. Product work starts through reviewed task issues after its actual blockers pass.
