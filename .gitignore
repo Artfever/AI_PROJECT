@@ -1,0 +1,28 @@
+FleetPulse_Phase_Implementation_Plan.md
+Shaheer.md
+
+# Local notes and environments
+message.txt
+Shaheer.txt
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# Local datasets and trained artifacts
+data/*
+!data/.gitkeep
+artifacts/*
+!artifacts/.gitkeep
+
+# Editor and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
