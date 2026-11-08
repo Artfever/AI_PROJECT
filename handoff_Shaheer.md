@@ -1,6 +1,6 @@
 ﻿# Shaheer handoff
 
-Read this file on resumption. Current focus: issue backlog and main-only integration workflow. This work creates planning records and CI policy; it does not implement or close P01-S1/S2/S3 or later product work.
+Read this file on resumption. Current focus: review of the issue backlog and main-only integration workflow. This work creates planning records and CI policy; it does not implement or close P01-S1/S2/S3 or later product work.
 
 ## Verified work and decisions
 
@@ -9,6 +9,7 @@ Read this file on resumption. Current focus: issue backlog and main-only integra
 - GitHub protection currently requires a PR to `main`, one approving review from another write-access teammate (for Shaheer: Abdullah or Taha), dismissal of stale approvals, approval after the latest push, resolved conversations, five named CI checks, and an up-to-date branch. Admin enforcement is on; force push and branch deletion are off. A reviewer still needs to approve the backlog PR before it can merge.
 - Local source extraction validated 26 phases, 234 task IDs, 78 assigned to each person, 37 phase edges, 189 task edges, and an acyclic graph. GitHub issue creation returned 26 parent and 234 task records, all open. A read-only remote audit verified the 78/78/78 single assignees, 234 native sub-issues, 226 native blocker edges, parent checklists, labels, and open states. All 260 were new; none reused or missing. The issue map and indexes carry actual links.
 - Local checks: `ruff check .` passed; `python -m pytest -q` passed 2 tests; `python scripts/backlog.py validate` passed; workflow YAML parsed with five expected jobs. Read-only dependency policy accepted an unblocked P01 task, rejected a wrong issue reference, and rejected P02-A1 with open P01 gate, showing its issue URL. The extended remote audit also matched every issue body to the generated source. PR CI is pending.
+- Backlog work commit `482e81e` was pushed on `chore/shaheer/issue-backlog`. [PR #266](https://github.com/Artfever/AI_PROJECT/pull/266) opened to protected `main`; this handoff update records its link and the completed work hash. No approval or merge is claimed.
 
 ## Files in this governance change
 
@@ -16,6 +17,6 @@ Read this file on resumption. Current focus: issue backlog and main-only integra
 
 ## Blockers and next steps
 
-1. Commit this audited backlog on `chore/shaheer/issue-backlog`, push, and open a PR to `main`. Record the PR link and completed work commit hash in the next handoff update.
-2. Obtain one approval from Abdullah or Taha and required CI before merge. The task dependency script is locally exercised; task-branch CI enforcement still needs its first real PR run after this change merges.
+1. Push this handoff update to PR #266, then verify all five PR CI jobs on its latest revision. Obtain one approval from Abdullah or Taha and resolve any conversations before merge. The task dependency script is locally exercised; task-branch CI enforcement still needs its first real PR run after this change merges.
+2. After a reviewed merge, verify the `main` commit and post-merge CI, then record the merge hash and PR state in the next substantive handoff update. Do not make a commit solely to record its own hash.
 3. P01-A1 [#32](https://github.com/Artfever/AI_PROJECT/issues/32) and P01-T1 [#33](https://github.com/Artfever/AI_PROJECT/issues/33) have no hard issue blocker but only partial work; Shaheer's P01-S1 [#186](https://github.com/Artfever/AI_PROJECT/issues/186) waits for P01-A2 [#108](https://github.com/Artfever/AI_PROJECT/issues/108), and S2/S3 follow. The official course statement and live Streamlit deployment remain unverified. Product work starts through reviewed task issues after its actual blockers pass.
