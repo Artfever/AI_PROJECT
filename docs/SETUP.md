@@ -40,6 +40,22 @@ The editable install makes `fleetpulse` importable from this clone without
 dependency/package metadata. The environment belongs to one clone; do not copy
 it to another laptop or location.
 
+## Check the setup
+
+Run the small configuration checks independently of the Streamlit UI test:
+
+```powershell
+.venv/Scripts/python.exe -m pytest -q tests/test_bootstrap.py -k "project_paths or installed_package_paths"
+```
+
+On Linux/macOS, replace `.venv/Scripts/python.exe` with `.venv/bin/python`.
+The checks verify the project metadata and Home entrypoint exist, and launch a
+fresh Python process from a temporary directory with `PYTHONPATH` removed.
+That process must import the installed `fleetpulse` package and resolve the same
+repository root. If the import fails, run the editable install using the same
+environment's interpreter. No dataset, trained artifact, or path edit is needed.
+The full `python -m pytest -q` command above also exercises Home's empty state.
+
 ## File-location contract
 
 Import `PROJECT_ROOT` from `fleetpulse`. It derives the clone root from the
