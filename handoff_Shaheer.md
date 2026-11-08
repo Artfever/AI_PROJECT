@@ -15,7 +15,7 @@ Setup changed `.gitignore`, `README.md`, `pyproject.toml`, `src/fleetpulse/__ini
 
 ## Blockers and exact next steps
 
-1. Put these post-merge handoff updates through a new PR to `main`; obtain one teammate's approval and passing CI. Record that PR link and any completed commit hash in the next handoff update, without making commits solely to record their own hashes.
-2. After the handoff PR merges, verify post-merge `main` CI and remove the short-lived setup branch. Do not bypass review.
+1. Post-merge handoff commit `ec8f12d` opened [PR #5](https://github.com/Artfever/AI_PROJECT/pull/5) to `main`. This update records that PR opening. Verify its final CI and obtain one teammate's approval; do not bypass review.
+2. After PR #5 merges, verify post-merge `main` CI and remove the short-lived setup and handoff branches. Record the completed commit hash in the next substantive update, without making commits solely to record their own hashes.
 3. Streamlit Community Cloud remains unconfigured/not verified. Configure repository `Artfever/AI_PROJECT`, branch `main`, entrypoint `app/Home.py`, Python 3.12; observe the live commit and health before claiming deployment.
 4. For later P01 work, confirm the official course statement, create only agreed Issues, and complete the synthetic engine fixture and any remaining teammate packets.
