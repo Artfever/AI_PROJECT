@@ -1,5 +1,7 @@
 # Shaheer handoff
 
+Temporary verification branch `probe-invalid-route`: this branch name intentionally violates the main PR naming rule so the `branch-policy` job must fail. Its draft PR must be closed without merge, and the branch deleted after evidence is captured.
+
 Read this file when resuming work. Status: P01-S3 repository verification and governance setup; FleetPulse application remains a bootstrap preview. No scientific model or final result is complete.
 
 ## Verified work and evidence
