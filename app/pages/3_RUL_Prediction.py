@@ -1,6 +1,10 @@
-"""RUL Prediction page shell."""
+"""RUL Prediction view."""
 
-import streamlit as st
+from fleetpulse.ui import render_page
 
-st.title('RUL Prediction')
-st.info('A trained model and predictions are not available yet.')
+render_page(
+    'RUL Prediction',
+    'Estimate remaining useful life in operating cycles.',
+    'A trained model and predictions are not available yet.',
+    'Predictions will appear here after an engine history and a trained model are available.',
+)

@@ -1,6 +1,10 @@
-"""Maintenance Planner page shell."""
+"""Maintenance Planner view."""
 
-import streamlit as st
+from fleetpulse.ui import render_page
 
-st.title('Maintenance Planner')
-st.info('Maintenance schedules are not available yet.')
+render_page(
+    'Maintenance Planner',
+    'Compare simulated maintenance schedules.',
+    'Maintenance schedules are not available yet.',
+    'Scheduling will be available when predictions and scenario inputs are connected.',
+)
