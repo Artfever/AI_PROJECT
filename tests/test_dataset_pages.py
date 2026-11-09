@@ -34,7 +34,7 @@ def test_dataset_pages_show_counts_and_preview_from_loader(page, synthetic_train
 
     assert not app.exception
     assert {item.label: item.value for item in app.metric} == {"Records": "3", "Engines": "1"}
-    assert len(app.dataframe) == (2 if page else 1)
+    assert len(app.dataframe) == (3 if page else 1)
     assert app.dataframe[0].value["cycle"].tolist() == [1, 2, 3]
     assert app.dataframe[0].value["unit_id"].tolist() == [900001] * 3
     assert not app.warning

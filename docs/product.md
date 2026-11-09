@@ -8,7 +8,7 @@ Start the app from the repository root with `python -m streamlit run app/Home.py
 
 1. **Home** introduces the project, reports that trained models and evaluation results are unavailable, and shows a training-history summary when the local file is available.
 2. **Fleet Overview** identifies the future fleet view and the absence of fleet data and predictions.
-3. **Engine Explorer** shows the training-history counts and preview and lets the user select a training engine to see its records sorted by cycle. A sensor selector charts one original channel against operating cycle. It explains why data could not be loaded when the file is missing or malformed.
+3. **Engine Explorer** shows the training-history counts and preview and lets the user select a training engine to see its records sorted by cycle. Sensor views chart original channels against operating cycle. A separate training-ground-truth tab displays uncapped known training RUL in cycles for analysis only; it is not a prediction or a model input. It explains why data could not be loaded when the file is missing or malformed.
 4. **RUL Prediction** identifies remaining useful life in operating cycles and the absence of a trained model and predictions.
 5. **Maintenance Planner** identifies the future simulated scheduling view and the absence of schedules.
 6. **Model Laboratory** identifies the future model evaluation view and the absence of trained models and evaluation results.
