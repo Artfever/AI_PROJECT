@@ -28,3 +28,5 @@ Starter record created by repository governance on 9 November 2026. Taha should 
 - Updated README onboarding and layout, clarified the current repository name, added bug and feature issue templates, and ignored local environment files and Ruff's cache. No data, models, or app behavior changed.
 - On Python 3.12.16: `.venv/Scripts/python.exe -m pytest -q` passed (3 tests); `.venv/Scripts/python.exe -m ruff check .` passed; `git diff --check` passed. App startup: NOT RUN (no app changes).
 - The current branch is `chore/repository-structure`. Its unnumbered name does not meet the existing branch-policy check; a suitable agreed task route and one other teammate's approval are needed before merging. No approval has been recorded.
+
+- Cleanup commit: `11d0983`; draft PR: https://github.com/Artfever/FleetpulseAI/pull/272. The task route, CI, and teammate review remain pending.
