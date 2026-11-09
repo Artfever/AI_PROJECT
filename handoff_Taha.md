@@ -51,7 +51,7 @@
 - Home and Engine Explorer now provide actionable training-file setup guidance when loading or integrity validation fails. Added `docs/data_policy.md` describing NASA raw-file setup, ignored local data, the absence of a packaged demo, and the test-only synthetic fixture; linked it from `docs/product.md`. No dataset, model, or test-answer values were added to the repository.
 - On Python 3.12.16 / Streamlit 1.67.0: `.venv/Scripts/python.exe -m ruff check .` passed; `.venv/Scripts/python.exe -m pytest -q` passed 45 tests. Synthetic AppTest checks cover missing and malformed files on both dataset pages and invalid records, confirming guidance and no fabricated counts. `git ls-files data/demo` showed only `.gitkeep`; `git check-ignore` confirmed raw and demo examples are ignored. The existing local Streamlit health endpoint returned `ok`.
 - Taha confirmed checking two engine IDs during P02-T2. A teammate must inspect this task's output and current CI. No separate personal browser check of the new missing-file guidance or additional agreement about dataset location is claimed. No model or real answer values were used.
-- Work commit and PR pending at this update. Current teammate approval, required CI and resolved conversations remain outstanding; the P02 phase gate also depends on all owners' work and shared evidence.
+- Work commit: `155891a`. PR [#293](https://github.com/Artfever/FleetpulseAI/pull/293) uses `Closes #190` subject to review. Current teammate approval, required CI and resolved conversations remain outstanding; the P02 phase gate also depends on all owners' work and shared evidence.
 
 ## Earlier handoff history
 
