@@ -33,9 +33,13 @@ def test_installed_package_paths_from_another_directory(tmp_path):
     assert (resolved_root / "app" / "Home.py").is_file()
 
 
-def test_home_empty_state():
+def test_home_empty_state(tmp_path, monkeypatch):
     from streamlit.testing.v1 import AppTest
 
+    from fleetpulse import ui
+
+    monkeypatch.setattr(ui, "PROJECT_ROOT", tmp_path)
     app = AppTest.from_file(str(PROJECT_ROOT / "app" / "Home.py"), default_timeout=10).run()
     assert not app.exception
-    assert any("no data, trained models" in item.value for item in app.info)
+    assert any("Trained models and evaluation results" in item.value for item in app.info)
+    assert any("Engine history data is not available" in item.value for item in app.warning)
