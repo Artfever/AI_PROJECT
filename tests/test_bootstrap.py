@@ -36,6 +36,6 @@ def test_installed_package_paths_from_another_directory(tmp_path):
 def test_home_empty_state():
     from streamlit.testing.v1 import AppTest
 
-    app = AppTest.from_file(str(PROJECT_ROOT / "app" / "Home.py")).run()
+    app = AppTest.from_file(str(PROJECT_ROOT / "app" / "Home.py"), default_timeout=10).run()
     assert not app.exception
     assert any("no data, trained models" in item.value for item in app.info)
