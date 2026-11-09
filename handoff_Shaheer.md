@@ -1,15 +1,15 @@
 ﻿# Shaheer handoff
 
-Read this file on resumption. Current focus: P01 shared-gate follow-up after completing P01-S3. All nine P01 task issues are closed, but phase [#6](https://github.com/Artfever/FleetpulseAI/issues/6) remains open until every member has evidence for the shared test and app-startup gate. Shaheer's next phase work is blocked by that gate.
+Read this file on resumption. Current focus: P02-S1 [#35](https://github.com/Artfever/FleetpulseAI/issues/35), implementing normalized FD001 history integrity checks. The task has no current native blockers. P01 parent #6 was closed by Taha on 9 November; its recorded shared-gate evidence is incomplete for Abdullah's local Streamlit startup, but P02-S1 is now unblocked in GitHub.
 
-## Latest update: P01-S3 merged
+## Latest update: P02-S1 active
 
-- [PR #278](https://github.com/Artfever/FleetpulseAI/pull/278) was approved by Taha (`TahaSohail-Goat`) on head `dde05deae58cb9e4db45e4ac6955e1d50b573901`; all five required checks passed. Squash-merged to protected `main` on 9 November 2026 as `f6d06e359b19aeb3c360f54d9d08e4e8ba3aaebe`. Issue [#264](https://github.com/Artfever/FleetpulseAI/issues/264) is CLOSED.
-- Post-merge Development CI run [42615576816](https://github.com/Artfever/FleetpulseAI/actions/runs/42615576816) completed successfully.
-- Updated local `main` to the merge commit. On Shaheer's Windows environment: `python -m ruff check .` passed; `python -m pytest -q` passed (**9 passed in 2.69s**); `python -m streamlit run app/Home.py --server.headless true --server.address 127.0.0.1 --server.port 18503 --browser.gatherUsageStats false` started and `curl.exe --fail --silent --show-error http://127.0.0.1:18503/_stcore/health` returned `ok`. The Streamlit process was stopped after the health check.
-- P01 child issues #32, #108, #185, #186, #238, #264, #33, #109, and #187 are all CLOSED. The parent #6 explicitly requires `python -m pytest -q` and `streamlit run app/Home.py` to work on each member's environment. Taha's handoff records both; this handoff records Shaheer's current-main checks. Abdullah's handoff records tests but says Streamlit was NOT RUN locally, so the shared phase gate is not yet verified. No teammate message or approval is claimed.
-- P02-S1 [#35](https://github.com/Artfever/FleetpulseAI/issues/35) remains blocked by open P01 phase #6. Do not begin P02 work until the shared gate is verified and the phase is closed through the agreed process.
-- The post-merge handoff update is in [PR #279](https://github.com/Artfever/FleetpulseAI/pull/279), open against protected `main`; its required CI and one teammate approval are pending. Work commit `67bf500` records the post-merge evidence; this follow-up records the PR link as required by the handoff process.
+- P01-S3 [PR #278](https://github.com/Artfever/FleetpulseAI/pull/278) was approved by Taha on head `dde05deae58cb9e4db45e4ac6955e1d50b573901`; all five required checks passed. It squash-merged to protected `main` as `f6d06e359b19aeb3c360f54d9d08e4e8ba3aaebe`; issue #264 closed. Post-merge Development CI [run 42615576816](https://github.com/Artfever/FleetpulseAI/actions/runs/42615576816) passed. On Shaheer's Windows environment, Ruff passed, pytest passed (**9 passed in 2.69s**), Streamlit started, and `/_stcore/health` returned `ok`.
+- P01 child issues #32, #108, #185, #186, #238, #264, #33, #109, and #187 are CLOSED. Taha closed parent #6 at 12:19:54Z on 9 November. Its shared-gate body requires pytest and Streamlit on each member's environment; the available Abdullah handoff says Streamlit was NOT RUN. This evidence gap is recorded without changing the teammate's closure decision. No teammate message or approval is claimed.
+- P02-S1 #35 is OPEN, assigned to Shaheer, and its live blocked-by API returned no blockers. P02 parent #7 is OPEN. Abdullah's P02-A1 #34 (original files) and P02-A2 #110 (parser) are OPEN; their real-data outputs are not present locally, so this validation is tested on the existing clearly labeled synthetic fixture and hand-calculated records only.
+- Current branch `feat/P02-S1-data-integrity` starts from current `main` at `f6d06e3`. The handoff closeout recorded in [PR #279](https://github.com/Artfever/FleetpulseAI/pull/279) was carried into this task branch; #279 should be closed as superseded once this task PR is open. Current handoff sync commit: `b122bd1`.
+- Implemented `src/fleetpulse/data/quality.py` with a normalized 26-column FD001 mapping contract, finite numeric readings, positive integral IDs/cycles, duplicate engine-cycle detection, per-engine cycle order, and gap warnings. It reports findings and never mutates or drops input rows. Added `tests/test_data_quality.py` using the synthetic fixture and explicit malformed/duplicate/gap/order records.
+- Focused `python -m pytest -q tests/test_data_quality.py`: **3 passed in 0.07s**. Full `python -m pytest -q`: **12 passed in 1.87s**. `python -m ruff check .`: **All checks passed**. `git diff --check`: passed. No NASA data files or loader outputs were available; real-data integration is NOT RUN.
 
 ## Verified work and decisions
 
@@ -34,5 +34,6 @@ Merged `docs/CI_CD.md` explains the red check, failed gate, downloadable JUnit a
 
 ## Blockers and next steps
 
-1. Abdullah must run `python -m pytest -q` and `streamlit run app/Home.py` in his own environment, then record actual output in `handoff_Abdullah.md` and the P01 gate [#6](https://github.com/Artfever/FleetpulseAI/issues/6). Do not contact him unless Shaheer authorizes a message.
-2. Once the parent gate has evidence from all three members, reassess and close P01 #6 only if its complete acceptance criteria are met. Until then, P02-S1 #35 remains blocked. The official course statement and live Streamlit deployment remain unverified.
+1. Review the validator contract and findings against #35; no actual FD001 rows were available. Update this handoff with final checks before the work commit, then push the issue branch and open a PR to `main`.
+2. Revalidate the normalized mapping with Abdullah's loader/parser output when #34/#110 are ready; do not remove suspicious rows silently. One actual teammate approval and all required CI remain necessary before merge. Keep P02 parent #7 open until all nine tasks and its real-data gate pass.
+3. The official course statement, full shared P01 member-by-member evidence, and live public Streamlit deployment remain unverified. Do not send teammate messages without Shaheer's authorization.
