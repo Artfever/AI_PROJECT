@@ -2,6 +2,20 @@
 
 Updated 9 November 2026. Owner: Abdullah (`Abdullah-SE-bit`).
 
+## Current P03-A1 checkpoint ? Abdullah, 9 November 2026
+
+This section supersedes stale blocked/open statements in the historical notes below.
+
+- User confirmed P02 gate closure; live #7 is CLOSED and the P03 phase native predecessor API returns CLOSED #7. P03-A1 #37 is OPEN with no task-level blocker. Started from clean main at 3a6a407 after `git pull --ff-only origin main` (already current), branch feat/P03-A1-training-rul. No competing target implementation/PR found. Read current AGENTS, owner handoff, issue, manifest P03-A1, local Abdullah/master-plan P03 guidance, dependency order, quality/loader contracts, and docs/rul_hand_calculation.md.
+- Previous P02-A3 PR #287 merged as 46b263a; #188 is CLOSED. Its work commits were 14434ff and 9d28ad5; all five final CI checks passed. All nine P02 tasks and parent #7 are now CLOSED. No new closure or teammate approval was performed by this session.
+- Added src/fleetpulse/data/targets.py: calculate_training_rul(records) validates normalized histories through existing quality module, computes per-engine maximum cycle, and returns uncapped integer labels aligned to input order. Materializes iterable once; no input mutation, sorting, row dropping, file reads, or added sensor fields. Rejects empty/invalid records. Caller must supply complete training trajectories; sensor values cannot establish completeness. Never use on test histories or visible prefixes. Gaps retain existing quality-warning policy; no synthetic filling.
+- Added tests/test_training_targets.py: interleaved engines with different lifetimes, published synthetic hand example (12-3=9, 12-8=4, 12-12=0), input immutability, generator input, uncapped values, single-row complete trajectory, empty input, duplicate/out-of-order/invalid cycles. Added docs/training_targets.md for input/output/preconditions/units and consumers. These are focused A1 correctness tests, not a claim that P03-A2/A3 or Shaheer's independent audit is complete.
+- Python 3.12.16 / existing editable fleetpulse-ai 0.1.0, pytest 8.4.2, Ruff 0.17.4: `.venv/Scripts/python.exe -m ruff check .` PASS. `.venv/Scripts/python.exe -m pytest -q tests/test_training_targets.py` PASS, **6 passed in 0.23s**. `.venv/Scripts/python.exe -m pytest -q` PASS, **51 passed in 6.44s**. `git diff --check` PASS. JUnit report remains ignored.
+- Real training-only stdin verification: 20,631 rows, 100 engines, 100 terminal zeros; label range 0..361 cycles. Engine 1 ends at 192: first (cycle,RUL)=(1,191), last=(192,0). Engine 2 ends at 287: first=(1,286), last=(287,0). Engine 100 ends at 200: first=(1,199), last=(200,0). Every label was checked against that engine's own last cycle. Hashes of local raw files unchanged before/after; real RUL answer values not parsed or printed. These are training ground-truth labels, not predictions, evaluation or model scores.
+- Local Streamlit startup NOT RUN for this task: no app code changed. Existing full page/AppTests pass; required PR smoke CI remains separate. Model training/inference NOT APPLICABLE. Peer must inspect the implementation and explain the simple arithmetic independently; no human approval for this task is claimed.
+- Work commit and PR pending creation. Publish as Abdullah-SE-bit via local gh, target protected main with Closes #37. Need one actual approval from Shaheer OR Taha, required current-head CI, resolved conversations before merge. No teammate messages or explicit review requests sent.
+- Next: P03-A2 #113 consumes reviewed A1 output and remains blocked by OPEN #37 until this PR is accepted/merged. Then pull main and inspect its exact separation requirement before implementing. P03-A3 #191 follows reviewed A2; independent target audit and UI ground-truth integration remain with their task owners. Do not stack normal implementation on unmerged A1 or mark shared P03 gate complete.
+
 ## Current P02-A3 checkpoint ? Abdullah, 9 November 2026
 
 This checkpoint supersedes stale open/blocked statements in historical sections below; preserve Taha's work credit.
