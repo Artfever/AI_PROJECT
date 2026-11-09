@@ -28,6 +28,7 @@ data/raw/*
 data/demo/*
 !data/demo/.gitkeep
 artifacts/*
+!artifacts/data_quality.json
 !artifacts/.gitkeep
 !artifacts/development/
 artifacts/development/*
