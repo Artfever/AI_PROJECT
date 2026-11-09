@@ -50,3 +50,8 @@ Thumbs.db
 .env.*
 !.env.example
 .ruff_cache/
+
+# Private planning files supplied in docs/
+/docs/taha.md
+/docs/implementationplan.md
+/docs/FleetPulse_Phase_Implementation_Plan.md
