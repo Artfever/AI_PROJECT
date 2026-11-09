@@ -49,7 +49,7 @@ def test_audit_displays_verified_manifest_and_rejects_tampering(tmp_path, monkey
     path.write_text(json.dumps(manifest), encoding="utf-8")
     page.run()
     assert not page.exception
-    assert any("does not reproduce" in message.value for message in page.warning)
+    assert any("target RUL mismatch" in message.value for message in page.warning)
     assert not page.metric and not page.dataframe
 
     path.write_text(json.dumps(build_split_manifest(
@@ -61,5 +61,5 @@ def test_audit_displays_verified_manifest_and_rejects_tampering(tmp_path, monkey
     source.write_text(source.read_text(encoding="utf-8") + "\n", encoding="utf-8")
     page.run()
     assert not page.exception
-    assert any("does not match" in message.value for message in page.warning)
+    assert any("SHA-256 mismatch" in message.value for message in page.warning)
     assert not page.metric and not page.dataframe

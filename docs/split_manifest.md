@@ -56,3 +56,38 @@ trained artifacts stay ignored. Existing output is deterministically replaced by
 the command; review any diff before accepting it. P04-A3 will independently audit
 no overlap, cutoff eligibility, and source/manifest agreement. The shared P04 gate
 also needs evaluator/metric and human checks; saving this file does not close it.
+
+## Read-only manifest audit (P04-A3)
+
+```powershell
+python scripts/verify_split_manifest.py
+python -m pytest -q tests/test_split_audit.py
+```
+
+`fleetpulse.data.split_audit.audit_split_manifest(manifest, records,
+source_sha256=...)` returns `None` on success and raises `ValueError` on an
+invalid source/manifest contract. It checks the saved assignments and metadata
+directly against the observed source histories without calling the builder,
+resampling groups, modifying records, or writing an artifact.
+
+The audit checks qualified identities, source hash/counts, unique and exhaustive
+groups, no trajectory overlap, declared validation size, integer seeds, supported
+policy, and a positive minimum history. For each validation engine, it derives
+eligible observed cycles and checks the saved range/count, cutoff membership,
+nonterminal status, actual prefix row count, full lifetime, and positive target.
+The command also checks the source path/original training hash and confirms
+neither source nor manifest changed while it ran. It opens no official test data.
+
+On 9 November 2026 the saved manifest passed: **80 fitting / 20 validation
+engines**, no overlap, all cutoffs eligible, split/cutoff seeds both `42`. The
+manifest hash remained
+`47eeae52d9099035f1db2780f2e11e8ec7718eec807aa248d11141dd67072c78`.
+Tests use a hand-authored synthetic manifest with gapped cycles and deliberate
+corruptions; they do not use the producer to construct the expected fixture.
+
+This verifies the saved invariants, not the statistical quality of a split or
+that a predictor actually receives only its prefix. It does not replay the RNG
+recipe; deterministic regeneration is checked separately by the P04-A2 command
+and diff. Future evaluator inputs, leakage prevention and metric tests remain
+Shaheer's work. Peer agreement on seed/cutoff policy before comparing models and
+the shared P04 gate remain separate from an automated audit pass.

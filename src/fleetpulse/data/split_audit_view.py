@@ -1,42 +1,29 @@
-﻿"""Read and verify the saved development manifest against training histories."""
+﻿"""Verify saved development metadata for the Model Laboratory view."""
 
 import hashlib
 import json
 from pathlib import Path
 
 from fleetpulse.data.loader import load_engine_history
-from fleetpulse.data.split import TRAIN_PARTITION
-from fleetpulse.data.split_manifest import build_split_manifest
+from fleetpulse.data.split_audit import audit_split_manifest
 
 
 def verified_split_manifest(manifest_path: Path, training_path: Path) -> dict:
-    """Return a manifest only if it reproduces from its declared training source.
+    """Audit a saved manifest against its training source without resampling it.
 
-    Training source and output paths are supplied by the caller; the manifest cannot
-    redirect file access. Official test histories and answer files are never read.
+    The caller fixes the paths; the manifest cannot redirect file access. Official
+    test histories and answer files are never read.
     """
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    if manifest["schema_version"] != 1:
-        raise ValueError("Unsupported split manifest schema.")
-    source = manifest["source"]
-    if source["dataset_partition"] != TRAIN_PARTITION or source["path"] != "data/raw/train_FD001.txt":
+    saved = manifest_path.read_bytes()
+    manifest = json.loads(saved)
+    if not isinstance(manifest, dict):
+        raise TypeError("The split manifest must be an object.")
+    source = manifest.get("source")
+    if not isinstance(source, dict) or source.get("path") != "data/raw/train_FD001.txt":
         raise ValueError("The manifest does not identify the expected FD001 training source.")
     digest = hashlib.sha256(training_path.read_bytes()).hexdigest()
-    if source["sha256"] != digest:
-        raise ValueError("The training file does not match the manifest's source hash.")
     rows = load_engine_history(training_path)
-    if hashlib.sha256(training_path.read_bytes()).hexdigest() != digest:
-        raise ValueError("The training file changed while verifying the manifest.")
-    rebuilt = build_split_manifest(
-        rows,
-        dataset_partition=TRAIN_PARTITION,
-        source_path="data/raw/train_FD001.txt",
-        source_sha256=digest,
-        split_seed=manifest["split"]["seed"],
-        cutoff_seed=manifest["cutoff_policy"]["seed"],
-        validation_fraction=manifest["split"]["validation_fraction"],
-        minimum_history_rows=manifest["cutoff_policy"]["minimum_history_rows"],
-    )
-    if rebuilt != manifest:
-        raise ValueError("The manifest does not reproduce from the local training histories.")
+    audit_split_manifest(manifest, rows, source_sha256=digest)
+    if manifest_path.read_bytes() != saved or hashlib.sha256(training_path.read_bytes()).hexdigest() != digest:
+        raise ValueError("The training file or manifest changed during the audit.")
     return manifest

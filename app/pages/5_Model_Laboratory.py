@@ -3,7 +3,7 @@
 import streamlit as st
 
 from fleetpulse import ui
-from fleetpulse.data.split_audit import verified_split_manifest
+from fleetpulse.data.split_audit_view import verified_split_manifest
 from fleetpulse.ui import render_page
 
 render_page(
