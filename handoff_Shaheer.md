@@ -9,6 +9,7 @@ Read this file on resumption. Current focus: P01 shared-gate follow-up after com
 - Updated local `main` to the merge commit. On Shaheer's Windows environment: `python -m ruff check .` passed; `python -m pytest -q` passed (**9 passed in 2.69s**); `python -m streamlit run app/Home.py --server.headless true --server.address 127.0.0.1 --server.port 18503 --browser.gatherUsageStats false` started and `curl.exe --fail --silent --show-error http://127.0.0.1:18503/_stcore/health` returned `ok`. The Streamlit process was stopped after the health check.
 - P01 child issues #32, #108, #185, #186, #238, #264, #33, #109, and #187 are all CLOSED. The parent #6 explicitly requires `python -m pytest -q` and `streamlit run app/Home.py` to work on each member's environment. Taha's handoff records both; this handoff records Shaheer's current-main checks. Abdullah's handoff records tests but says Streamlit was NOT RUN locally, so the shared phase gate is not yet verified. No teammate message or approval is claimed.
 - P02-S1 [#35](https://github.com/Artfever/FleetpulseAI/issues/35) remains blocked by open P01 phase #6. Do not begin P02 work until the shared gate is verified and the phase is closed through the agreed process.
+- The post-merge handoff update is in [PR #279](https://github.com/Artfever/FleetpulseAI/pull/279), open against protected `main`; its required CI and one teammate approval are pending. Work commit `67bf500` records the post-merge evidence; this follow-up records the PR link as required by the handoff process.
 
 ## Verified work and decisions
 
