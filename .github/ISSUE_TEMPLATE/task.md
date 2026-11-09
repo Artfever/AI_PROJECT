@@ -30,7 +30,7 @@ assignees: ''
 
 ## PR route and review
 
-Branch from current `main` using `feat/<task-id>-<description>` (or `fix/` or `chore/`); PR targets `main`. One other named teammate approves the current revision. Link the issue and use `Closes #N` only when fully complete.
+Branch from current `main` using a descriptive name; PR targets `main`. One other named teammate approves the current revision. Link the issue and use `Closes #N` only when fully complete.
 
 ## Scientific/course constraints and completion rule
 

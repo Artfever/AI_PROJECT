@@ -2,7 +2,7 @@
 
 Development CI runs on PRs to `main`, pushes to `main`, and manual dispatch. The required check names are `branch-policy`, `quality`, `unit-and-contract-tests`, `streamlit-smoke`, and `ci-gate`.
 
-The test job uploads `reports/junit.xml` even on failure. The gate writes a job summary with each dependency result. The smoke job starts `app/Home.py`, probes `/_stcore/health`, captures the log on failure, and stops the process. PR code runs with read-only workflow permissions. For a numbered task branch, `branch-policy` verifies its linked issue and checks the task's and phase parent's native open blockers. An open blocker fails with its issue URL. Governance branches use the existing route check. A closed issue is a gate only when its acceptance evidence has been reviewed by the team.
+The test job uploads `reports/junit.xml` even on failure. The gate writes a job summary with each dependency result. The smoke job starts `app/Home.py`, probes `/_stcore/health`, captures the log on failure, and stops the process. PR code runs with read-only workflow permissions. `branch-policy` checks that PRs target `main` and come from a branch in the same repository. It does not require a numbered task or check issue blockers; inspect relevant blockers manually for planned work.
 
 `main` requires a PR, one approving teammate review, dismissal of stale approvals, approval after the latest reviewable push, resolved conversations, and all five CI checks with the branch up to date. Force pushes and deletion are disabled, and the protection applies to administrators. Verify the effective settings with `gh api repos/Artfever/AI_PROJECT/branches/main/protection`. The owner can still change repository settings.
 

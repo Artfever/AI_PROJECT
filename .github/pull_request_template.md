@@ -2,7 +2,7 @@
 
 ## Linked Issue (or reason none applies)
 
-Task ID and issue number: `P__-__` / `#___`. Use `Closes #___` only if this PR fully completes the issue; otherwise use `Refs #___`.
+Link a relevant issue when one exists. Use `Closes #___` only if this PR fully completes it; otherwise use `Refs #___`.
 
 ## Behavior changed
 
