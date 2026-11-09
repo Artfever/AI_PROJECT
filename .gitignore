@@ -44,3 +44,9 @@ artifacts/experiments/*
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Local secrets and tooling caches
+.env
+.env.*
+!.env.example
+.ruff_cache/
