@@ -64,6 +64,30 @@ their own declared input contracts. Run
 `python -m pytest -q tests/test_target_separation.py` for the focused P03-A2
 read-only-input and contaminated-schema checks.
 
+## Repeatable verification on real training engines
+
+P03-A3 reuses the existing tiny synthetic test above and adds local integration
+checks for original FD001 engines 1, 2, and 100. Their audited terminal cycles
+are 192, 287, and 200. Each test checks every label against its known engine
+lifetime, the initial label, and exactly one terminal zero. The fixture verifies
+the original training-file SHA-256 before and after use. No raw data is committed.
+
+```powershell
+python -m pytest -q -rs tests/test_training_targets.py tests/test_training_targets_fd001.py
+python scripts/verify_training_targets.py
+```
+
+The second command reuses Shaheer's [independent check](training_targets_independent_check.md)
+against the audited lifetimes for all training engines. It remains a check of
+training ground truth, not model predictions or official test evaluation.
+
+The local integration tests skip explicitly when `data/raw/train_FD001.txt` is
+absent, including in CI without raw data. A skip does not establish real-data
+correctness; run the commands with the original local file to obtain that
+evidence. An existing file with an incorrect hash fails rather than skips.
+Tests do not read the official test histories or answer file. The raw-file
+retrieval and checksum instructions remain in [provenance](fd001_provenance.md).
+
 The [synthetic hand calculation](rul_hand_calculation.md) gives labels 9, 4, 0
 at cycles 3, 8, 12 for an engine ending at 12. The tests also interleave a second
 engine with a different lifetime to catch accidentally using a global maximum.
