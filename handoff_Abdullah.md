@@ -2,6 +2,20 @@
 
 Updated 9 November 2026. Owner: Abdullah (`Abdullah-SE-bit`).
 
+## Current P02-A3 checkpoint ? Abdullah, 9 November 2026
+
+This checkpoint supersedes stale open/blocked statements in historical sections below; preserve Taha's work credit.
+
+- PR #286 was approved by Abdullah-SE-bit on final head 58bb939 and merged as 9d1719f. #110 CLOSED; P01 #6 CLOSED; native #188 blocker API shows only CLOSED #110, and P02's predecessor is CLOSED #6. Pulled current main safely to d33c790, then created feat/P02-A3-loader-errors. Saved the previous uncommitted local audit in ignored reports/Abdullah-pre-A3-audit.md before updating; no teammate edits discarded.
+- Current task: P02-A3 #188, explicit unreadable/malformed-file errors and train/test/label-length checks. Inspected AGENTS, current handoff, #188/phase blockers, merged loader/tests/docs, prior P02 source/guide/provenance/quality contracts. No new package dependencies or app code.
+- Changed src/fleetpulse/data/loader.py: FD001LoadError(ValueError) for missing/unreadable/invalid-encoding/empty/malformed input; preserves cause for access/encoding failures and path/line diagnostics. Existing reader names and successful return types unchanged. load_rul_values gains optional keyword expected_engine_count; mismatched cardinality rejected with counts. Invalid count argument gets ValueError. History loading never opens answer files. Integrity/finite checks remain in Shaheer's quality module; answer alignment/evaluation is not inferred.
+- Changed tests/test_data_loader.py: missing files, mocked permission denial (portable), damaged UTF-8, empty files, excess columns, synthetic separate train/test collections, too-short/too-long RUL counts, invalid count arguments. Existing malformed-number/short-row tests retained. Changed docs/fd001_loader.md documents errors, optional count and scientific limits.
+- Python 3.12.16, pytest 8.4.2, Ruff 0.17.4, existing fleetpulse-ai 0.1.0: `.venv/Scripts/python.exe -m ruff check .` PASS. `.venv/Scripts/python.exe -m pytest -q tests/test_data_loader.py` passed 19 tests before adding excess-column case; full suite then passed 34. Final `.venv/Scripts/python.exe -m pytest -q` PASS, **35 passed in 3.64s** after excess-column case. `git diff --check` PASS. JUnit output stays ignored at reports/junit.xml.
+- Real-file stdin verification using load_engine_history + validate_engine_history: train 20,631 rows / 100 engines; test histories 13,096 rows / 100 engines; both zero errors and warnings. RUL shape-only inspection: one column / 100 nonempty rows, matching distinct test engines. Did not parse/print real answer values, train, evaluate or tune. All three raw SHA-256 hashes matched docs/fd001_provenance.md before and after; originals unchanged and ignored.
+- `streamlit run app/Home.py`: NOT RUN, no app behavior change. Existing page/AppTests pass as part of full suite; PR smoke CI remains required. Training/inference checks: NOT APPLICABLE, loader work only. Peer should inspect synthetic examples and errors; no claimed human approval of A3.
+- Work commit/PR not yet created. Commit and open focused PR with Closes #188; closure depends on actual peer approval, required CI and merge. Update this handoff with the actual commit/PR afterward. No teammate messages or review requests sent.
+- Next Abdullah task P03-A1 #37 remains blocked by OPEN P02 phase #7 (no task-level blocker is not sufficient). P02-A3 alone does not complete P02; UI integration/quality report/shared real-data gate remain separate team outputs. Continue only after the next task's actual blockers and required outputs are verified.
+
 ## P02-A1 work performed by Taha ? 9 November 2026
 
 - At Taha's explicit request because Abdullah was unavailable, Taha is preparing [#34](https://github.com/Artfever/FleetpulseAI/issues/34). The GitHub issue remains assigned to Abdullah; this is not a claim of Abdullah's work, review, or agreement. P01 #6 is closed following Taha's confirmation; this task has no open native phase blocker.
