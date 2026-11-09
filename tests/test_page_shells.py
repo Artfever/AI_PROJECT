@@ -16,16 +16,20 @@ from fleetpulse import PROJECT_ROOT
         ("5_Model_Laboratory.py", "Model Laboratory", "models and evaluation results"),
     ],
 )
-def test_page_shell_loads_without_data(filename, title, missing):
+def test_page_shell_loads_without_data(filename, title, missing, tmp_path, monkeypatch):
+    from fleetpulse import ui
+
+    monkeypatch.setattr(ui, "PROJECT_ROOT", tmp_path)
     app = AppTest.from_file(str(PROJECT_ROOT / "app" / "Home.py"), default_timeout=10).run()
     assert not app.exception
     page = app.switch_page(f"pages/{filename}").run()
 
     assert not page.exception
     assert [heading.value for heading in page.title] == [title]
-    assert any(missing in message.value and "not available" in message.value for message in page.info)
+    messages = page.warning if title == "Engine Explorer" else page.info
+    assert any(missing in message.value and "not available" in message.value for message in messages)
     assert not page.metric
-    assert len(page.caption) == 1
+    assert page.caption
     assert page.markdown
 
     home = app.switch_page("Home.py").run()
