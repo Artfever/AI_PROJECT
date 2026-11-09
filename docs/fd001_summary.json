@@ -1,0 +1,1319 @@
+{
+  "analysis": {
+    "incidental_answer_output_possible_during_session": true,
+    "loader": "fleetpulse.data.loader.load_engine_history",
+    "summary": "fleetpulse.data.summary.summarize_engine_history",
+    "test_answer_file_parsed_in_summary": false,
+    "test_answer_values_used": false,
+    "variance": "population variance (ddof=0) over all rows within each split"
+  },
+  "dataset": "NASA C-MAPSS FD001",
+  "generated_on": "2026-11-09",
+  "input_commit": "d33c790a6ba28b63b5c253f816560cbb5b0245a1",
+  "loader_contract": "docs/fd001_loader.md",
+  "provenance_record": "docs/fd001_provenance.md",
+  "source_files": {
+    "test": {
+      "bytes": 2228855,
+      "path": "data/raw/test_FD001.txt",
+      "sha256": "3cda7109ce17bafb5443f2ac926cfcf88154b941b8c4cf95eb55d1ddd6f52851"
+    },
+    "train": {
+      "bytes": 3515356,
+      "path": "data/raw/train_FD001.txt",
+      "sha256": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8"
+    }
+  },
+  "splits": {
+    "test": {
+      "engine_count": 100,
+      "engines": [
+        {
+          "engine_id": 1,
+          "first_cycle": 1,
+          "last_cycle": 31,
+          "row_count": 31
+        },
+        {
+          "engine_id": 2,
+          "first_cycle": 1,
+          "last_cycle": 49,
+          "row_count": 49
+        },
+        {
+          "engine_id": 3,
+          "first_cycle": 1,
+          "last_cycle": 126,
+          "row_count": 126
+        },
+        {
+          "engine_id": 4,
+          "first_cycle": 1,
+          "last_cycle": 106,
+          "row_count": 106
+        },
+        {
+          "engine_id": 5,
+          "first_cycle": 1,
+          "last_cycle": 98,
+          "row_count": 98
+        },
+        {
+          "engine_id": 6,
+          "first_cycle": 1,
+          "last_cycle": 105,
+          "row_count": 105
+        },
+        {
+          "engine_id": 7,
+          "first_cycle": 1,
+          "last_cycle": 160,
+          "row_count": 160
+        },
+        {
+          "engine_id": 8,
+          "first_cycle": 1,
+          "last_cycle": 166,
+          "row_count": 166
+        },
+        {
+          "engine_id": 9,
+          "first_cycle": 1,
+          "last_cycle": 55,
+          "row_count": 55
+        },
+        {
+          "engine_id": 10,
+          "first_cycle": 1,
+          "last_cycle": 192,
+          "row_count": 192
+        },
+        {
+          "engine_id": 11,
+          "first_cycle": 1,
+          "last_cycle": 83,
+          "row_count": 83
+        },
+        {
+          "engine_id": 12,
+          "first_cycle": 1,
+          "last_cycle": 217,
+          "row_count": 217
+        },
+        {
+          "engine_id": 13,
+          "first_cycle": 1,
+          "last_cycle": 195,
+          "row_count": 195
+        },
+        {
+          "engine_id": 14,
+          "first_cycle": 1,
+          "last_cycle": 46,
+          "row_count": 46
+        },
+        {
+          "engine_id": 15,
+          "first_cycle": 1,
+          "last_cycle": 76,
+          "row_count": 76
+        },
+        {
+          "engine_id": 16,
+          "first_cycle": 1,
+          "last_cycle": 113,
+          "row_count": 113
+        },
+        {
+          "engine_id": 17,
+          "first_cycle": 1,
+          "last_cycle": 165,
+          "row_count": 165
+        },
+        {
+          "engine_id": 18,
+          "first_cycle": 1,
+          "last_cycle": 133,
+          "row_count": 133
+        },
+        {
+          "engine_id": 19,
+          "first_cycle": 1,
+          "last_cycle": 135,
+          "row_count": 135
+        },
+        {
+          "engine_id": 20,
+          "first_cycle": 1,
+          "last_cycle": 184,
+          "row_count": 184
+        },
+        {
+          "engine_id": 21,
+          "first_cycle": 1,
+          "last_cycle": 148,
+          "row_count": 148
+        },
+        {
+          "engine_id": 22,
+          "first_cycle": 1,
+          "last_cycle": 39,
+          "row_count": 39
+        },
+        {
+          "engine_id": 23,
+          "first_cycle": 1,
+          "last_cycle": 130,
+          "row_count": 130
+        },
+        {
+          "engine_id": 24,
+          "first_cycle": 1,
+          "last_cycle": 186,
+          "row_count": 186
+        },
+        {
+          "engine_id": 25,
+          "first_cycle": 1,
+          "last_cycle": 48,
+          "row_count": 48
+        },
+        {
+          "engine_id": 26,
+          "first_cycle": 1,
+          "last_cycle": 76,
+          "row_count": 76
+        },
+        {
+          "engine_id": 27,
+          "first_cycle": 1,
+          "last_cycle": 140,
+          "row_count": 140
+        },
+        {
+          "engine_id": 28,
+          "first_cycle": 1,
+          "last_cycle": 158,
+          "row_count": 158
+        },
+        {
+          "engine_id": 29,
+          "first_cycle": 1,
+          "last_cycle": 171,
+          "row_count": 171
+        },
+        {
+          "engine_id": 30,
+          "first_cycle": 1,
+          "last_cycle": 143,
+          "row_count": 143
+        },
+        {
+          "engine_id": 31,
+          "first_cycle": 1,
+          "last_cycle": 196,
+          "row_count": 196
+        },
+        {
+          "engine_id": 32,
+          "first_cycle": 1,
+          "last_cycle": 145,
+          "row_count": 145
+        },
+        {
+          "engine_id": 33,
+          "first_cycle": 1,
+          "last_cycle": 50,
+          "row_count": 50
+        },
+        {
+          "engine_id": 34,
+          "first_cycle": 1,
+          "last_cycle": 203,
+          "row_count": 203
+        },
+        {
+          "engine_id": 35,
+          "first_cycle": 1,
+          "last_cycle": 198,
+          "row_count": 198
+        },
+        {
+          "engine_id": 36,
+          "first_cycle": 1,
+          "last_cycle": 126,
+          "row_count": 126
+        },
+        {
+          "engine_id": 37,
+          "first_cycle": 1,
+          "last_cycle": 121,
+          "row_count": 121
+        },
+        {
+          "engine_id": 38,
+          "first_cycle": 1,
+          "last_cycle": 125,
+          "row_count": 125
+        },
+        {
+          "engine_id": 39,
+          "first_cycle": 1,
+          "last_cycle": 37,
+          "row_count": 37
+        },
+        {
+          "engine_id": 40,
+          "first_cycle": 1,
+          "last_cycle": 133,
+          "row_count": 133
+        },
+        {
+          "engine_id": 41,
+          "first_cycle": 1,
+          "last_cycle": 123,
+          "row_count": 123
+        },
+        {
+          "engine_id": 42,
+          "first_cycle": 1,
+          "last_cycle": 156,
+          "row_count": 156
+        },
+        {
+          "engine_id": 43,
+          "first_cycle": 1,
+          "last_cycle": 172,
+          "row_count": 172
+        },
+        {
+          "engine_id": 44,
+          "first_cycle": 1,
+          "last_cycle": 54,
+          "row_count": 54
+        },
+        {
+          "engine_id": 45,
+          "first_cycle": 1,
+          "last_cycle": 152,
+          "row_count": 152
+        },
+        {
+          "engine_id": 46,
+          "first_cycle": 1,
+          "last_cycle": 146,
+          "row_count": 146
+        },
+        {
+          "engine_id": 47,
+          "first_cycle": 1,
+          "last_cycle": 73,
+          "row_count": 73
+        },
+        {
+          "engine_id": 48,
+          "first_cycle": 1,
+          "last_cycle": 78,
+          "row_count": 78
+        },
+        {
+          "engine_id": 49,
+          "first_cycle": 1,
+          "last_cycle": 303,
+          "row_count": 303
+        },
+        {
+          "engine_id": 50,
+          "first_cycle": 1,
+          "last_cycle": 74,
+          "row_count": 74
+        },
+        {
+          "engine_id": 51,
+          "first_cycle": 1,
+          "last_cycle": 144,
+          "row_count": 144
+        },
+        {
+          "engine_id": 52,
+          "first_cycle": 1,
+          "last_cycle": 189,
+          "row_count": 189
+        },
+        {
+          "engine_id": 53,
+          "first_cycle": 1,
+          "last_cycle": 164,
+          "row_count": 164
+        },
+        {
+          "engine_id": 54,
+          "first_cycle": 1,
+          "last_cycle": 121,
+          "row_count": 121
+        },
+        {
+          "engine_id": 55,
+          "first_cycle": 1,
+          "last_cycle": 113,
+          "row_count": 113
+        },
+        {
+          "engine_id": 56,
+          "first_cycle": 1,
+          "last_cycle": 136,
+          "row_count": 136
+        },
+        {
+          "engine_id": 57,
+          "first_cycle": 1,
+          "last_cycle": 160,
+          "row_count": 160
+        },
+        {
+          "engine_id": 58,
+          "first_cycle": 1,
+          "last_cycle": 176,
+          "row_count": 176
+        },
+        {
+          "engine_id": 59,
+          "first_cycle": 1,
+          "last_cycle": 94,
+          "row_count": 94
+        },
+        {
+          "engine_id": 60,
+          "first_cycle": 1,
+          "last_cycle": 147,
+          "row_count": 147
+        },
+        {
+          "engine_id": 61,
+          "first_cycle": 1,
+          "last_cycle": 159,
+          "row_count": 159
+        },
+        {
+          "engine_id": 62,
+          "first_cycle": 1,
+          "last_cycle": 232,
+          "row_count": 232
+        },
+        {
+          "engine_id": 63,
+          "first_cycle": 1,
+          "last_cycle": 155,
+          "row_count": 155
+        },
+        {
+          "engine_id": 64,
+          "first_cycle": 1,
+          "last_cycle": 168,
+          "row_count": 168
+        },
+        {
+          "engine_id": 65,
+          "first_cycle": 1,
+          "last_cycle": 71,
+          "row_count": 71
+        },
+        {
+          "engine_id": 66,
+          "first_cycle": 1,
+          "last_cycle": 147,
+          "row_count": 147
+        },
+        {
+          "engine_id": 67,
+          "first_cycle": 1,
+          "last_cycle": 71,
+          "row_count": 71
+        },
+        {
+          "engine_id": 68,
+          "first_cycle": 1,
+          "last_cycle": 187,
+          "row_count": 187
+        },
+        {
+          "engine_id": 69,
+          "first_cycle": 1,
+          "last_cycle": 54,
+          "row_count": 54
+        },
+        {
+          "engine_id": 70,
+          "first_cycle": 1,
+          "last_cycle": 152,
+          "row_count": 152
+        },
+        {
+          "engine_id": 71,
+          "first_cycle": 1,
+          "last_cycle": 68,
+          "row_count": 68
+        },
+        {
+          "engine_id": 72,
+          "first_cycle": 1,
+          "last_cycle": 131,
+          "row_count": 131
+        },
+        {
+          "engine_id": 73,
+          "first_cycle": 1,
+          "last_cycle": 112,
+          "row_count": 112
+        },
+        {
+          "engine_id": 74,
+          "first_cycle": 1,
+          "last_cycle": 137,
+          "row_count": 137
+        },
+        {
+          "engine_id": 75,
+          "first_cycle": 1,
+          "last_cycle": 88,
+          "row_count": 88
+        },
+        {
+          "engine_id": 76,
+          "first_cycle": 1,
+          "last_cycle": 205,
+          "row_count": 205
+        },
+        {
+          "engine_id": 77,
+          "first_cycle": 1,
+          "last_cycle": 162,
+          "row_count": 162
+        },
+        {
+          "engine_id": 78,
+          "first_cycle": 1,
+          "last_cycle": 72,
+          "row_count": 72
+        },
+        {
+          "engine_id": 79,
+          "first_cycle": 1,
+          "last_cycle": 101,
+          "row_count": 101
+        },
+        {
+          "engine_id": 80,
+          "first_cycle": 1,
+          "last_cycle": 133,
+          "row_count": 133
+        },
+        {
+          "engine_id": 81,
+          "first_cycle": 1,
+          "last_cycle": 213,
+          "row_count": 213
+        },
+        {
+          "engine_id": 82,
+          "first_cycle": 1,
+          "last_cycle": 162,
+          "row_count": 162
+        },
+        {
+          "engine_id": 83,
+          "first_cycle": 1,
+          "last_cycle": 73,
+          "row_count": 73
+        },
+        {
+          "engine_id": 84,
+          "first_cycle": 1,
+          "last_cycle": 172,
+          "row_count": 172
+        },
+        {
+          "engine_id": 85,
+          "first_cycle": 1,
+          "last_cycle": 34,
+          "row_count": 34
+        },
+        {
+          "engine_id": 86,
+          "first_cycle": 1,
+          "last_cycle": 110,
+          "row_count": 110
+        },
+        {
+          "engine_id": 87,
+          "first_cycle": 1,
+          "last_cycle": 56,
+          "row_count": 56
+        },
+        {
+          "engine_id": 88,
+          "first_cycle": 1,
+          "last_cycle": 68,
+          "row_count": 68
+        },
+        {
+          "engine_id": 89,
+          "first_cycle": 1,
+          "last_cycle": 177,
+          "row_count": 177
+        },
+        {
+          "engine_id": 90,
+          "first_cycle": 1,
+          "last_cycle": 146,
+          "row_count": 146
+        },
+        {
+          "engine_id": 91,
+          "first_cycle": 1,
+          "last_cycle": 234,
+          "row_count": 234
+        },
+        {
+          "engine_id": 92,
+          "first_cycle": 1,
+          "last_cycle": 150,
+          "row_count": 150
+        },
+        {
+          "engine_id": 93,
+          "first_cycle": 1,
+          "last_cycle": 244,
+          "row_count": 244
+        },
+        {
+          "engine_id": 94,
+          "first_cycle": 1,
+          "last_cycle": 133,
+          "row_count": 133
+        },
+        {
+          "engine_id": 95,
+          "first_cycle": 1,
+          "last_cycle": 89,
+          "row_count": 89
+        },
+        {
+          "engine_id": 96,
+          "first_cycle": 1,
+          "last_cycle": 97,
+          "row_count": 97
+        },
+        {
+          "engine_id": 97,
+          "first_cycle": 1,
+          "last_cycle": 134,
+          "row_count": 134
+        },
+        {
+          "engine_id": 98,
+          "first_cycle": 1,
+          "last_cycle": 121,
+          "row_count": 121
+        },
+        {
+          "engine_id": 99,
+          "first_cycle": 1,
+          "last_cycle": 97,
+          "row_count": 97
+        },
+        {
+          "engine_id": 100,
+          "first_cycle": 1,
+          "last_cycle": 198,
+          "row_count": 198
+        }
+      ],
+      "exactly_constant_sensors": [
+        "sensor_1",
+        "sensor_5",
+        "sensor_10",
+        "sensor_16",
+        "sensor_18",
+        "sensor_19"
+      ],
+      "quality": {
+        "error_codes": {},
+        "error_count": 0,
+        "findings": [],
+        "rows_checked": 13096,
+        "warning_codes": {},
+        "warning_count": 0
+      },
+      "row_count": 13096,
+      "sensor_population_variance_ddof_0": {
+        "sensor_1": 0.0,
+        "sensor_10": 0.0,
+        "sensor_11": 0.03838063607289374,
+        "sensor_12": 0.3131581891007155,
+        "sensor_13": 0.003241268172184321,
+        "sensor_14": 103.79974476824295,
+        "sensor_15": 0.0008414768252473488,
+        "sensor_16": 0.0,
+        "sensor_17": 1.5215955880901417,
+        "sensor_18": 0.0,
+        "sensor_19": 0.0,
+        "sensor_2": 0.16070801000418147,
+        "sensor_20": 0.020071903632366894,
+        "sensor_21": 0.007075681198890533,
+        "sensor_3": 25.030838539187467,
+        "sensor_4": 44.73006538518848,
+        "sensor_5": 0.0,
+        "sensor_6": 2.903683115965272e-06,
+        "sensor_7": 0.46411532094745467,
+        "sensor_8": 0.0032993066141253405,
+        "sensor_9": 130.7780678417255
+      }
+    },
+    "train": {
+      "engine_count": 100,
+      "engines": [
+        {
+          "engine_id": 1,
+          "first_cycle": 1,
+          "last_cycle": 192,
+          "row_count": 192
+        },
+        {
+          "engine_id": 2,
+          "first_cycle": 1,
+          "last_cycle": 287,
+          "row_count": 287
+        },
+        {
+          "engine_id": 3,
+          "first_cycle": 1,
+          "last_cycle": 179,
+          "row_count": 179
+        },
+        {
+          "engine_id": 4,
+          "first_cycle": 1,
+          "last_cycle": 189,
+          "row_count": 189
+        },
+        {
+          "engine_id": 5,
+          "first_cycle": 1,
+          "last_cycle": 269,
+          "row_count": 269
+        },
+        {
+          "engine_id": 6,
+          "first_cycle": 1,
+          "last_cycle": 188,
+          "row_count": 188
+        },
+        {
+          "engine_id": 7,
+          "first_cycle": 1,
+          "last_cycle": 259,
+          "row_count": 259
+        },
+        {
+          "engine_id": 8,
+          "first_cycle": 1,
+          "last_cycle": 150,
+          "row_count": 150
+        },
+        {
+          "engine_id": 9,
+          "first_cycle": 1,
+          "last_cycle": 201,
+          "row_count": 201
+        },
+        {
+          "engine_id": 10,
+          "first_cycle": 1,
+          "last_cycle": 222,
+          "row_count": 222
+        },
+        {
+          "engine_id": 11,
+          "first_cycle": 1,
+          "last_cycle": 240,
+          "row_count": 240
+        },
+        {
+          "engine_id": 12,
+          "first_cycle": 1,
+          "last_cycle": 170,
+          "row_count": 170
+        },
+        {
+          "engine_id": 13,
+          "first_cycle": 1,
+          "last_cycle": 163,
+          "row_count": 163
+        },
+        {
+          "engine_id": 14,
+          "first_cycle": 1,
+          "last_cycle": 180,
+          "row_count": 180
+        },
+        {
+          "engine_id": 15,
+          "first_cycle": 1,
+          "last_cycle": 207,
+          "row_count": 207
+        },
+        {
+          "engine_id": 16,
+          "first_cycle": 1,
+          "last_cycle": 209,
+          "row_count": 209
+        },
+        {
+          "engine_id": 17,
+          "first_cycle": 1,
+          "last_cycle": 276,
+          "row_count": 276
+        },
+        {
+          "engine_id": 18,
+          "first_cycle": 1,
+          "last_cycle": 195,
+          "row_count": 195
+        },
+        {
+          "engine_id": 19,
+          "first_cycle": 1,
+          "last_cycle": 158,
+          "row_count": 158
+        },
+        {
+          "engine_id": 20,
+          "first_cycle": 1,
+          "last_cycle": 234,
+          "row_count": 234
+        },
+        {
+          "engine_id": 21,
+          "first_cycle": 1,
+          "last_cycle": 195,
+          "row_count": 195
+        },
+        {
+          "engine_id": 22,
+          "first_cycle": 1,
+          "last_cycle": 202,
+          "row_count": 202
+        },
+        {
+          "engine_id": 23,
+          "first_cycle": 1,
+          "last_cycle": 168,
+          "row_count": 168
+        },
+        {
+          "engine_id": 24,
+          "first_cycle": 1,
+          "last_cycle": 147,
+          "row_count": 147
+        },
+        {
+          "engine_id": 25,
+          "first_cycle": 1,
+          "last_cycle": 230,
+          "row_count": 230
+        },
+        {
+          "engine_id": 26,
+          "first_cycle": 1,
+          "last_cycle": 199,
+          "row_count": 199
+        },
+        {
+          "engine_id": 27,
+          "first_cycle": 1,
+          "last_cycle": 156,
+          "row_count": 156
+        },
+        {
+          "engine_id": 28,
+          "first_cycle": 1,
+          "last_cycle": 165,
+          "row_count": 165
+        },
+        {
+          "engine_id": 29,
+          "first_cycle": 1,
+          "last_cycle": 163,
+          "row_count": 163
+        },
+        {
+          "engine_id": 30,
+          "first_cycle": 1,
+          "last_cycle": 194,
+          "row_count": 194
+        },
+        {
+          "engine_id": 31,
+          "first_cycle": 1,
+          "last_cycle": 234,
+          "row_count": 234
+        },
+        {
+          "engine_id": 32,
+          "first_cycle": 1,
+          "last_cycle": 191,
+          "row_count": 191
+        },
+        {
+          "engine_id": 33,
+          "first_cycle": 1,
+          "last_cycle": 200,
+          "row_count": 200
+        },
+        {
+          "engine_id": 34,
+          "first_cycle": 1,
+          "last_cycle": 195,
+          "row_count": 195
+        },
+        {
+          "engine_id": 35,
+          "first_cycle": 1,
+          "last_cycle": 181,
+          "row_count": 181
+        },
+        {
+          "engine_id": 36,
+          "first_cycle": 1,
+          "last_cycle": 158,
+          "row_count": 158
+        },
+        {
+          "engine_id": 37,
+          "first_cycle": 1,
+          "last_cycle": 170,
+          "row_count": 170
+        },
+        {
+          "engine_id": 38,
+          "first_cycle": 1,
+          "last_cycle": 194,
+          "row_count": 194
+        },
+        {
+          "engine_id": 39,
+          "first_cycle": 1,
+          "last_cycle": 128,
+          "row_count": 128
+        },
+        {
+          "engine_id": 40,
+          "first_cycle": 1,
+          "last_cycle": 188,
+          "row_count": 188
+        },
+        {
+          "engine_id": 41,
+          "first_cycle": 1,
+          "last_cycle": 216,
+          "row_count": 216
+        },
+        {
+          "engine_id": 42,
+          "first_cycle": 1,
+          "last_cycle": 196,
+          "row_count": 196
+        },
+        {
+          "engine_id": 43,
+          "first_cycle": 1,
+          "last_cycle": 207,
+          "row_count": 207
+        },
+        {
+          "engine_id": 44,
+          "first_cycle": 1,
+          "last_cycle": 192,
+          "row_count": 192
+        },
+        {
+          "engine_id": 45,
+          "first_cycle": 1,
+          "last_cycle": 158,
+          "row_count": 158
+        },
+        {
+          "engine_id": 46,
+          "first_cycle": 1,
+          "last_cycle": 256,
+          "row_count": 256
+        },
+        {
+          "engine_id": 47,
+          "first_cycle": 1,
+          "last_cycle": 214,
+          "row_count": 214
+        },
+        {
+          "engine_id": 48,
+          "first_cycle": 1,
+          "last_cycle": 231,
+          "row_count": 231
+        },
+        {
+          "engine_id": 49,
+          "first_cycle": 1,
+          "last_cycle": 215,
+          "row_count": 215
+        },
+        {
+          "engine_id": 50,
+          "first_cycle": 1,
+          "last_cycle": 198,
+          "row_count": 198
+        },
+        {
+          "engine_id": 51,
+          "first_cycle": 1,
+          "last_cycle": 213,
+          "row_count": 213
+        },
+        {
+          "engine_id": 52,
+          "first_cycle": 1,
+          "last_cycle": 213,
+          "row_count": 213
+        },
+        {
+          "engine_id": 53,
+          "first_cycle": 1,
+          "last_cycle": 195,
+          "row_count": 195
+        },
+        {
+          "engine_id": 54,
+          "first_cycle": 1,
+          "last_cycle": 257,
+          "row_count": 257
+        },
+        {
+          "engine_id": 55,
+          "first_cycle": 1,
+          "last_cycle": 193,
+          "row_count": 193
+        },
+        {
+          "engine_id": 56,
+          "first_cycle": 1,
+          "last_cycle": 275,
+          "row_count": 275
+        },
+        {
+          "engine_id": 57,
+          "first_cycle": 1,
+          "last_cycle": 137,
+          "row_count": 137
+        },
+        {
+          "engine_id": 58,
+          "first_cycle": 1,
+          "last_cycle": 147,
+          "row_count": 147
+        },
+        {
+          "engine_id": 59,
+          "first_cycle": 1,
+          "last_cycle": 231,
+          "row_count": 231
+        },
+        {
+          "engine_id": 60,
+          "first_cycle": 1,
+          "last_cycle": 172,
+          "row_count": 172
+        },
+        {
+          "engine_id": 61,
+          "first_cycle": 1,
+          "last_cycle": 185,
+          "row_count": 185
+        },
+        {
+          "engine_id": 62,
+          "first_cycle": 1,
+          "last_cycle": 180,
+          "row_count": 180
+        },
+        {
+          "engine_id": 63,
+          "first_cycle": 1,
+          "last_cycle": 174,
+          "row_count": 174
+        },
+        {
+          "engine_id": 64,
+          "first_cycle": 1,
+          "last_cycle": 283,
+          "row_count": 283
+        },
+        {
+          "engine_id": 65,
+          "first_cycle": 1,
+          "last_cycle": 153,
+          "row_count": 153
+        },
+        {
+          "engine_id": 66,
+          "first_cycle": 1,
+          "last_cycle": 202,
+          "row_count": 202
+        },
+        {
+          "engine_id": 67,
+          "first_cycle": 1,
+          "last_cycle": 313,
+          "row_count": 313
+        },
+        {
+          "engine_id": 68,
+          "first_cycle": 1,
+          "last_cycle": 199,
+          "row_count": 199
+        },
+        {
+          "engine_id": 69,
+          "first_cycle": 1,
+          "last_cycle": 362,
+          "row_count": 362
+        },
+        {
+          "engine_id": 70,
+          "first_cycle": 1,
+          "last_cycle": 137,
+          "row_count": 137
+        },
+        {
+          "engine_id": 71,
+          "first_cycle": 1,
+          "last_cycle": 208,
+          "row_count": 208
+        },
+        {
+          "engine_id": 72,
+          "first_cycle": 1,
+          "last_cycle": 213,
+          "row_count": 213
+        },
+        {
+          "engine_id": 73,
+          "first_cycle": 1,
+          "last_cycle": 213,
+          "row_count": 213
+        },
+        {
+          "engine_id": 74,
+          "first_cycle": 1,
+          "last_cycle": 166,
+          "row_count": 166
+        },
+        {
+          "engine_id": 75,
+          "first_cycle": 1,
+          "last_cycle": 229,
+          "row_count": 229
+        },
+        {
+          "engine_id": 76,
+          "first_cycle": 1,
+          "last_cycle": 210,
+          "row_count": 210
+        },
+        {
+          "engine_id": 77,
+          "first_cycle": 1,
+          "last_cycle": 154,
+          "row_count": 154
+        },
+        {
+          "engine_id": 78,
+          "first_cycle": 1,
+          "last_cycle": 231,
+          "row_count": 231
+        },
+        {
+          "engine_id": 79,
+          "first_cycle": 1,
+          "last_cycle": 199,
+          "row_count": 199
+        },
+        {
+          "engine_id": 80,
+          "first_cycle": 1,
+          "last_cycle": 185,
+          "row_count": 185
+        },
+        {
+          "engine_id": 81,
+          "first_cycle": 1,
+          "last_cycle": 240,
+          "row_count": 240
+        },
+        {
+          "engine_id": 82,
+          "first_cycle": 1,
+          "last_cycle": 214,
+          "row_count": 214
+        },
+        {
+          "engine_id": 83,
+          "first_cycle": 1,
+          "last_cycle": 293,
+          "row_count": 293
+        },
+        {
+          "engine_id": 84,
+          "first_cycle": 1,
+          "last_cycle": 267,
+          "row_count": 267
+        },
+        {
+          "engine_id": 85,
+          "first_cycle": 1,
+          "last_cycle": 188,
+          "row_count": 188
+        },
+        {
+          "engine_id": 86,
+          "first_cycle": 1,
+          "last_cycle": 278,
+          "row_count": 278
+        },
+        {
+          "engine_id": 87,
+          "first_cycle": 1,
+          "last_cycle": 178,
+          "row_count": 178
+        },
+        {
+          "engine_id": 88,
+          "first_cycle": 1,
+          "last_cycle": 213,
+          "row_count": 213
+        },
+        {
+          "engine_id": 89,
+          "first_cycle": 1,
+          "last_cycle": 217,
+          "row_count": 217
+        },
+        {
+          "engine_id": 90,
+          "first_cycle": 1,
+          "last_cycle": 154,
+          "row_count": 154
+        },
+        {
+          "engine_id": 91,
+          "first_cycle": 1,
+          "last_cycle": 135,
+          "row_count": 135
+        },
+        {
+          "engine_id": 92,
+          "first_cycle": 1,
+          "last_cycle": 341,
+          "row_count": 341
+        },
+        {
+          "engine_id": 93,
+          "first_cycle": 1,
+          "last_cycle": 155,
+          "row_count": 155
+        },
+        {
+          "engine_id": 94,
+          "first_cycle": 1,
+          "last_cycle": 258,
+          "row_count": 258
+        },
+        {
+          "engine_id": 95,
+          "first_cycle": 1,
+          "last_cycle": 283,
+          "row_count": 283
+        },
+        {
+          "engine_id": 96,
+          "first_cycle": 1,
+          "last_cycle": 336,
+          "row_count": 336
+        },
+        {
+          "engine_id": 97,
+          "first_cycle": 1,
+          "last_cycle": 202,
+          "row_count": 202
+        },
+        {
+          "engine_id": 98,
+          "first_cycle": 1,
+          "last_cycle": 156,
+          "row_count": 156
+        },
+        {
+          "engine_id": 99,
+          "first_cycle": 1,
+          "last_cycle": 185,
+          "row_count": 185
+        },
+        {
+          "engine_id": 100,
+          "first_cycle": 1,
+          "last_cycle": 200,
+          "row_count": 200
+        }
+      ],
+      "exactly_constant_sensors": [
+        "sensor_1",
+        "sensor_5",
+        "sensor_10",
+        "sensor_16",
+        "sensor_18",
+        "sensor_19"
+      ],
+      "quality": {
+        "error_codes": {},
+        "error_count": 0,
+        "findings": [],
+        "rows_checked": 20631,
+        "warning_codes": {},
+        "warning_count": 0
+      },
+      "row_count": 20631,
+      "sensor_population_variance_ddof_0": {
+        "sensor_1": 0.0,
+        "sensor_10": 0.0,
+        "sensor_11": 0.07133222081842819,
+        "sensor_12": 0.5439586389998092,
+        "sensor_13": 0.005172079728390101,
+        "sensor_14": 363.88285133652977,
+        "sensor_15": 0.001406559691473435,
+        "sensor_16": 0.0,
+        "sensor_17": 2.398550641233471,
+        "sensor_18": 0.0,
+        "sensor_19": 0.0,
+        "sensor_2": 0.2500411526291055,
+        "sensor_20": 0.03266768768507952,
+        "sensor_21": 0.011717683890605915,
+        "sensor_3": 37.589172369189,
+        "sensor_4": 81.00695975729346,
+        "sensor_5": 0.0,
+        "sensor_6": 1.9291855741313105e-06,
+        "sensor_7": 0.7833503331586583,
+        "sensor_8": 0.005038693972217882,
+        "sensor_9": 487.62993118548894
+      }
+    }
+  }
+}
