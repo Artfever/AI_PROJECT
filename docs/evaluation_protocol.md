@@ -25,6 +25,28 @@ C-MAPSS FD001 development data only; it does not define an official test result.
   Verify it against the original local training file before relying on its
   assignments.
 
+## Concrete visible-prefix example
+
+The saved manifest selects **FD001/train engine 4**, a simulated validation
+engine, at cycle 164. Its complete training history has observed cycles 1?189.
+The predictor receives only cycles 1?164: 164 sensor-history rows from this
+engine. Cycles 165?189 are the hidden future and must not be supplied to the
+predictor or used to create its input features. The scoring path can use the
+known final cycle 189 to calculate the target: `189 - 164 = 25` cycles.
+
+| Information | Available to predictor? | Purpose |
+| --- | --- | --- |
+| Engine 4 sensor records through cycle 164 | Yes | Observed prefix input |
+| Engine 4 sensor records from cycles 165?189 | No | Future trajectory, hidden from prediction |
+| Final cycle 189 and target RUL 25 | No | Scoring and analysis only |
+
+This example describes a held-out engine from the original **training**
+partition; it is not an official-test engine or a model prediction. Numeric
+engine IDs can repeat across partitions, so keep `FD001/train` with the ID.
+The row counts above were checked against the local source and saved manifest;
+other engines or gapped histories need their actual observed row counts rather
+than assuming a cutoff cycle equals a row count.
+
 ## Primary validation measures
 
 Produce exactly one prediction for each validation engine and calculate the
