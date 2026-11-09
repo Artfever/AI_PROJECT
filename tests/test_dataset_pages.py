@@ -41,16 +41,22 @@ def test_dataset_pages_show_counts_and_preview_from_loader(page, synthetic_train
 
 
 @pytest.mark.parametrize("content", [None, "1 2 3\n"])
-def test_missing_or_malformed_data_is_explained_without_fake_counts(content, tmp_path, monkeypatch):
+@pytest.mark.parametrize("page", [None, "pages/2_Engine_Explorer.py"])
+def test_missing_or_malformed_data_is_explained_without_fake_counts(
+    content, page, tmp_path, monkeypatch
+):
     if content is not None:
         raw = tmp_path / "data" / "raw"
         raw.mkdir(parents=True)
         (raw / "train_FD001.txt").write_text(content, encoding="utf-8")
     monkeypatch.setattr(ui, "PROJECT_ROOT", tmp_path)
     app = AppTest.from_file(str(PROJECT_ROOT / "app" / "Home.py"), default_timeout=30).run()
+    if page:
+        app = app.switch_page(page).run()
 
     assert not app.exception
     assert any("Engine history data is not available" in item.value for item in app.warning)
+    assert any("train_FD001.txt" in item.value and "No packaged demo" in item.value for item in app.markdown)
     assert not app.metric
     assert not app.dataframe
 
@@ -64,5 +70,6 @@ def test_invalid_history_is_not_presented_as_valid(synthetic_training_root, monk
 
     assert not app.exception
     assert any("invalid records" in item.value for item in app.error)
+    assert any("No packaged demo" in item.value for item in app.markdown)
     assert not app.metric
     assert not app.dataframe
