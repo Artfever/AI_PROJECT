@@ -30,3 +30,8 @@ Starter record created by repository governance on 9 November 2026. Taha should 
 - The current branch is `chore/repository-structure`. Its unnumbered name does not meet the existing branch-policy check; a suitable agreed task route and one other teammate's approval are needed before merging. No approval has been recorded.
 
 - Cleanup commit: `11d0983`; draft PR: https://github.com/Artfever/FleetpulseAI/pull/272. The task route, CI, and teammate review remain pending.
+
+## PR policy update (9 November 2026)
+
+- At Taha's request, removed the numbered-task branch and linked-issue gate from development CI. The `branch-policy` check still requires PRs to target `main` from a branch in this repository; planned work's relevant issue blockers remain a manual check.
+- Updated the PR and task templates, contributor guidance, CI documentation, and repository instructions to match. The existing PR, required CI, and other-teammate review remain in effect. PR #272 must pass CI and receive a current approval after this change.
