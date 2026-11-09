@@ -1,0 +1,606 @@
+{
+  "cutoff_policy": {
+    "algorithm": "python-random-choice-observed-v1",
+    "exclude_terminal": true,
+    "minimum_history_rows": 1,
+    "seed": 42,
+    "selection": "uniform_over_eligible_observed_cycles"
+  },
+  "fitting_engines": [
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 1
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 2
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 3
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 6
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 7
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 8
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 9
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 10
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 11
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 13
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 16
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 17
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 19
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 20
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 21
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 22
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 23
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 24
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 25
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 26
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 27
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 31
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 33
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 34
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 35
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 37
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 38
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 39
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 40
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 41
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 42
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 43
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 44
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 45
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 46
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 47
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 48
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 49
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 50
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 51
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 52
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 53
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 54
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 56
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 57
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 58
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 59
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 60
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 61
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 62
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 63
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 64
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 66
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 67
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 68
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 69
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 71
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 73
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 74
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 75
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 77
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 79
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 80
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 81
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 83
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 84
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 85
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 86
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 88
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 89
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 90
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 91
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 92
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 93
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 94
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 96
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 97
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 98
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 99
+    },
+    {
+      "dataset_partition": "FD001/train",
+      "unit_id": 100
+    }
+  ],
+  "schema_version": 1,
+  "source": {
+    "dataset_partition": "FD001/train",
+    "engine_count": 100,
+    "path": "data/raw/train_FD001.txt",
+    "row_count": 20631,
+    "sha256": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8"
+  },
+  "split": {
+    "algorithm": "python-random-sample-v1",
+    "seed": 42,
+    "validation_fraction": 0.2
+  },
+  "validation_prefixes": [
+    {
+      "cutoff_cycle": 164,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 188,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 188
+      },
+      "full_lifetime": 189,
+      "prefix_row_count": 164,
+      "target_rul": 25,
+      "unit_id": 4
+    },
+    {
+      "cutoff_cycle": 58,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 268,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 268
+      },
+      "full_lifetime": 269,
+      "prefix_row_count": 58,
+      "target_rul": 211,
+      "unit_id": 5
+    },
+    {
+      "cutoff_cycle": 7,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 169,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 169
+      },
+      "full_lifetime": 170,
+      "prefix_row_count": 7,
+      "target_rul": 163,
+      "unit_id": 12
+    },
+    {
+      "cutoff_cycle": 71,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 179,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 179
+      },
+      "full_lifetime": 180,
+      "prefix_row_count": 71,
+      "target_rul": 109,
+      "unit_id": 14
+    },
+    {
+      "cutoff_cycle": 63,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 206,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 206
+      },
+      "full_lifetime": 207,
+      "prefix_row_count": 63,
+      "target_rul": 144,
+      "unit_id": 15
+    },
+    {
+      "cutoff_cycle": 58,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 194,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 194
+      },
+      "full_lifetime": 195,
+      "prefix_row_count": 58,
+      "target_rul": 137,
+      "unit_id": 18
+    },
+    {
+      "cutoff_cycle": 36,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 164,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 164
+      },
+      "full_lifetime": 165,
+      "prefix_row_count": 36,
+      "target_rul": 129,
+      "unit_id": 28
+    },
+    {
+      "cutoff_cycle": 27,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 162,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 162
+      },
+      "full_lifetime": 163,
+      "prefix_row_count": 27,
+      "target_rul": 136,
+      "unit_id": 29
+    },
+    {
+      "cutoff_cycle": 174,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 193,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 193
+      },
+      "full_lifetime": 194,
+      "prefix_row_count": 174,
+      "target_rul": 20,
+      "unit_id": 30
+    },
+    {
+      "cutoff_cycle": 190,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 190,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 190
+      },
+      "full_lifetime": 191,
+      "prefix_row_count": 190,
+      "target_rul": 1,
+      "unit_id": 32
+    },
+    {
+      "cutoff_cycle": 140,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 157,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 157
+      },
+      "full_lifetime": 158,
+      "prefix_row_count": 140,
+      "target_rul": 18,
+      "unit_id": 36
+    },
+    {
+      "cutoff_cycle": 23,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 192,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 192
+      },
+      "full_lifetime": 193,
+      "prefix_row_count": 23,
+      "target_rul": 170,
+      "unit_id": 55
+    },
+    {
+      "cutoff_cycle": 152,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 152,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 152
+      },
+      "full_lifetime": 153,
+      "prefix_row_count": 152,
+      "target_rul": 1,
+      "unit_id": 65
+    },
+    {
+      "cutoff_cycle": 109,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 136,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 136
+      },
+      "full_lifetime": 137,
+      "prefix_row_count": 109,
+      "target_rul": 28,
+      "unit_id": 70
+    },
+    {
+      "cutoff_cycle": 9,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 212,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 212
+      },
+      "full_lifetime": 213,
+      "prefix_row_count": 9,
+      "target_rul": 204,
+      "unit_id": 72
+    },
+    {
+      "cutoff_cycle": 8,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 209,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 209
+      },
+      "full_lifetime": 210,
+      "prefix_row_count": 8,
+      "target_rul": 202,
+      "unit_id": 76
+    },
+    {
+      "cutoff_cycle": 24,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 230,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 230
+      },
+      "full_lifetime": 231,
+      "prefix_row_count": 24,
+      "target_rul": 207,
+      "unit_id": 78
+    },
+    {
+      "cutoff_cycle": 56,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 213,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 213
+      },
+      "full_lifetime": 214,
+      "prefix_row_count": 56,
+      "target_rul": 158,
+      "unit_id": 82
+    },
+    {
+      "cutoff_cycle": 60,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 177,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 177
+      },
+      "full_lifetime": 178,
+      "prefix_row_count": 60,
+      "target_rul": 118,
+      "unit_id": 87
+    },
+    {
+      "cutoff_cycle": 259,
+      "dataset_partition": "FD001/train",
+      "eligible_cutoff_count": 282,
+      "eligible_cutoff_range": {
+        "first": 1,
+        "last": 282
+      },
+      "full_lifetime": 283,
+      "prefix_row_count": 259,
+      "target_rul": 24,
+      "unit_id": 95
+    }
+  ]
+}
