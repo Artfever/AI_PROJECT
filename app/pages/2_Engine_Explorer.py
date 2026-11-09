@@ -1,6 +1,10 @@
-"""Engine Explorer page shell."""
+"""Engine Explorer view."""
 
-import streamlit as st
+from fleetpulse.ui import render_page
 
-st.title('Engine Explorer')
-st.info('Engine history data is not available yet.')
+render_page(
+    'Engine Explorer',
+    'Explore an individual engine history.',
+    'Engine history data is not available yet.',
+    'Engine histories will appear here when the dataset is connected.',
+)

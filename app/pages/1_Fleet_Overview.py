@@ -1,6 +1,10 @@
-"""Fleet Overview page shell."""
+"""Fleet Overview view."""
 
-import streamlit as st
+from fleetpulse.ui import render_page
 
-st.title('Fleet Overview')
-st.info('Fleet data and predictions are not available yet.')
+render_page(
+    'Fleet Overview',
+    'Review a fleet of simulated engines.',
+    'Fleet data and predictions are not available yet.',
+    'Fleet summaries will appear here when data and predictions are available.',
+)
