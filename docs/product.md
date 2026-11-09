@@ -13,7 +13,7 @@ Start the app from the repository root with `python -m streamlit run app/Home.py
 5. **Maintenance Planner** identifies the future simulated scheduling view and the absence of schedules.
 6. **Model Laboratory** identifies the future model evaluation view and the absence of trained models and evaluation results.
 
-The sidebar lets the user move between pages. Missing or malformed local training data produces a message without fabricated counts. No data upload, prediction, comparison, or scheduling control is implemented yet.
+The sidebar lets the user move between pages. Missing or malformed local training data produces a message without fabricated counts, with [setup and demo-data guidance](data_policy.md). No data upload, prediction, comparison, or scheduling control is implemented yet.
 
 ## Intended future journey
 
