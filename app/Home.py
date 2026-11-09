@@ -2,7 +2,7 @@
 
 import streamlit as st
 
-st.set_page_config(page_title="FleetPulse AI", page_icon="???")
+st.set_page_config(page_title="FleetPulse AI", page_icon="\U0001f6e0\ufe0f")
 
 navigation = st.navigation(
     [
