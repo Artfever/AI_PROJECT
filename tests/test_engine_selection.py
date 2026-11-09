@@ -34,8 +34,8 @@ def test_selecting_two_engines_shows_only_their_ordered_cycles(tmp_path, monkeyp
 
     assert not page.exception
     assert page.selectbox[0].value == 900001
-    assert page.dataframe[-1].value["unit_id"].tolist() == [900001] * 3
-    assert page.dataframe[-1].value["cycle"].tolist() == [1, 2, 3]
+    assert page.dataframe[1].value["unit_id"].tolist() == [900001] * 3
+    assert page.dataframe[1].value["cycle"].tolist() == [1, 2, 3]
     assert page.multiselect[0].value == ["sensor_1", "sensor_2", "sensor_9"]
     assert len(page.get("vega_lite_chart")) == 3
     chart_fields = [
@@ -49,8 +49,8 @@ def test_selecting_two_engines_shows_only_their_ordered_cycles(tmp_path, monkeyp
     assert "1 direction reversals" in descriptions
     page.selectbox[0].set_value(900002).run()
     assert not page.exception
-    assert page.dataframe[-1].value["unit_id"].tolist() == [900002] * 3
-    assert page.dataframe[-1].value["cycle"].tolist() == [1, 2, 3]
+    assert page.dataframe[1].value["unit_id"].tolist() == [900002] * 3
+    assert page.dataframe[1].value["cycle"].tolist() == [1, 2, 3]
 
 
 def test_missing_training_data_has_no_engine_selector(tmp_path, monkeypatch):
