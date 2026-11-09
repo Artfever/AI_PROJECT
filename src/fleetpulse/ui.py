@@ -24,7 +24,7 @@ def render_dataset_preview(record_count: int, engine_count: int, preview: object
     st.dataframe(preview, hide_index=True)
 
 
-def render_training_data() -> None:
+def render_training_data() -> list[dict[str, int | float]] | None:
     """Display actual FD001 training histories or an actionable load error."""
     st.subheader("FD001 training histories")
     st.caption("Simulated NASA C-MAPSS training data; engine IDs belong to the training partition.")
@@ -48,3 +48,4 @@ def render_training_data() -> None:
         engine_count=len({record["unit_id"] for record in records}),
         preview=records[:10],
     )
+    return records
