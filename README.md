@@ -1,11 +1,40 @@
 # FleetPulse AI
 
-FleetPulse is a planned Streamlit application for simulated turbofan remaining-useful-life prediction and maintenance scheduling. The repository is in its bootstrap stage; no trained model or final evaluation is available yet.
+FleetPulse is a planned Streamlit application for predicting the remaining useful life of simulated turbofan engines and exploring maintenance schedules. It is currently a bootstrap: no dataset, trained model, predictions, or evaluation results are included.
 
-Use Python 3.12. Run `python -m pip install -e ".[dev]"`, `python -m pytest -q`, and `streamlit run app/Home.py` for the current preview.
+## Get started
 
-Follow the [editable-install guide](docs/SETUP.md) to select Python 3.12, create an isolated environment on Windows/Linux/macOS, and use repository-relative file paths.
+The project requires Python 3.12. From the repository root:
 
-The [shared repository layout](docs/REPOSITORY_LAYOUT.md) describes the package folders and the empty data/artifact directories preserved in a fresh clone.
+```sh
+python -m venv .venv
+# Activate the environment, then run:
+python -m pip install -e ".[dev]"
+python -m pytest -q
+python -m ruff check .
+python -m streamlit run app/Home.py
+```
 
-`main` is the only long-lived branch. Track agreed work in GitHub Issues, make changes on a short-lived branch from `main`, and open a pull request back to `main`. One other named teammate must approve after CI passes. Start with [repository agent instructions](AGENTS.md) and the current owner's handoff ([Shaheer](handoff_Shaheer.md), [Abdullah](handoff_Abdullah.md), or [Taha](handoff_Taha.md)). See [the issue backlog](docs/ISSUE_BACKLOG.md), [dependencies and merge order](docs/DEPENDENCIES_AND_MERGE_ORDER.md), [workflow migration](docs/ISSUE_WORKFLOW_MIGRATION.md), [contributing](docs/CONTRIBUTING.md), [branching and reviews](docs/BRANCHING_AND_REVIEWS.md), [CI and delivery](docs/CI_CD.md), [capability inventory](docs/CI_CAPABILITIES.md), and [course evidence](docs/COURSE_COMPLIANCE.md).
+See the [setup guide](docs/SETUP.md) for Windows, Linux, and macOS commands and the editable-install path contract.
+
+## Repository structure
+
+```text
+app/                  Streamlit entrypoint and future pages
+src/fleetpulse/       Python package and planned domain modules
+tests/                Automated tests
+data/                 Local datasets (contents ignored by Git)
+artifacts/            Local model and experiment outputs (contents ignored by Git)
+docs/                 Setup, workflow, and project documentation
+planning/             Backlog manifest and issue mapping
+scripts/              Backlog and issue-workflow utilities
+.github/              CI, issue and pull request templates, and code owners
+```
+
+Empty data and artifact folders are kept using `.gitkeep` files. See the [repository layout](docs/REPOSITORY_LAYOUT.md) for details and the distinction between planned and implemented components.
+
+## Working on the project
+
+Start with the [contributing guide](docs/CONTRIBUTING.md), [repository instructions](AGENTS.md), and the relevant handoff ([Shaheer](handoff_Shaheer.md), [Abdullah](handoff_Abdullah.md), or [Taha](handoff_Taha.md)). The [issue backlog](docs/ISSUE_BACKLOG.md) and [dependency guide](docs/DEPENDENCIES_AND_MERGE_ORDER.md) describe the planned work. Changes follow the [branch and review workflow](docs/BRANCHING_AND_REVIEWS.md) and [CI checks](docs/CI_CD.md).
+
+The repository currently has no license file. Contact the repository owner before assuming permission to reuse or redistribute its contents.

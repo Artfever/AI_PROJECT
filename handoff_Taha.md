@@ -21,3 +21,10 @@ Starter record created by repository governance on 9 November 2026. Taha should 
 1. Start from current `main`; inspect #33, `app/`, and any supplied local plan/guide. Confirm which page files exist.
 2. Complete and verify only P01-T1, update this handoff before a work commit, and record actual Streamlit, Ruff, pytest, and browser results or NOT RUN reasons. Link the focused task PR to #33.
 3. After reviewed T1 completion, reassess #109, then #187. Taha must personally check the pages and user journey when those tasks reach their human acceptance steps.
+
+## Repository structure cleanup (9 November 2026)
+
+- Taha requested a repository structure review and a PR to `main`. This cleanup is separate from P01-T1; no numbered task has been assigned for it. Historical repository-layout issue #32 is closed.
+- Updated README onboarding and layout, clarified the current repository name, added bug and feature issue templates, and ignored local environment files and Ruff's cache. No data, models, or app behavior changed.
+- On Python 3.12.16: `.venv/Scripts/python.exe -m pytest -q` passed (3 tests); `.venv/Scripts/python.exe -m ruff check .` passed; `git diff --check` passed. App startup: NOT RUN (no app changes).
+- The current branch is `chore/repository-structure`. Its unnumbered name does not meet the existing branch-policy check; a suitable agreed task route and one other teammate's approval are needed before merging. No approval has been recorded.

@@ -2,17 +2,18 @@
 
 P01-A1 / [issue #32](https://github.com/Artfever/AI_PROJECT/issues/32).
 
-The shared repository is `Artfever/AI_PROJECT`. The Python distribution remains
+The shared repository is `Artfever/FleetpulseAI` (formerly `Artfever/AI_PROJECT`;
+GitHub redirects the historical links). The Python distribution remains
 `fleetpulse-ai`, and its import package is `fleetpulse`. The original plan's
 `fleetpulse-ai/` root denotes this project; a clone's local directory name need
-not match the distribution name. No repository rename or replacement is needed.
+not match the distribution name.
 On 9 November 2026, Abdullah confirmed team agreement on this interpretation,
 Python 3.12, the planned folder names, and working access for all three teammates.
 GitHub's collaborator API independently showed write access for Abdullah and
 Taha and owner/admin access for Shaheer (`Artfever`).
 
 ```text
-AI_PROJECT/
+FleetpulseAI/
   pyproject.toml
   app/
     Home.py
