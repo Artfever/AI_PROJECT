@@ -2,6 +2,18 @@
 
 Updated 9 November 2026. Owner: Abdullah (`Abdullah-SE-bit`).
 
+## Current P03-A2 checkpoint ? Abdullah, 9 November 2026
+
+- User asked to complete any unblocked Abdullah assignments. Read-only live audit covered 72 open assignments, their native task blockers, parent phase predecessors, and explicit Phase gate requirements in issue bodies. Snapshot saved locally at ignored reports/abdullah-readiness-audit.json. Only P03-A1/A2 were ready in that time-varying snapshot: A1 merged during the audit. All other audited tasks had open hard prerequisites; later phases must not be treated as ready solely because an individual issue has no task-level edge.
+- PR #295 MERGED as dcadfd9 after Artfever approval on head 8696164 and five passing checks. #37 CLOSED; #7 CLOSED. Pulled current main safely from a clean working tree to dcadfd9; created chore/P03-A2-target-separation. Inspected #113's exact requirement and its native CLOSED #37 blocker, existing targets/loader/validator/tests and docs, manifest/guide P03 rules already read in preceding task. No competing A2 PR found.
+- Task P03-A2 #113: keep raw sensor schema separate from labels and final-lifetime metadata. The existing runtime already returns a separate list of labels, leaves raw rows untouched and validates exact raw columns. No duplicate runtime API or speculative prediction/feature subsystem added.
+- Added tests/test_target_separation.py: target generation on read-only normalized mappings preserves the exact 26-column loader schema and yields synthetic [9,4,0]; validator and target generator reject raw rows contaminated with rul/true_rul/target/last_cycle/final_lifetime fields. Rejection does not silently delete those fields. Fixtures are invented, not NASA observations.
+- Updated docs/training_targets.md: explicit raw versus label/lifetime contract, analysis-view separation, identity metadata versus future feature lists, and limits (cannot detect disguised target values or establish completeness from sensor readings). P03-A3's broader tiny/real-engine tests and Shaheer's independent audit remain separate.
+- Python 3.12.16 / fleetpulse-ai 0.1.0 / pytest 8.4.2 / Ruff 0.17.4: `.venv/Scripts/python.exe -m ruff check .` PASS; `.venv/Scripts/python.exe -m pytest -q tests/test_target_separation.py` PASS, **6 passed in 0.12s**; `.venv/Scripts/python.exe -m pytest -q` PASS, **57 passed in 12.11s**. `git diff --check` PASS. JUnit output ignored under reports/.
+- Streamlit startup NOT RUN for this change (tests/docs only, no app behavior changed); page/AppTests passed in full suite and PR smoke CI remains required. Raw datasets/official test answers not read for these synthetic checks; no model, metric or artifact generated. Prior A1 real-data evidence remains in its section below.
+- Work commit/PR not yet created. Open a focused PR with Closes #113 as Abdullah-SE-bit; record actual commit/PR next. One actual approval from Artfever OR TahaSohail-Goat, current-head required CI and resolved conversations remain necessary. Peer must inspect original #113 requirement against evidence. No teammate messages or explicit review requests sent.
+- Next task P03-A3 #191 remains blocked by OPEN #113 until this output is reviewed/merged. After acceptance, pull main and recheck live blockers; continue in order. P04-A1 #40 is blocked by OPEN P03 gate #8. No additional independent ready assignment was found in the audit.
+
 ## Current P03-A1 checkpoint ? Abdullah, 9 November 2026
 
 This section supersedes stale blocked/open statements in the historical notes below.
