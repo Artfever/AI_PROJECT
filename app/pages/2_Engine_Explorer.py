@@ -6,6 +6,7 @@ import streamlit as st
 
 from fleetpulse.data.quality import SENSOR_COLUMNS
 from fleetpulse.ui import render_training_data
+from fleetpulse.visualization import sensor_figure
 
 st.title("Engine Explorer")
 st.caption("Explore an individual engine history.")
@@ -20,6 +21,14 @@ if records is not None:
     st.subheader(f"Training engine {selected_engine}")
     st.caption("Observed records, sorted by cycle.")
     st.dataframe(engine_records, hide_index=True)
+
+    st.subheader("Selected sensor")
+    selected_sensor = st.selectbox("Sensor", SENSOR_COLUMNS)
+    st.plotly_chart(
+        sensor_figure(engine_records, selected_sensor),
+        width="stretch",
+        alt=f"{selected_sensor} readings by cycle for training engine {selected_engine}",
+    )
 
     st.subheader("Sensor histories")
     st.caption(
