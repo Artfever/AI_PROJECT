@@ -15,10 +15,9 @@ from numbers import Integral, Real
 from typing import Literal
 
 IDENTITY_COLUMNS = ("unit_id", "cycle")
-READING_COLUMNS = (
-    *(f"setting_{number}" for number in range(1, 4)),
-    *(f"sensor_{number}" for number in range(1, 22)),
-)
+SETTING_COLUMNS = tuple(f"setting_{number}" for number in range(1, 4))
+SENSOR_COLUMNS = tuple(f"sensor_{number}" for number in range(1, 22))
+READING_COLUMNS = (*SETTING_COLUMNS, *SENSOR_COLUMNS)
 FD001_COLUMNS = frozenset((*IDENTITY_COLUMNS, *READING_COLUMNS))
 
 
