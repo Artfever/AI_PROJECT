@@ -100,8 +100,22 @@ are `[2, 4]`; MAE is `(2 + 4) / 2 = 3` cycles, and RMSE is
   official answer-file path or answer-loader use in development scripts or the
   evaluator. Loader unit tests mention the separate reader only to test its
   parsing behavior with synthetic values.
+- `.venv\Scripts\python.exe scripts/smoke_validation.py` — passed on Python
+  3.12.10. This deterministic evaluator inference smoke uses two artificial
+  histories and a fixed 3-cycle callback (split/cutoff seed: not applicable;
+  fitted model/artifact version: not applicable). It observed prefixes
+  `[1, 2, 3, 4]` and `[1, 2, 3]`, targets `[2, 5]`, predictions `[3, 3]`, MAE
+  `1.5`, and RMSE `1.5811388300841898` cycles. This verifies prefix wiring and
+  metric arithmetic only; it is not a trained-model inference result. PR
+  [#315](https://github.com/Artfever/FleetpulseAI/pull/315) records Taha's
+  confirmation that he inspected the saved output and discussed the constant
+  callback and its limitations with a teammate.
 - Model training, model comparison, inference, and model reload: **NOT RUN**;
-  no trained model artifact exists. No model metric or behavior is claimed.
+  no trained model artifact exists. The synthetic evaluator smoke above is the
+  relevant available execution evidence; no trained-model metric or behavior
+  is claimed.
 
-The split, metric, and label-boundary checks are technical evidence. Teammate
-review of this protocol and the separate shared P04 gate are still required.
+The split, metric, label-boundary, and synthetic evaluator checks are technical
+evidence. Abdullah approved the protocol PR #316. The shared P04 gate is tracked
+separately and remains open until all nine task outcomes and its shared
+acceptance checks are verified.
