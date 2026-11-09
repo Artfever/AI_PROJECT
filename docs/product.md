@@ -1,0 +1,26 @@
+# FleetPulse AI: initial user journey
+
+FleetPulse is an early Streamlit shell for exploring simulated turbofan engine histories and maintenance planning. It does not yet load data, generate predictions, evaluate models, or produce schedules.
+
+## Current experience
+
+Start the app from the repository root with `python -m streamlit run app/Home.py`. Use the sidebar to open:
+
+1. **Home** introduces the project and says that data, trained models, and evaluation results are unavailable.
+2. **Fleet Overview** identifies the future fleet view and the absence of fleet data and predictions.
+3. **Engine Explorer** identifies the future history view and the absence of engine history data.
+4. **RUL Prediction** identifies remaining useful life in operating cycles and the absence of a trained model and predictions.
+5. **Maintenance Planner** identifies the future simulated scheduling view and the absence of schedules.
+6. **Model Laboratory** identifies the future model evaluation view and the absence of trained models and evaluation results.
+
+Each page is an informational empty state. The sidebar lets the user move between pages; no engine selection, data upload, prediction, comparison, or scheduling control is implemented yet.
+
+## Intended future journey
+
+As the relevant phases are implemented and reviewed, a user is intended to select or provide an engine history, inspect its readings, request a remaining-useful-life prediction from a saved model, and explore the prediction and available evaluation evidence. A fleet view is intended to bring engine predictions together; a simulated maintenance planner is intended to compare schedules using clearly identified scenario assumptions. The Model Laboratory is intended to show actual model-development and evaluation results when available.
+
+These are planned steps, not current features. Data, synthetic scenario assumptions, predictions, and measured evaluation results must remain clearly distinguishable. Remaining useful life is measured in operating cycles. The project uses simulated turbofan data and is not a certified aircraft maintenance system.
+
+## Verification and human review
+
+The automated page checks run from the project root with `python -m pytest -q`; they exercise Home, each page, and returning to Home without requiring data or models. Taha confirmed in chat on 9 November 2026 that he tested the pages after the navigation update. The assistant's own browser inspection was unavailable in this environment. Reviewers should check the page names, sidebar, and empty-state wording in a browser; there is no service output to compare yet.
