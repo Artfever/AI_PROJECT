@@ -4,9 +4,15 @@ import hashlib
 import json
 from dataclasses import asdict
 from math import fsum, sqrt
+from time import perf_counter_ns
 
 from fleetpulse import PROJECT_ROOT
-from fleetpulse.evaluation import score_constant_baseline
+from fleetpulse.evaluation import (
+    build_metrics_record,
+    save_metrics_record,
+    score_constant_baseline,
+    validate_metrics_record,
+)
 from fleetpulse.features import FeatureConfig
 from fleetpulse.features.build_dataset import manifest_digest
 from fleetpulse.features.dataset_io import load_feature_dataset
@@ -44,7 +50,9 @@ def main():
         expected_manifest_sha256=manifest_sha256,
         expected_config=config,
     )
+    started_ns = perf_counter_ns()
     result = score_constant_baseline(fitting, validation, statistic="mean")
+    runtime_seconds = (perf_counter_ns() - started_ns) / 1_000_000_000
 
     partitions = {row.dataset_partition for row in result.metrics.per_engine}
     if len(partitions) != 1:
@@ -107,6 +115,38 @@ def main():
         or saved_rmse != result.metrics.rmse
     ):
         raise ValueError("Saved predictions and aggregate metrics are inconsistent.")
+
+    metrics_record = build_metrics_record(
+        model_name="constant-rul-baseline",
+        model_version=result.baseline.artifact_version,
+        partition=next(iter(partitions)),
+        sample_unit="engine",
+        sample_count=result.metrics.engine_count,
+        feature_config=asdict(config),
+        random_seed=result.baseline.random_seed,
+        parameters={
+            "statistic": result.baseline.statistic,
+            "value_cycles": result.baseline.value_cycles,
+            "target_name": result.baseline.target_name,
+            "fitting_label_count": result.baseline.fitting_label_count,
+        },
+        mae_cycles=result.metrics.mae,
+        rmse_cycles=result.metrics.rmse,
+        runtime_seconds=runtime_seconds,
+        input_hashes={
+            "training_source_sha256": TRAIN_SHA256,
+            "split_manifest_sha256": manifest_sha256,
+            "fitting_dataset_sha256": _dataset_payload_sha256(fitting_path),
+            "validation_dataset_sha256": _dataset_payload_sha256(validation_path),
+        },
+    )
+    metrics_path = artifact_dir / "metrics.json"
+    save_metrics_record(metrics_record, metrics_path)
+    saved_metrics_record = json.loads(metrics_path.read_text(encoding="utf-8"))
+    validate_metrics_record(saved_metrics_record)
+    if saved_metrics_record != metrics_record:
+        raise ValueError("Saved metrics record did not reload identically.")
+
     print(f"artifact: {output.relative_to(PROJECT_ROOT)}")
     print(f"artifact_sha256: {digest}")
     print(f"artifact_version: {ARTIFACT_VERSION}")
@@ -117,6 +157,10 @@ def main():
     print(f"mae_cycles: {result.metrics.mae:.12f}")
     print(f"rmse_cycles: {result.metrics.rmse:.12f}")
     print("artifact_reload_and_metric_recheck: passed")
+    print(f"metrics_record: {metrics_path.relative_to(PROJECT_ROOT)}")
+    print(f"metrics_schema_version: {metrics_record['schema_version']}")
+    print(f"scoring_runtime_seconds: {runtime_seconds:.9f}")
+    print("metrics_record_reload_and_schema_check: passed")
 
 
 if __name__ == "__main__":

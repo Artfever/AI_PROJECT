@@ -66,8 +66,9 @@ semantic manifest SHA-256 is
 Because this comparison used development-validation labels to make the
 conditional choice, these scores are selection evidence, not an untouched
 final estimate of generalization. The official FD001 test histories and RUL
-answers were not read. The full P06-S2 deliverable, including a saved
-per-engine prediction artifact and its human review, remains separate.
+answers were not read. P06-S2's saved per-engine output and teammate inspection
+are recorded on [issue #123](https://github.com/Artfever/FleetpulseAI/issues/123).
+The common downstream metrics record is specified in [`metrics_json.md`](metrics_json.md).
 
 The JSON-ready artifact records `constant-rul-v1`, statistic, RUL value in
 cycles, target name, fitting-label count, and `random_seed: null`. The predictor
