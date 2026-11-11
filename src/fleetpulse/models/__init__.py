@@ -1,1 +1,5 @@
-"""Model training and loading package; implementation is pending."""
+"""FleetPulse model implementations."""
+
+from fleetpulse.models.constant_baseline import ConstantRULBaseline
+
+__all__ = ["ConstantRULBaseline"]
