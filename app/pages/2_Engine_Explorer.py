@@ -110,19 +110,23 @@ if records is not None:
             st.warning(f"Feature preview is unavailable: {error}")
         else:
             st.caption(
+                f"{vector.dataset_partition} engine {vector.unit_id}. "
                 f"Visible input: {vector.observed_row_count} rows through cycle "
                 f"{vector.selected_cycle}; {vector.window_row_count} rows in the "
                 f"{config.window_cycles}-cycle window. Configuration: {config.version}."
             )
             st.write("Visible input history")
             st.dataframe(prefix, hide_index=True)
-            st.write("Calculated features")
+            st.write("Calculated features in model-vector order")
             st.caption(
                 "Latest, mean and standard deviation use source channel units; "
-                "slopes use source units per cycle."
+                "slopes use source units per cycle. Position is zero-based in the feature vector."
             )
             st.dataframe(
-                [{"feature": name, "value": value} for name, value in vector.as_dict().items()],
+                [
+                    {"position": position, "feature": name, "value": value}
+                    for position, (name, value) in enumerate(vector.as_dict().items())
+                ],
                 hide_index=True,
             )
 
