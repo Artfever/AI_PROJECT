@@ -101,3 +101,35 @@ def build_fitting_dataset(
             )
             result.append(LabeledFeatureRow(vector, targets[unit, cycle]))
     return FeatureDataset("fitting", feature_config, tuple(result))
+
+
+def build_validation_dataset(
+    records: Iterable[Mapping[str, object]],
+    *,
+    manifest: Mapping[str, object],
+    source_sha256: str,
+    config: FeatureConfig | None = None,
+) -> FeatureDataset:
+    """Emit exactly one row per saved validation engine at its audited cutoff.
+
+    Do not choose a new cutoff or derive a label from the truncated prefix.
+    IDs/cutoffs stay in vector metadata; only the numeric readings' statistics
+    enter X. Full training lifetimes remain on the scoring side of the call.
+    """
+    feature_config = config if config is not None else FeatureConfig()
+    if not isinstance(feature_config, FeatureConfig):
+        raise TypeError("config must be a FeatureConfig.")
+    _, by_unit = _audited_source(records, manifest, source_sha256)
+    result = []
+    for entry in sorted(manifest["validation_prefixes"], key=lambda item: item["unit_id"]):
+        unit, cutoff = entry["unit_id"], entry["cutoff_cycle"]
+        prefix = [row for row in by_unit[unit] if int(row["cycle"]) <= cutoff]
+        vector = engineer_features(
+            prefix,
+            dataset_partition=TRAIN_PARTITION,
+            unit_id=unit,
+            selected_cycle=cutoff,
+            config=feature_config,
+        )
+        result.append(LabeledFeatureRow(vector, entry["target_rul"]))
+    return FeatureDataset("validation", feature_config, tuple(result))

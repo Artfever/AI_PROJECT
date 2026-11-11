@@ -1,6 +1,6 @@
 # P06 dataset builder
 
-Schema v1 is the proposed trainer contract. Import `build_fitting_dataset` from
+Schema v1 is the trainer contract accepted by both trainers, as confirmed by Abdullah. Import `build_fitting_dataset` from
 `fleetpulse.features.build_dataset`. Supply the complete original training
 records, saved P04 manifest and independently calculated original-file SHA-256;
 the builder audits the manifest against those histories before extracting.
@@ -67,5 +67,38 @@ Original raw training source SHA-256 is
 `963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8`.
 No raw/model artifacts were added. Streamlit startup **NOT RUN**: no app changes;
 app tests passed in the full suite. Model training/inference **NOT RUN**: builder
-only. Agreement with both trainers on schema v1 and independent human row
-inspection are pending confirmation; no teammate message or sign-off is claimed.
+only. Abdullah confirmed agreement with both trainers on schema v1 and independently
+checked the A1 row/target separation example. This records supplied human
+evidence; no teammate message or GitHub approval is claimed.
+
+## Saved-cutoff validation (A2 / #122)
+
+`build_validation_dataset(records, manifest=manifest, source_sha256=hash, config=config)`
+returns the same FeatureDataset interface with role validation. It audits the
+saved manifest first, emits one row per saved validation engine in numeric ID
+order, and calls the extractor only with that engine's rows through its saved
+cutoff. No resampling, additional cutoffs, terminal validation rows or fitting
+engines are introduced. Labels are the independently audited saved full-lifetime
+minus cutoff targets, not the truncated prefix's apparent lifetime. IDs and
+cutoffs remain vector metadata and row_keys, separate from X.
+
+Artificial check: validation engine1 has full lifetime3 and saved cutoff1.
+Only reading2 at cycle1 enters X=(2,2,0,0), while y=2cycles. Cycles2/3 never
+reach the extractor. Synthetic readings have unspecified units; slope is percycle.
+
+Executed on Python3.12.16:
+
+- `.venv/Scripts/python.exe -m ruff check .`: PASS.
+- `.venv/Scripts/python.exe -m pytest -q tests/test_validation_dataset.py`:
+  **5 passed in0.38s** (prefix/identity/target separation, fitting-versus-validation
+  schema and disjoint membership, corrupted cutoff/label/count rejection before extraction).
+- `.venv/Scripts/python.exe -m pytest -q`: **185 passed in14.32s**.
+- Direct original training-source build: **20 rows x96 features/20engines**,
+  positive labels1..211; first key(FD001/train,4,164), target25, observed164,
+  window30. No official answers read or dataset artifacts written.
+- `git diff --check`: PASS before commit.
+
+Streamlit startup NOT RUN:no app changes; full app tests pass. Model training/
+inference NOT RUN:no model. A2 small-example inspection is pending confirmation;
+A1 acceptance and both-trainer schema agreement are already supplied. Saved
+reproducibility and alignment checks remain A3; shared phase11 stays open.
