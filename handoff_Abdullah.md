@@ -1,5 +1,20 @@
 # Abdullah handoff
 
+## P06-A2 saved-cutoff validation checkpoint - 11 November 2026
+
+- Abdullah supplied both-trainer schema1 agreement and independent A1 row/separation acceptance. Verified PR331 merged2be37ec; closed45 completed. Fetched dev/preserved local postmerge handoff and fast-forwarded to e81e7d5 (teammate handoff only). Created feat/P06-A2-validation-dataset. Exact122 and native blocker45 CLOSED; P06 predecessor10 CLOSED. Read actual A1/interfaces and dev AGENTS; Shaheer PR332 owns baseline and was not modified.
+- Added build_validation_dataset to features/build_dataset.py: audit complete training/manifest first, emit only one canonical row per saved validation cutoff, extractor receives prefix only, labels from audited scoring metadata, X has no IDs/cutoff/lifetime/targets. Same immutable trainer interface/config/schema as A1. No saved-cutoff changes, fitting rows, resampling or official answers.
+- Added tests/test_validation_dataset.py5cases for exact prefix callback, nonzero full-lifetime label from one-row prefix, unchanged source/manifest, schema/disjointness with fitting and corrupt cutoff/target/count refusal before extraction. Updated docs/build_dataset.md A1 human evidence and A2API/results/limits.
+- `.venv/Scripts/python.exe -m ruff format src/fleetpulse/features/build_dataset.py tests/test_validation_dataset.py` formatted2files; Ruff check PASS; `.venv/Scripts/python.exe -m pytest -q tests/test_validation_dataset.py` **5passed in0.38s**; full pytest **185passed in14.32s**; diffcheck PASS. Real source:20x96validation/20engines, labels1..211, first keyFD001/train,4,164 target25 observed164/window30. No model score or training. Streamlit startup NOT RUN:no app change; full app tests pass. Model inference NOT RUN:no model. New tests synthetic; actual rawtrain summary separately source-derived.
+- A2 independent small example requested; pending response. Both-trainer schema acceptance already supplied. Work9002a13 pushed; [PR #333](https://github.com/Artfever/FleetpulseAI/pull/333) OPEN to dev with Refs122. This substantive PR-link update precedes its commit; record completed follow-up hash next substantive update. Normal merge after five current-head CI/conversations under authorized no-task-review route. Then close122 with complete evidence and proceed197. Main/phase11 unaffected; no teammate messages sent.
+
+
+## P06-A1 dev merge checkpoint - 11 November 2026
+
+- PR331 MERGED normally into dev as2be37ec5a0fc18f3b154c24248781ea8fcc99a49. Head80fa6182b9267d8c1a2bc9af285b3875208ad946 had all five checks PASS (run43076541678), no review threads, current base; no approval required for task workflow. Work0fa0697/handoff80fa618 preserved by squash. Pulled dev after merge. Main unchanged.
+- #45 stays OPEN until both-trainer schema agreement and independent row inspection replies arrive. These were requested asynchronously and remain pending; do not invent acceptance. #122 native hard blocker45 therefore remains open. User requested merging all3 P06 tasks without stopping; continue as soon as supplied human evidence permits closure, then A2/A3 one at a time. Local postmerge handoff will accompany next substantive task commit; no hash-only PR.
+
+
 ## P06-A1 fitting dataset checkpoint - 11 November 2026
 
 - Verified P05 gate10 CLOSED and phase PR328 MERGED into main07bb4a6; dev advanced86ffb17. Preserved local postmerge handoff while safely fast-forwarding dev; created feat/P06-A1-fitting-dataset. Read AGENTS/dev workflow, private P06 guide/plan, actual extractor/targets/audit/manifest contracts, exact45/native dependencies and P05 shared evidence. P06 predecessor10 CLOSED;45 has no task blockers. No competing dataset builder/open task PR found. Issue bodies still contain old main/approval routing; latest user+AGENTS dev/no-task-review policy applies.
