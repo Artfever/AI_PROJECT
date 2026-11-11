@@ -99,6 +99,94 @@ Executed on Python3.12.16:
 - `git diff --check`: PASS before commit.
 
 Streamlit startup NOT RUN:no app changes; full app tests pass. Model training/
-inference NOT RUN:no model. A2 small-example inspection is pending confirmation;
-A1 acceptance and both-trainer schema agreement are already supplied. Saved
+inference NOT RUN:no model. Abdullah supplied A2 small-example inspection and acceptance, in addition to
+A1 acceptance and both-trainer schema agreement. Saved
 reproducibility and alignment checks remain A3; shared phase11 stays open.
+
+## Reproducible storage (A3 / #197)
+
+Rebuild both ignored tables from the repository root:
+
+```powershell
+.venv/Scripts/python.exe scripts/build_feature_datasets.py
+```
+
+Inputs are original `data/raw/train_FD001.txt` and tracked
+`artifacts/split_manifest.json`; the script pins the original training-file SHA,
+checks source and manifest bytes remain unchanged during construction, builds
+both tables, saves them, reloads with expected input hashes/config, and checks
+exact dataset equality. It never opens the official test source or answer file.
+Outputs are ignored `artifacts/development/fitting_features.json` and
+`artifacts/development/validation_features.json`. Do not add generated feature
+tables or raw data to Git. This command builds datasets, not models.
+
+`FeatureDataset` now carries the builder's immutable `source_sha256` and
+`split_manifest_sha256`. The first is the actual source-file byte hash; the
+second hashes canonical semantic manifest JSON (sorted keys, compact separators,
+UTF-8, no NaN), so whitespace changes do not alter semantic identity. The existing
+P04 manifest **file** hash is a different value and must not be substituted.
+
+`save_feature_dataset(dataset, path)` returns the canonical payload SHA-256.
+`load_feature_dataset(path, expected_source_sha256=..., expected_manifest_sha256=...,
+expected_config=...)` exposes the original FeatureDataset after checking stored
+content and caller-pinned provenance. Use `manifest_digest(manifest)` for the
+expected semantic manifest hash and the same FeatureConfig used for building.
+The loader itself performs no feature extraction or model fitting.
+
+Saved JSON contains:
+
+- Envelope `sha256` and `payload` with dataset schema version1 and role.
+- Exact `feature_names`, full versioned `feature_config`, and source-file,
+  semantic-manifest and canonical-config hashes.
+- A canonical list of complete rows. Each row has its explicit qualified
+  `key`, separate identity/count `metadata`, numeric `features`, and `true_rul`.
+  This keeps the label attached to its vector while allowing separate X/y/key
+  projections. Feature values never contain the metadata or label.
+
+Reload rejects content drift, incorrect feature order/version/config hash,
+invalid widths/numeric labels/counts, noncanonical or duplicate row keys, and
+row-key/metadata mismatches. Shuffling metadata fails even after recomputing
+content hash; shuffling labels without updating the hash fails the content
+check. These hashes detect drift, not a deliberately regenerated false dataset:
+original source, audited manifest and the producer remain scientific authorities.
+No learned filtering exists; future learned preprocessing must still fit only
+fitting engines.
+
+### Actual A3 checks (11 November 2026)
+
+Python3.12.16 / pytest8.4.2 / Ruff0.17.4:
+
+- `.venv/Scripts/python.exe -m ruff check .`: PASS.
+- `.venv/Scripts/python.exe -m pytest -q tests/test_dataset_io.py tests/test_fitting_dataset.py tests/test_validation_dataset.py`:
+  **24 passed in1.22s**, including15 persistence cases. Synthetic expectations
+  cover deterministic bytes, both roles, a fresh Python process/path with spaces,
+  exact X/y/keys, metadata/label shuffles and caller-pinned provenance mismatch.
+- `.venv/Scripts/python.exe -m pytest -q`: **200 passed in15.48s**.
+- `git diff --check`: PASS before commit.
+- First real rebuild/save/reload succeeded: **16,738x96 fitting**, **20x96
+  validation**. Canonical payload hashes:
+  fitting `6e2a0f0c28b0fbcb3afdc2b81d8f0c3aa02920617df758053d4d33f43bbb712c`;
+  validation `f843a342a3f8799a22a1d386936e9f4c2ab57b6f7cb30cc21885a2b989fcdff7`.
+
+No model training, prediction metrics or artifact reload are claimed. Local
+Streamlit startup NOT RUN:no app changes; app tests pass in the full suite.
+Teammate inspection of the storage output is requested and pending confirmation;
+no teammate message or approving review is fabricated. P06 shared gate11 needs
+separate actual trainers, validation predictions/metrics and reload evidence.
+
+Two complete original-source rebuilds produced **byte-identical** saved files:
+
+| Local generated file | Bytes | File SHA-256 |
+| --- | ---: | --- |
+| fitting_features.json | 23,754,754 | c87fb2f2039fe515cb7c5566cd0b7b87f43aa64bc56a7ff31e59e5d7a95be665 |
+| validation_features.json | 30,852 | b241a6ec5a72cade8925ed40802e2d118871f71eee1622beec18f6dc8b869487 |
+
+Both use canonical feature-config hash
+`19dd0331ee3e0c3a90217446a4481507b7da94fe1424b1c251c4605a6b168dfe`
+and semantic manifest hash
+`6fd1d32f7570f70f5a9513d900fbb9d26b182359aced425e2276700c84f08d92`.
+Byte hashes above identify the envelope files, and differ from payload hashes.
+The second verification used Python stdin to capture file byte hashes, execute
+`runpy.run_path('scripts/build_feature_datasets.py', run_name='__main__')`, and
+assert both post-rebuild byte hashes equaled their captured values. Generated
+files remain ignored; only this evidence is tracked.

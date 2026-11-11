@@ -1,5 +1,7 @@
 """Model inputs and uncapped labels built from audited training histories."""
 
+import hashlib
+import json
 import re
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
@@ -32,6 +34,8 @@ class FeatureDataset:
     role: str
     config: FeatureConfig
     rows: tuple[LabeledFeatureRow, ...]
+    source_sha256: str
+    split_manifest_sha256: str
 
     @property
     def X(self) -> tuple[tuple[float, ...], ...]:
@@ -48,6 +52,12 @@ class FeatureDataset:
     @property
     def feature_names(self) -> tuple[str, ...]:
         return self.config.output_schema
+
+
+def manifest_digest(manifest: Mapping[str, object]) -> str:
+    """Hash semantic manifest content using canonical JSON, independent of spacing."""
+    encoded = json.dumps(manifest, sort_keys=True, separators=(",", ":"), allow_nan=False)
+    return hashlib.sha256(encoded.encode("utf-8")).hexdigest()
 
 
 def _audited_source(records, manifest, source_sha256):
@@ -100,7 +110,13 @@ def build_fitting_dataset(
                 config=feature_config,
             )
             result.append(LabeledFeatureRow(vector, targets[unit, cycle]))
-    return FeatureDataset("fitting", feature_config, tuple(result))
+    return FeatureDataset(
+        "fitting",
+        feature_config,
+        tuple(result),
+        source_sha256,
+        manifest_digest(manifest),
+    )
 
 
 def build_validation_dataset(
@@ -132,4 +148,10 @@ def build_validation_dataset(
             config=feature_config,
         )
         result.append(LabeledFeatureRow(vector, entry["target_rul"]))
-    return FeatureDataset("validation", feature_config, tuple(result))
+    return FeatureDataset(
+        "validation",
+        feature_config,
+        tuple(result),
+        source_sha256,
+        manifest_digest(manifest),
+    )
