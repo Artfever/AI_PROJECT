@@ -76,3 +76,54 @@ validation result. No true RUL, final lifetime, feature values, or validation
 labels enter the fit. The real FD001 fitting-data execution, artifact reload,
 and owner-requested validation comparison are recorded in `handoff_Shaheer.md`.
 The validation comparison is not a substitute for completing P06-S2.
+
+## P06-S2: saved per-engine validation output
+
+`python scripts/score_constant_baseline.py` loads the hash-checked fitting and
+validation feature tables generated from the saved P04 manifest. It verifies
+their source, manifest and feature configuration; fits mean from fitting labels
+only; predicts once per saved validation engine; and calculates MAE/RMSE from
+the held-out validation targets. Validation features are not passed to this
+constant predictor. The script writes the complete, full-precision output to
+the ignored local file `artifacts/development/constant_rul_validation.json` and
+reloads it to check row uniqueness and consistency of the stored metrics.
+
+Observed run: artifact `constant-rul-validation-v1`, 16,738 fitting labels,
+20 `FD001/train` validation engines, mean prediction 109.609989246027 cycles,
+MAE 65.728002150795 cycles and RMSE 74.258986754232 cycles. The saved artifact
+SHA-256 was
+`c1a91a96338be50f0b91f45546c63722570e4db44fd7011fde71dbfdbc6027f8`; it also
+records the source, split-manifest, fitting-table and validation-table hashes,
+and every per-engine prediction, target and error. This development artifact
+is ignored by Git; the tracked per-engine summary below makes the results
+reviewable, and the script recreates the full-precision artifact locally.
+
+| Unit | Cutoff | True RUL | Predicted RUL | Absolute error |
+| ---: | ---: | ---: | ---: | ---: |
+| 4 | 164 | 25 | 109.610 | 84.610 |
+| 5 | 58 | 211 | 109.610 | 101.390 |
+| 12 | 7 | 163 | 109.610 | 53.390 |
+| 14 | 71 | 109 | 109.610 | 0.610 |
+| 15 | 63 | 144 | 109.610 | 34.390 |
+| 18 | 58 | 137 | 109.610 | 27.390 |
+| 28 | 36 | 129 | 109.610 | 19.390 |
+| 29 | 27 | 136 | 109.610 | 26.390 |
+| 30 | 174 | 20 | 109.610 | 89.610 |
+| 32 | 190 | 1 | 109.610 | 108.610 |
+| 36 | 140 | 18 | 109.610 | 91.610 |
+| 55 | 23 | 170 | 109.610 | 60.390 |
+| 65 | 152 | 1 | 109.610 | 108.610 |
+| 70 | 109 | 28 | 109.610 | 81.610 |
+| 72 | 9 | 204 | 109.610 | 94.390 |
+| 76 | 8 | 202 | 109.610 | 92.390 |
+| 78 | 24 | 207 | 109.610 | 97.390 |
+| 82 | 56 | 158 | 109.610 | 48.390 |
+| 87 | 60 | 118 | 109.610 | 8.390 |
+| 95 | 259 | 24 | 109.610 | 85.610 |
+
+Each row is one engine-level prediction at the P04-saved cutoff. The target is
+derived from that engine's complete training lifetime for scoring only; no
+later history or target is supplied to the predictor. These 20 development
+validation results are not official test results. The constant ignores sensor
+readings and individual engine condition, so this artifact is a benchmark, not
+an individual maintenance prediction.
