@@ -26,7 +26,7 @@ def test_ground_truth_is_separate_and_changes_with_training_engine(tmp_path, mon
     page = page.switch_page("pages/2_Engine_Explorer.py").run()
 
     assert not page.exception
-    assert [tab.label for tab in page.tabs] == ["Sensor histories", "Training ground truth"]
+    assert [tab.label for tab in page.tabs] == ["Sensor histories", "Training ground truth", "Development feature preview"]
     raw_engine = page.dataframe[1].value
     truth = page.dataframe[2].value
     assert list(raw_engine.columns) == list(HISTORY_COLUMNS)
