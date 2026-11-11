@@ -1,5 +1,35 @@
 # Abdullah handoff
 
+## P05-A2 independent numerical checks - 11 November 2026
+
+- Preserved prior local postmerge/acceptance handoff and saved patch in ignored reports/Abdullah-pre-P05-A2-handoff.patch. Fetched/pulled dev safely to79e23b6 (Shaheer PR321); new branch test/P05-A2-feature-numerics. Read actual engineering.py/tests/contract, owner/Shaheer handoffs, AGENTS and exact119/native dependencies. #43/#9 CLOSED; Shaheer #120/#196/#241 CLOSED; no competing A2 PR. Taha PR322 is separate UI work and was not modified.
+- Added tests/test_feature_numerics_independent.py:18 synthetic cases for hand-derived gapped nonlinear slope27/74/stdsqrt6, constant and decreasing channels, custom order, read-only maps,96finite one-row default features, cycle-window short history, empty/missing and invalid values at both window positions. No numerical producer changes or duplicate extractor. Added docs/P05_A2_VERIFICATION.md with exact derivations, observed numbers, commands, limits and pending human check.
+- `.venv/Scripts/python.exe -m ruff format tests/test_feature_numerics_independent.py` formatted1file; `.venv/Scripts/python.exe -m ruff check .` PASS; `.venv/Scripts/python.exe -m pytest -q tests/test_feature_numerics_independent.py` **18 passed in0.43s**; `.venv/Scripts/python.exe -m pytest -q` **168 passed in12.75s**. Python stdin actual extractor output sensor1 latest5/mean5/std2.449489742783178/slope0.36486486486486486, sensor2 constant7/std0/slope0; qualified synthetic identity17/cutoff9/counts3/3. `git diff --check` PASS. Streamlit startup NOT RUN: no app change; full app tests pass. Model training/inference NOT RUN:no model. New checks read no raw or official answers.
+- Teammate inspection required by119 requested from Abdullah; response pending. Existing mathematics agreement and A1 human acceptance remain recorded. Prepare Refs119 task PR to dev, all five required CI and resolved conversations, no task approval needed. User authorized automatic normal merge after checks; issue closure waits for honest human evidence. No messages to teammates sent. Next195 blocked until119 complete; do not claim shared phase gate.
+
+
+## P05-A1 acceptance and closure - 11 November 2026
+
+- Abdullah explicitly confirmed: "I checked and accept this contract" for all24 reading channels, ordered latest/mean/std/slope, inclusive30cycle interval (selected40 includes11..40, excludes10/41), and synthetic2/4/6 example latest6/mean4/stdsqrt(8/3)/slope2. This is supplied human acceptance, not an agent-invented observation.
+- Verified PR320 MERGED into dev as29a9abd, then closed #43 as completed with gh issue close43 --reason completed. Native blocker API for119 now reports43 CLOSED. No issue comment or teammate message sent. No runtime changes; no repeated tests required for acceptance/status only. Previous Ruff/138testPASS remains historical.
+- A2 still requires actual numerical extractor from Shaheer #120; inspect live dev/PR output before starting. No substitute implementation or fake numerical pass claimed. P05 shared gate remains open. This local handoff will accompany next substantive commit.
+
+
+## Next-task readiness inspection - 11 November 2026
+
+- Fetched origin: dev unchanged at29a9abd, prior local postmerge handoff preserved. Native #119 blocker is OPEN #43. #120 P05-S1 OPEN assigned Artfever; no open PR and no features/engineering.py or numerical extractor on dev (only config.py and __init__.py). A2 cannot demonstrate numerical results without Shaheer's output; no fake tests or substitute mathematics implementation created. A3 follows A2 and is not ready.
+- Asked Abdullah to independently check and accept exact channels/order/cycle-interval contract and the small mathematical example before closing #43. Confirmation pending; no invented human acceptance or issue closure. Prior broad agreement on std/slope/one-row rules remains recorded. No runtime change, so checks NOT RUN for this read-only inspection; last verified suite138PASS remains historical.
+- Next: after supplied human acceptance, close #43 based on merged PR320 and real evidence; then await Shaheer's callable extractor from #120 (and one-row behavior #196 as needed). Inspect its actual API and native blocker status before creating A2 branch from current dev. No teammate messages sent; this status-only handoff stays local for next substantive commit.
+
+
+## P05-A1 dev merge checkpoint - 11 November 2026
+
+- At Abdullah's explicit instruction, merged PR #320 normally into dev (squash), without admin bypass or teammate approval, as allowed by current task policy. Final head bb89ec366f9147d2c844667b50f1ab6b22b4634f had all five required checks SUCCESS in run43061338395; GraphQL returned zero review threads. Merge commit29a9abd0bbf86feec47b95002e8eaafb197a3f6b, merged2026-11-11T16:47:48Z. Main unchanged. Fetched and checked out tracking dev at that merge.
+- Feature work72e3023, handoff cad3016 and workflow integration bb89ec3 are now included in the squash. Local premerge verification remains Ruff PASS and138tests PASS in13.21s. No code changed afterward. No new test run needed for merge-status-only update.
+- #43 remains OPEN: exact API/channel/window interpretation and independent human example acceptance were explicitly pending in PR. No automatic issue closure or fabricated sign-off. Next numbered task #119 remains blocked until #43 evidence is accepted/closed and Shaheer's extractor exists. Do not start another owner's mathematics. Shared P05 #10 remains OPEN; promote only whole verified phase dev-to-main.
+- This postmerge handoff update is local and will accompany the next substantive work commit rather than creating another PR solely to record a merge hash. No teammate messages sent.
+
+
 ## P05-A1 workflow correction - 11 November 2026
 
 - Abdullah clarified that task PRs go to shared dev; only whole completed phases promote dev to protected main. This supersedes earlier main-only instructions and the historical route discussion below. Fetched origin/dev and read its AGENTS, BRANCHING_AND_REVIEWS, CI workflow and ISSUE_WORKFLOW_MIGRATION; new workflow commit is 94b05c3. I should have inspected the remote dev policy when issue43 revealed the route change.
