@@ -1,0 +1,103 @@
+"""Model inputs and uncapped labels built from audited training histories."""
+
+import re
+from collections.abc import Iterable, Mapping
+from dataclasses import dataclass
+
+from fleetpulse.data.split import TRAIN_PARTITION
+from fleetpulse.data.split_audit import audit_split_manifest
+from fleetpulse.data.targets import calculate_training_rul
+from fleetpulse.features.config import FeatureConfig
+from fleetpulse.features.engineering import EngineFeatureVector, engineer_features
+
+DATASET_SCHEMA_VERSION = 1
+
+
+@dataclass(frozen=True)
+class LabeledFeatureRow:
+    """Keep one immutable vector attached to its separately held scoring label."""
+
+    vector: EngineFeatureVector
+    true_rul: int
+
+    @property
+    def key(self) -> tuple[str, int, int]:
+        return (*self.vector.engine_key, self.vector.selected_cycle)
+
+
+@dataclass(frozen=True)
+class FeatureDataset:
+    """Trainer contract: X, y and metadata projected from the same ordered rows."""
+
+    role: str
+    config: FeatureConfig
+    rows: tuple[LabeledFeatureRow, ...]
+
+    @property
+    def X(self) -> tuple[tuple[float, ...], ...]:
+        return tuple(row.vector.values for row in self.rows)
+
+    @property
+    def y(self) -> tuple[int, ...]:
+        return tuple(row.true_rul for row in self.rows)
+
+    @property
+    def row_keys(self) -> tuple[tuple[str, int, int], ...]:
+        return tuple(row.key for row in self.rows)
+
+    @property
+    def feature_names(self) -> tuple[str, ...]:
+        return self.config.output_schema
+
+
+def _audited_source(records, manifest, source_sha256):
+    if not isinstance(source_sha256, str) or re.fullmatch(r"[a-f0-9]{64}", source_sha256) is None:
+        raise ValueError("source_sha256 must be a lowercase SHA-256 hex digest.")
+    rows = tuple(records)
+    audit_split_manifest(manifest, rows, source_sha256=source_sha256)
+    by_unit = {}
+    for row in rows:
+        by_unit.setdefault(int(row["unit_id"]), []).append(row)
+    if any(history[0]["cycle"] != 1 for history in by_unit.values()):
+        raise ValueError("Complete original training histories must start at cycle 1.")
+    return rows, by_unit
+
+
+def build_fitting_dataset(
+    records: Iterable[Mapping[str, object]],
+    *,
+    manifest: Mapping[str, object],
+    source_sha256: str,
+    config: FeatureConfig | None = None,
+) -> FeatureDataset:
+    """Generate one row at every observed fitting cycle, including terminal RUL 0.
+
+    One-row prefixes are supported, so every observed cycle is eligible. Each
+    extractor call receives only that fitting engine's prefix; labels come
+    separately from complete training trajectories. No file or test answer is
+    opened. The caller must hash and supply the original full training source.
+    """
+    feature_config = config if config is not None else FeatureConfig()
+    if not isinstance(feature_config, FeatureConfig):
+        raise TypeError("config must be a FeatureConfig.")
+    rows, by_unit = _audited_source(records, manifest, source_sha256)
+    labels = calculate_training_rul(rows)
+    targets = {
+        (int(row["unit_id"]), int(row["cycle"])): label
+        for row, label in zip(rows, labels, strict=True)
+    }
+    result = []
+    for identity in sorted(manifest["fitting_engines"], key=lambda item: item["unit_id"]):
+        unit = identity["unit_id"]
+        history = by_unit[unit]
+        for index, row in enumerate(history):
+            cycle = int(row["cycle"])
+            vector = engineer_features(
+                history[: index + 1],
+                dataset_partition=TRAIN_PARTITION,
+                unit_id=unit,
+                selected_cycle=cycle,
+                config=feature_config,
+            )
+            result.append(LabeledFeatureRow(vector, targets[unit, cycle]))
+    return FeatureDataset("fitting", feature_config, tuple(result))
