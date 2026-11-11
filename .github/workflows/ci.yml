@@ -2,10 +2,10 @@ name: Development CI
 
 on:
   pull_request:
-    branches: [main]
+    branches: [dev, main]
     types: [opened, synchronize, reopened, ready_for_review, edited]
   push:
-    branches: [main]
+    branches: [dev, main]
   workflow_dispatch:
 
 permissions:
@@ -25,11 +25,16 @@ jobs:
         if: github.event_name == 'pull_request'
         env:
           BASE: ${{ github.event.pull_request.base.ref }}
+          HEAD: ${{ github.event.pull_request.head.ref }}
           HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
           BASE_REPO: ${{ github.repository }}
         run: |
-          [[ "$BASE" == main ]] || { echo 'PRs must target main'; exit 1; }
+          [[ "$BASE" == dev || "$BASE" == main ]] || { echo 'PRs must target dev or main'; exit 1; }
           [[ "$HEAD_REPO" == "$BASE_REPO" ]] || { echo 'Use a branch in this repository'; exit 1; }
+          if [[ "$BASE" == main && "$HEAD" != dev ]]; then
+            echo 'Phase integration PRs to main must come from dev'
+            exit 1
+          fi
 
   quality:
     runs-on: ubuntu-latest
