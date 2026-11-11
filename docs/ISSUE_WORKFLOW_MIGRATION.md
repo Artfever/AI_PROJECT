@@ -1,9 +1,9 @@
-# Issue workflow migration
+# Issue workflow
 
-The current route is a GitHub task issue, a short-lived branch from `main`, and a pull request back to protected `main`. One other named teammate approves the latest revision: for Shaheer, Abdullah or Taha; for Abdullah, Shaheer or Taha; for Taha, Abdullah or Shaheer. Required CI and resolved conversations also apply. A review request, comment, bot review, or the author's own review does not count.
+As of 2026-11-11, the team uses one shared `dev` branch for all task work. The branch is based on the latest phase merge to `main`. Each teammate creates a short-lived task branch from current `dev` and opens a PR back to `dev`. Task PRs need no teammate approval; required CI checks and resolved conversations still apply.
 
-This supersedes the earlier `dev` integration route and two-teammate approval wording. The former `dev` branch had no unique commits and was deleted during the previous repository setup at the owner's request. Existing historical PRs, commits, and reviews remain in GitHub. Do not infer implementation completion from the new backlog; issue status follows actual evidence.
+After all nine tasks and the shared acceptance gate for a phase are verified, open a PR from `dev` to protected `main`. That phase integration PR needs one current approval from a named teammate other than its author, all required CI checks, resolved conversations, and an up-to-date base. Do not push directly to `main`.
 
-The phase and task issue links are in [the backlog](ISSUE_BACKLOG.md). [Dependencies and merge order](DEPENDENCIES_AND_MERGE_ORDER.md) explain when downstream work can merge. Native issue relationships are for planning; required CI and branch protection decide whether a PR can merge.
+The phase and task issue links are in [the backlog](ISSUE_BACKLOG.md). [Dependencies and merge order](DEPENDENCIES_AND_MERGE_ORDER.md) explain task ordering. Inspect native issue blockers before starting planned work; issue relationships do not replace evidence or CI.
 
-For a numbered task, use `feat/P05-S1-short-description`, `fix/…`, or `chore/…`. Link the task issue in the PR. Use `Closes #N` only if the PR fully completes it; use `Refs #N` for partial work. Keep each owner's handoff file current with evidence and next consumers. A phase parent remains open until all nine tasks and its shared gate are verified.
+Use `feat/P05-S1-short-description`, `fix/…`, or `chore/…` for task branches. Link the task issue in the PR. Use `Refs #N` for partial work; close an issue only after its work and evidence are complete and merged to `dev`. Keep each owner's handoff current. Keep the phase parent open until all nine tasks and its shared gate are verified.

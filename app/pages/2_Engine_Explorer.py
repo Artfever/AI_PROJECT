@@ -6,6 +6,7 @@ import streamlit as st
 
 from fleetpulse.data.quality import SENSOR_COLUMNS
 from fleetpulse.data.targets import calculate_training_rul
+from fleetpulse.features import FeatureConfig, engineer_features
 from fleetpulse.ui import render_training_data
 from fleetpulse.visualization import sensor_figure
 
@@ -23,7 +24,9 @@ if records is not None:
     st.caption("Observed records, sorted by cycle.")
     st.dataframe(engine_records, hide_index=True)
 
-    sensors_tab, truth_tab = st.tabs(["Sensor histories", "Training ground truth"])
+    sensors_tab, truth_tab, features_tab = st.tabs(
+        ["Sensor histories", "Training ground truth", "Development feature preview"]
+    )
     with sensors_tab:
         st.subheader("Selected sensor")
         selected_sensor = st.selectbox("Sensor", SENSOR_COLUMNS)
@@ -83,6 +86,49 @@ if records is not None:
             for row, label in zip(engine_records, labels, strict=True)
         ]
         st.dataframe(analysis_rows, hide_index=True)
+
+    with features_tab:
+        st.subheader("Development feature preview")
+        st.caption(
+            "Simulated FD001 training data; inspection only. Features use the selected "
+            "engine's observed history through the selected cycle, not future rows or RUL labels."
+        )
+        selected_cycle = st.selectbox(
+            "Feature preview cycle", [int(row["cycle"]) for row in engine_records]
+        )
+        prefix = [row for row in engine_records if row["cycle"] <= selected_cycle]
+        config = FeatureConfig()
+        try:
+            vector = engineer_features(
+                prefix,
+                dataset_partition="FD001/train",
+                unit_id=selected_engine,
+                selected_cycle=selected_cycle,
+                config=config,
+            )
+        except (ValueError, TypeError) as error:
+            st.warning(f"Feature preview is unavailable: {error}")
+        else:
+            st.caption(
+                f"{vector.dataset_partition} engine {vector.unit_id}. "
+                f"Visible input: {vector.observed_row_count} rows through cycle "
+                f"{vector.selected_cycle}; {vector.window_row_count} rows in the "
+                f"{config.window_cycles}-cycle window. Configuration: {config.version}."
+            )
+            st.write("Visible input history")
+            st.dataframe(prefix, hide_index=True)
+            st.write("Calculated features in model-vector order")
+            st.caption(
+                "Latest, mean and standard deviation use source channel units; "
+                "slopes use source units per cycle. Position is zero-based in the feature vector."
+            )
+            st.dataframe(
+                [
+                    {"position": position, "feature": name, "value": value}
+                    for position, (name, value) in enumerate(vector.as_dict().items())
+                ],
+                hide_index=True,
+            )
 
 else:
     st.write("Choose an engine once the training histories are available.")
