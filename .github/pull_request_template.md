@@ -14,6 +14,9 @@ Link a relevant issue when one exists. Use `Closes #___` only if this PR fully c
 
 ## Scientific and scope impact
 
-## Required reviewer (one other teammate)
+## Review route
+
+- Task PR to `dev`: no teammate approval required; required CI and resolved conversations still apply.
+- Phase integration PR from `dev` to `main`: one other named teammate must approve; all required CI and resolved conversations apply.
 
 ## Remaining manual checks

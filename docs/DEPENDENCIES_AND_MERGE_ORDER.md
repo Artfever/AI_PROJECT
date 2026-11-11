@@ -137,10 +137,11 @@ flowchart LR
 ## Issue to PR route
 
 1. Select one assigned task whose hard predecessor outputs and phase gate are verified. One active implementation task per person is the default.
-2. Branch from current `main` as `feat/<task-id>-<description>` (or `fix/` / `chore/`). Do not stack normal implementation PRs on unmerged branches.
+2. Branch from current shared `dev` as `feat/<task-id>-<description>` (or `fix/` / `chore/`). Do not stack normal implementation PRs on unmerged branches.
 3. Implement only the task or a small, clear same-owner packet; run relevant tests and update the owner's handoff file.
-4. Open a PR to `main`, link each task issue it truly completes, and record actual evidence. `Closes #N` is for full completion; `Refs #N` is for partial work.
-5. One other named teammate approves the latest reviewable revision; required CI and resolved conversations must pass. Native issue dependencies are planning relationships and do not themselves enforce a PR merge gate.
-6. After merge, verify issue closure and the phase checklist. A consumer updates from `main` and validates the producer's real interface before relying on it. Close the parent only after all nine tasks and its shared gate have evidence.
+4. Open a task PR to `dev`, link each task issue it truly completes, and record actual evidence. `Refs #N` is for task PRs; close the issue only when complete and merged to `dev`.
+5. Task PRs do not require teammate approval. Required CI and resolved conversations still apply. Native issue dependencies are planning relationships and do not themselves enforce a PR merge gate.
+6. After all nine tasks and the shared gate have evidence, open a phase integration PR from `dev` to protected `main`. One other named teammate approves that PR; all required checks and resolved conversations must pass.
+7. After the phase merge, verify issue closure and the phase checklist. A consumer updates from `dev` and validates the producer's real interface before relying on it. Close the parent only after all nine tasks and its shared gate have evidence.
 
 Independent ready tasks may merge in either order; shared schema/model/scheduler contracts need coordination and revalidation. A person being busy is not a technical dependency. A downstream draft may use labeled temporary fixtures but must revalidate against merged upstream code before merge.

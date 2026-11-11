@@ -30,7 +30,7 @@ assignees: ''
 
 ## PR route and review
 
-Branch from current `main` using a descriptive name; PR targets `main`. One other named teammate approves the current revision. Link the issue and use `Closes #N` only when fully complete.
+Branch from current `dev` using a descriptive name; task PR targets `dev`. Teammate approval is not required on task PRs; required CI and resolved conversations still apply. Link the issue and use `Refs #N` on the task PR. Close the issue only when its work and evidence are complete and merged to `dev`. After all phase tasks and the shared gate are verified, promote `dev` to protected `main` through a phase PR with one teammate approval.
 
 ## Scientific/course constraints and completion rule
 

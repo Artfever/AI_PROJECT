@@ -8,7 +8,7 @@
     "Taha": "8d9bb93519ca8895cd972fce978b385051610bd3a7b553a04de776a8d8bcbfc2"
   },
   "repository": "Artfever/AI_PROJECT",
-  "review_rule": "one approving review from another named teammate",
+  "review_rule": "task PRs target shared dev without teammate approval; phase integration PRs from dev to protected main require one approving review from another named teammate",
   "native_dependencies": {
     "P02<-P01": true,
     "P03<-P02": true,

@@ -1,5 +1,13 @@
 # Abdullah handoff
 
+## P05-A1 workflow correction - 11 November 2026
+
+- Abdullah clarified that task PRs go to shared dev; only whole completed phases promote dev to protected main. This supersedes earlier main-only instructions and the historical route discussion below. Fetched origin/dev and read its AGENTS, BRANCHING_AND_REVIEWS, CI workflow and ISSUE_WORKFLOW_MIGRATION; new workflow commit is 94b05c3. I should have inspected the remote dev policy when issue43 revealed the route change.
+- Retargeted existing PR #320 from main to dev; preserved its branch and review history. Issue #43 stays OPEN, linked with Refs. No duplicate PR, issue closure, direct main push or settings change. Incorporated origin/dev into feat/P05-A1-feature-contract with a normal merge; no conflicts and no feature behavior changes. PR description now records dev routing, task CI/conversations requirements and phase-only teammate approval. Main remains protected.
+- Prior feature work72e3023 and handoff cad3016 remain preserved. Merge includes the reviewed upstream policy changes without modifying teammate work. After policy integration `.venv/Scripts/python.exe -m ruff check .` PASS; `.venv/Scripts/python.exe -m pytest -q` **138 passed in13.21s**; `git diff --check` PASS. Streamlit startup NOT RUN: no app changes. New-head CI pending after push. Record this merge hash in next substantive update, not a hash-only commit.
+- Next: finish exact contract/independent human acceptance, require all five current-head CI checks and resolved conversations, then task can merge to dev without teammate approval. Close #43 only after complete evidence and dev merge. A2 #119 still needs accepted contract and actual Shaheer extractor; P05 parent stays open until all nine tasks and shared gate pass, then one approved dev-to-main phase PR.
+
+
 ## P05-A1 feature contract checkpoint - 11 November 2026
 
 - PR #319 MERGED as d79fff6, with Artfever approval on final cce0342 and five successful CI checks (run43051420819); P04 gate #9 CLOSED. Previous gate work c7cd988 and handoff cce0342. Clean main fast-forwarded to d79fff6; created feat/P05-A1-feature-contract. #43 OPEN assigned Abdullah, no native task blockers; P05 predecessor #9 CLOSED. Inspected live requirement, policies, local guide/plan, manifest, existing raw/evaluator contracts and empty features package; no competing open PR or extractor found.
