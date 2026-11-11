@@ -69,8 +69,9 @@ only and preserve its frozen schema for validation; these tests do not certify
 an absent future preprocessing pipeline.
 
 Local Streamlit startup: **NOT RUN**, no app change; full suite includes app
-tests. Model training/inference: **NOT RUN**, no model exists. Human inspection
-of the small example and its synthetic provenance is pending confirmation.
+tests. Model training/inference: **NOT RUN**, no model exists. Abdullah confirmed on 11 November 2026: "I checked and accept this example",
+including its synthetic provenance and the reported future-invariance result.
+This is supplied human acceptance, not an agent-invented observation.
 The task PR targets dev without an approval requirement; all five CI checks
 and resolved conversations still apply. P05's UI tasks and shared phase gate
 remain separate, and no phase promotion to main is claimed.
