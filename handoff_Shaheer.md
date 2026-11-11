@@ -2,9 +2,15 @@
 
 Read this file on resumption. Shaheer's P02 tasks (#111 and #189), P03 tasks (#38, #114, #192), P03 gate #8, all nine P04 child tasks, and P04 parent gate #9 are CLOSED. FD001 raw files remain local and ignored; prior answer-file output exposure is disclosed in the summary note.
 
-## Latest update: P06-S3 #242 metrics format in progress (2026-11-12)
+## Latest update: P06-S3 #242 complete; P07-S1 waits for P06 gate (2026-11-12)
 
-### P06-S3 #242 implementation prepared locally (2026-11-12)
+### P06-S3 #242 merged and closed (2026-11-12)
+
+- PR [#337](https://github.com/Artfever/FleetpulseAI/pull/337) merged to `dev` as `b3366549282cfa7b9236976ccf2b29a63f9cc952`. Implementation commit `06a46aab7219f3bc619d0173f2c17accda78973c`; handoff/PR-link commit `570c7bbb45606516b8189fee6b12ea4340206154`. The merge record and CI link are in [PR #337](https://github.com/Artfever/FleetpulseAI/pull/337#issuecomment-6806133672). Post-merge run [43093639365](https://github.com/Artfever/FleetpulseAI/actions/runs/43093639365) passed all five required checks. Issue [#242](https://github.com/Artfever/FleetpulseAI/issues/242) is CLOSED with implementation and verification evidence [in its closeout comment](https://github.com/Artfever/FleetpulseAI/issues/242#issuecomment-6806131738).
+- P06 gate [#11](https://github.com/Artfever/FleetpulseAI/issues/11) remains OPEN with 6/9 child tasks complete. Taha's #47, #124, and #243 remain OPEN. Do not close the gate until all nine task outcomes and shared evidence are complete. Shaheer's next issue is P07-S1 [#49](https://github.com/Artfever/FleetpulseAI/issues/49); its requirements name P06 gate #11, and the P07 parent #12 is natively blocked by #11. No new P07 implementation started because the required P06 phase output is incomplete. Recheck #11 and #49 after Taha's remaining P06 tasks merge.
+- The PR #337 handoff/PR-link commit contained the implementation verification and #123 Abdullah inspection. This post-merge closeout update is being committed separately because Shaheer requested that the handoff be synced to `dev` now. No P07 work is started while P06 gate #11 is open.
+
+### P06-S3 #242 implementation and checks before PR (2026-11-12)
 
 - Defined strict model-neutral `metrics-v1` JSON contract in `src/fleetpulse/evaluation/metrics_artifact.py`, exported reusable build/validate/save APIs, and documented field meanings and units in `docs/metrics_json.md`. The contract includes model name/version, partition, sample unit/count, feature configuration, seed, parameters, MAE/RMSE in cycles, measured runtime, and SHA-256 input hashes.
 - Extended `scripts/score_constant_baseline.py` to write and reload-check ignored `artifacts/development/metrics.json` alongside the per-engine artifact. Observed local record: `constant-rul-baseline` / `constant-rul-v1`, FD001/train, 20 engines, `past-only-v1` window 30, seed null, mean 109.609989246027 cycles, MAE 65.728002150795, RMSE 74.258986754232, measured fit/predict/score runtime 0.010332900 seconds. Runtime excludes feature loading and JSON I/O and varies by run. Both output JSON files remain ignored; the tracked docs/code define the reproducible interface.
