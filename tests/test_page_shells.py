@@ -13,7 +13,7 @@ from fleetpulse import PROJECT_ROOT
         ("2_Engine_Explorer.py", "Engine Explorer", "history data"),
         ("3_RUL_Prediction.py", "RUL Prediction", "trained model and predictions"),
         ("4_Maintenance_Planner.py", "Maintenance Planner", "schedules"),
-        ("5_Model_Laboratory.py", "Model Laboratory", "models and evaluation results"),
+        ("5_Model_Laboratory.py", "Model Laboratory", "Development split audit is unavailable"),
     ],
 )
 def test_page_shell_loads_without_data(filename, title, missing, tmp_path, monkeypatch):
@@ -26,8 +26,11 @@ def test_page_shell_loads_without_data(filename, title, missing, tmp_path, monke
 
     assert not page.exception
     assert [heading.value for heading in page.title] == [title]
-    messages = page.warning if title == "Engine Explorer" else page.info
-    assert any(missing in message.value and "not available" in message.value for message in messages)
+    if title == "Model Laboratory":
+        assert any(missing in message.value for message in page.warning)
+    else:
+        messages = page.warning if title == "Engine Explorer" else page.info
+        assert any(missing in message.value and "not available" in message.value for message in messages)
     assert not page.metric
     assert page.caption
     assert page.markdown
