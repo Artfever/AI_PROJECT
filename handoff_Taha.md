@@ -1,5 +1,13 @@
 # Taha handoff
 
+## Current status - P06-T1 #47 - 12 November 2026
+
+- P06 gate #11 is open at 6/9 tasks. Taha's tasks are sequential: #47, then #124, then #243. #47's P05 prerequisite #10 is closed and it has no task-level native blocker. Abdullah's common fitting/validation tables and Shaheer's `metrics-v1` contract are available on `dev`.
+- Active branch: `feat/P06-T1-decision-tree`, from `dev` `584f61b`. Added `src/fleetpulse/models/train_tree.py`, `scripts/train_decision_tree.py`, `tests/test_train_tree.py`, and pinned runtime dependency `scikit-learn==1.9.1` in `pyproject.toml`. The trainer accepts only validated common feature datasets, verifies role/schema/provenance and disjoint engines, uses seed 42, `max_depth=8`, `min_samples_leaf=5`, then emits one prediction and scored error per saved validation engine. Training rows are cycle-level rows from the 80 fitting engines; validation uses 20 held-out engine cutoffs. No official test data or answers are opened.
+- Local Python 3.12.10 / scikit-learn 1.9.1: `python scripts/train_decision_tree.py` produced MAE 22.494269745771 cycles and RMSE 29.449573581433 cycles. Example: engine 4 at cutoff 164 predicted 34.196078 cycles vs 25 actual (absolute error 9.196078 cycles). The tree is a bounded development benchmark, not an individual maintenance claim. `python -m pytest -q tests/test_train_tree.py`: 6 passed; `ruff check .`: passed; after `python -m pip install -e '.[dev]'`, full `python -m pytest -q`: 228 passed. First full pytest attempt was NOT RUN to completion because Plotly, already declared in pyproject, was missing from this Python environment; it was installed with the declared package set and the rerun passed. The real-table CLI rerun printed the same predictions/metrics. Full GitHub CI is pending.
+- Handoff explanation of observed tree behavior is recorded above for Shaheer; no teammate response or review is claimed. No model artifact has been saved yet; that is #124. No application comparison has been implemented; that is #243.
+- Commit/PR: pending. Exact next steps: finish Ruff/full regression checks, commit and open a `Refs #47` PR to `dev`; merge after required CI passes; then implement #124's hashed model/settings/predictions artifact and fresh-process reload check, and finally #243's honest Model Laboratory comparison. Keep P07 untouched. Do not close P06 gate #11 until all nine task results and the shared gate evidence pass.
+
 ## P01-T1 implementation and follow-up ? 9 November 2026
 
 - Task: [#33](https://github.com/Artfever/FleetpulseAI/issues/33), assigned to Taha. At inspection, task and P01 phase had no native blockers. Current base was `main` at `0f16f27`; branch: `feat/P01-T1-streamlit-pages`.
