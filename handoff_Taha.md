@@ -1,13 +1,15 @@
 # Taha handoff
 
-## P06 complete - 12 November 2026
+## P06 promotion merged - 12 November 2026
+
+- This handoff update is included in [PR #344](https://github.com/Artfever/FleetpulseAI/pull/344) to `dev`; the PR is open and final-head CI is pending.
 
 - All nine P06 child issues are closed: Abdullah #45/#122/#197, Shaheer #46/#123/#242, and Taha #47/#124/#243. P05 gate #10 and shared P06 gate #11 are closed. No P07 work was started.
 - Taha task PRs to `dev` passed all five required CI jobs: #339 implementation `b8fd2690a522c9ad3fe1d3f5b0ef4f9c5a7ebe19`, merge `44965fd8e504103b06863ff126e105e6679ee5d1`; #340 implementation `2f0f8dbf6e9e3fc7cd0579f0921795b8e22fcc75`, merge `1784b76b2c6a1d78821c695680345c62b3627fd6`; #341 implementation `bfa0845ef8c0d4a82399db8aa141aa6cc7b256e0`, handoff commit `785d38dd77375c6b803ef69369cfba2867c11d35`, merge `774159d6cbde0a89795e75eb8b3475ebfb9d6354`.
 - `python scripts/run_p06_validation.py` rebuilt ignored tables, scored the mean baseline, trained/saved the tree, checked fresh-process reload, and verified per-engine alignment. It used 16,738 fitting rows across 80 engines and 20 validation engines. Mean baseline: 109.609989 cycles per engine; MAE 65.728002150795, RMSE 74.258986754232. Decision Tree: scikit-learn 1.9.1, seed 42, max depth 8, minimum leaf 5; MAE 22.494269745771, RMSE 29.449573581433. These are held-out FD001 training-engine results, not official-test or future performance. Example: engine 4 at cutoff 164 predicted 34.196078 vs target 25 cycles (error +9.196078).
 - Model Laboratory verifies table/artifact hashes and per-engine identities, displays both metrics, and plots predicted versus actual RUL. Missing or stale artifacts show an explanatory state. Generated tables, model binary and result JSON remain ignored; no official test histories or answers were read.
 - Verification on Python 3.12.10: `ruff check .` passed; `python -m pytest -q` passed 234 tests; `git diff --check` passed; Model Laboratory AppTest rendered 3 tables and 1 chart without exceptions; Streamlit launched and `/_stcore/health` returned `ok`. All five CI jobs passed on each Taha task PR.
-- Phase PR [#342](https://github.com/Artfever/FleetpulseAI/pull/342) is open from `dev` to protected `main`. Its initial head `774159d6cbde0a89795e75eb8b3475ebfb9d6354` passed all five required checks. The current approval from Abdullah or Taha remains outstanding; no teammate approval is claimed. This handoff closeout advances `dev`, so rerun checks and ensure the required approval is current on the resulting PR head before merging #342. P07 remains deferred pending Shaheer's instruction.
+- Phase PR [#342](https://github.com/Artfever/FleetpulseAI/pull/342) merged `dev` to protected `main` on head `a11c27a248b2c1acee9c7d248573a099cde0a172`, with merge commit `95e6be77b0ac0ea0a5d4fbb1c70833a7357797f7`. Abdullah approved that exact head, and all five required CI checks passed. P07 remains deferred pending Shaheer's instruction.
 
 ## P01-T1 implementation and follow-up ? 9 November 2026
 
