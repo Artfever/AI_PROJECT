@@ -17,7 +17,7 @@ FleetpulseAI/
   pyproject.toml
   app/
     Home.py
-    pages/.gitkeep
+    pages/  (Streamlit pages)
   src/fleetpulse/
     __init__.py
     data/__init__.py
@@ -30,7 +30,7 @@ FleetpulseAI/
   docs/
   data/
     raw/.gitkeep
-    demo/.gitkeep
+    demo/  (tracked demo histories)
   artifacts/
     development/.gitkeep
     final/.gitkeep
@@ -45,8 +45,8 @@ models, evaluation, scheduling, or service implementation. Taha owns the actual
 app pages in P01-T1. The data and artifact directories contain no dataset,
 trained bundle, predictions, or metrics.
 
-Git records files, so `.gitkeep` files preserve the empty directories in a
-fresh checkout. Ignore exceptions admit only these markers under data and
+Git records files, so `.gitkeep` files preserve directories that remain empty in a
+fresh checkout. The pages and demo directories contain tracked files and need no markers. Ignore exceptions admit the remaining markers under data and
 artifacts; other contents remain ignored pending their own reviewed policies.
 `src/fleetpulse/data/` holds Python code; root `data/` holds local data files.
 

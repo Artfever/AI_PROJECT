@@ -254,3 +254,10 @@ Starter record created by repository governance on 9 November 2026. Taha should 
 
 - At Taha's request, removed the numbered-task branch and linked-issue gate from development CI. The `branch-policy` check still requires PRs to target `main` from a branch in this repository; planned work's relevant issue blockers remain a manual check.
 - Updated the PR and task templates, contributor guidance, CI documentation, and repository instructions to match. The existing PR, required CI, and other-teammate review remain in effect. PR #272 must pass CI and receive a current approval after this change.
+
+## Repository cleanup
+- Current task: remove redundant tracked files at Taha's request; branch `chore/remove-obsolete-repo-files` targets `dev` and is separate from numbered phase work.
+- Removed unused `scripts/check_pr_issue.py`, which enforced the retired numbered-branch policy and is not referenced by current CI; removed redundant `app/pages/.gitkeep` and `data/demo/.gitkeep` and its ignore exception. Updated the repository layout accordingly.
+- Validation: `python -m ruff check .` passed using the main checkout's `.venv`. `PYTHONPATH=src python -m pytest -q` using that same environment: 271 passed, 4 skipped, 1 failed; the bootstrap test removes PYTHONPATH and resolves the editable install to the original checkout, not this isolated worktree. This is an environment mismatch; full clean-install CI is required. `git diff --check HEAD` passed. Streamlit launch NOT RUN: no app behavior changed.
+- Blockers and teammate dependencies: none known; required CI and resolved conversations apply to the PR. Preserve the original checkout's uncommitted handoff. Next: open the PR, record its URL, check CI and merge to `dev` when clean. `main` promotion follows the phase workflow.
+- Cleanup commit `e483b65`; PR #357: https://github.com/Artfever/FleetpulseAI/pull/357. Clean-install CI is pending.
