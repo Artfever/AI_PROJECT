@@ -3,6 +3,7 @@
 from streamlit.testing.v1 import AppTest
 
 from fleetpulse import PROJECT_ROOT, services, ui
+from fleetpulse.data.loader import HISTORY_COLUMNS
 from fleetpulse.data.quality import READING_COLUMNS
 from fleetpulse.services import RULPrediction
 
@@ -77,3 +78,42 @@ def test_packaged_illustrative_history_is_distinct_and_has_no_future_rows(monkey
     assert calls[0][1]["dataset_partition"] == "illustrative/synthetic"
     assert calls[0][1]["unit_id"] == 900001
     assert page.metric[0].value == "3.00"
+
+
+def test_packaged_fd001_subset_uses_only_selected_training_prefix(monkeypatch, tmp_path):
+    page = _page(monkeypatch, tmp_path)
+    rows = [
+        {"unit_id": engine, "cycle": cycle, **dict.fromkeys(READING_COLUMNS, 0.5)}
+        for engine, cutoff in ((4, 164), (5, 58), (12, 7))
+        for cycle in range(1, cutoff + 1)
+    ]
+    subset_path = tmp_path / "data/demo/fd001_training_prefixes.txt"
+    subset_path.parent.mkdir(parents=True)
+    subset_path.write_text(
+        "\n".join(" ".join(str(row[column]) for column in HISTORY_COLUMNS) for row in rows)
+        + "\n",
+        encoding="utf-8",
+    )
+    calls = []
+
+    def predict(history, **kwargs):
+        calls.append((history, kwargs))
+        return RULPrediction(
+            34.19607843137255, 34.20, "decision-tree-rul", "decision-tree-rul-v1", 164, 30, ()
+        )
+
+    monkeypatch.setattr(services, "predict_rul_with_context", predict)
+    page.run()
+    page.selectbox[0].select("Packaged FD001/train parity subset").run()
+    assert any("not a complete dataset" in item.value for item in page.info)
+    page.selectbox[2].select(164).run()
+    page.button[0].click().run()
+
+    assert not page.exception
+    assert len(calls[0][0]) == 164
+    assert {row["unit_id"] for row in calls[0][0]} == {4}
+    assert max(row["cycle"] for row in calls[0][0]) == 164
+    assert all(set(row) == {"unit_id", "cycle", *READING_COLUMNS} for row in calls[0][0])
+    assert calls[0][1]["dataset_partition"] == "FD001/train"
+    assert calls[0][1]["unit_id"] == 4
+    assert page.metric[0].value == "34.20"

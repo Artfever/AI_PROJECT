@@ -64,3 +64,38 @@ def render_training_data() -> list[dict[str, int | float]] | None:
         preview=records[:10],
     )
     return records
+
+
+def render_packaged_training_subset() -> list[dict[str, int | float]] | None:
+    """Load the small, explicitly labeled FD001/train deployment subset."""
+    st.subheader("Packaged FD001/train prefix subset")
+    st.info(
+        "Small simulated NASA training-data subset: engines 4, 5 and 12, truncated at cycles "
+        "164, 58 and 7. It supports the three deployment parity examples only; it is not a "
+        "complete dataset or evidence of model quality or maintenance readiness."
+    )
+    path = PROJECT_ROOT / "data" / "demo" / "fd001_training_prefixes.txt"
+    try:
+        records = load_engine_history(path)
+    except FD001LoadError as error:
+        st.warning(f"Packaged FD001/train subset is not available. {error}")
+        return
+
+    report = validate_engine_history(records)
+    expected_cutoffs = {4: 164, 5: 58, 12: 7}
+    cycles_by_engine = {
+        engine_id: sorted(int(row["cycle"]) for row in records if int(row["unit_id"]) == engine_id)
+        for engine_id in expected_cutoffs
+    }
+    expected_cycles = {
+        engine_id: list(range(1, cutoff + 1)) for engine_id, cutoff in expected_cutoffs.items()
+    }
+    if (
+        not report.is_valid
+        or {int(row["unit_id"]) for row in records} != set(expected_cutoffs)
+        or cycles_by_engine != expected_cycles
+        or len(records) != 229
+    ):
+        st.error("The packaged FD001/train subset failed its expected data checks.")
+        return
+    return records

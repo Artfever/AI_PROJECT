@@ -1,10 +1,12 @@
 """Predict remaining cycles for a selected simulated training-engine history."""
 
 import streamlit as st
+from streamlit.errors import StreamlitSecretNotFoundError
 
 from fleetpulse import ui
 from fleetpulse.data.loader import FD001LoadError, load_engine_history
 from fleetpulse.data.quality import validate_engine_history
+from fleetpulse.deployment import prediction_manifest
 from fleetpulse.services import (
     PredictionArtifactError,
     PredictionInputError,
@@ -14,10 +16,19 @@ from fleetpulse.services import (
 st.title("RUL Prediction")
 st.caption("Estimate remaining useful life in operating cycles using a saved development model.")
 
-source = st.selectbox("History source", ["Local FD001 training data", "Illustrative synthetic example"])
+source = st.selectbox(
+    "History source",
+    [
+        "Local FD001 training data",
+        "Packaged FD001/train parity subset",
+        "Illustrative synthetic example",
+    ],
+)
 partition = "FD001/train"
 if source == "Local FD001 training data":
     records = ui.render_training_data()
+elif source == "Packaged FD001/train parity subset":
+    records = ui.render_packaged_training_subset()
 else:
     partition = "illustrative/synthetic"
     st.warning(
@@ -44,9 +55,16 @@ if records is not None:
         prefix = [row for row in history if row["cycle"] <= cycle]
         manifest = ui.PROJECT_ROOT / "artifacts/development/decision_tree_validation.json"
         try:
-            result = predict_rul_with_context(
-                prefix, dataset_partition=partition, unit_id=engine, manifest_path=manifest
-            )
+            supplied = None
+            if not manifest.exists():
+                try:
+                    supplied = st.secrets.get("deployment_model")
+                except StreamlitSecretNotFoundError:
+                    pass
+            with prediction_manifest(manifest, supplied) as active_manifest:
+                result = predict_rul_with_context(
+                    prefix, dataset_partition=partition, unit_id=engine, manifest_path=active_manifest
+                )
         except (PredictionArtifactError, PredictionInputError) as error:
             st.warning(f"Prediction is unavailable: {error}")
             st.write("Check the saved development model bundle and the selected training history.")

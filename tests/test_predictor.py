@@ -1,5 +1,6 @@
 """P07 raw/context component tests using temporary synthetic saved trees."""
 
+import base64
 import copy
 import hashlib
 import json
@@ -13,6 +14,7 @@ from sklearn.tree import DecisionTreeRegressor
 
 from fleetpulse.data.quality import READING_COLUMNS
 from fleetpulse.data.split_manifest import build_split_manifest
+from fleetpulse.deployment import prediction_manifest
 from fleetpulse.features import FeatureConfig
 from fleetpulse.features.build_dataset import build_fitting_dataset, build_validation_dataset
 from fleetpulse.models.train_tree import train_decision_tree
@@ -92,6 +94,46 @@ def test_saved_channel_order_and_window_drive_prediction_without_mutating_inputs
     assert asdict(result) == {"raw_rul_cycles": expected}
     assert [field.name for field in fields(result)] == ["raw_rul_cycles"]
     assert history == original
+
+
+def test_deployment_bundle_is_temporary_validated_and_never_silently_overrides_local(
+    synthetic_bundle, tmp_path
+):
+    manifest, _ = synthetic_bundle
+    model_path = manifest.parent / MODEL_FILENAME
+    supplied = {
+        "manifest_base64": base64.b64encode(manifest.read_bytes()).decode(),
+        "model_base64": base64.b64encode(model_path.read_bytes()).decode(),
+    }
+    expected = _predict([_row(1)], manifest)
+    missing_local = tmp_path / "missing" / "manifest.json"
+    with prediction_manifest(missing_local, supplied) as staged:
+        assert staged.is_file()
+        assert _predict([_row(1)], staged) == expected
+    assert not staged.exists()
+    with prediction_manifest(manifest, supplied) as active:
+        assert active == manifest
+    with (
+        prediction_manifest(missing_local, None) as active,
+        pytest.raises(PredictionArtifactError, match="Cannot read"),
+    ):
+        _predict([_row(1)], active)
+    with (
+        pytest.raises(PredictionArtifactError, match="Invalid deployment model configuration"),
+        prediction_manifest(missing_local, {"model_base64": "not-valid"}),
+    ):
+        pass
+    with (
+        pytest.raises(PredictionArtifactError, match="Invalid deployment model configuration"),
+        prediction_manifest(missing_local, {**supplied, "model_base64": "!invalid!"}),
+    ):
+        pass
+    corrupt = {**supplied, "model_base64": base64.b64encode(b"wrong").decode()}
+    with (
+        prediction_manifest(missing_local, corrupt) as staged,
+        pytest.raises(PredictionArtifactError, match="model file hash mismatch"),
+    ):
+        _predict([_row(1)], staged)
 
 
 @pytest.mark.parametrize("cycles", [(7,), (1, 3)])
