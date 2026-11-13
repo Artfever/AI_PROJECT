@@ -15,9 +15,22 @@ Deploy an approved task branch for verification and later the phase-approved
 branch, recording the actual branch, commit, URL and model version. Do not put
 credentials in the repository or chat. The account owner signs in personally.
 
-**Outstanding:** no reviewed mechanism currently supplies the trusted model
-bundle and NASA FD001 input histories to a remote checkout. They are ignored by
-Git. The only packaged history is a clearly artificial example; it cannot
+The owner can supply the existing trusted P06 model in Community Cloud app
+secrets without committing it to Git. Run
+`python scripts/prepare_p07_model_secrets.py` locally; this validates the local
+bundle and creates the ignored file `reports/p07_streamlit_model_secrets.toml`
+without overwriting an existing file. Paste its contents into the app's
+**Advanced settings > Secrets** in Community Cloud, never into chat or Git.
+The page uses a local bundle when present; otherwise, on an explicit prediction,
+it temporarily stages the supplied model and manifest, then removes the staged
+files. The existing service verifies their hashes and compatibility before
+inference. This is not encryption or provenance verification: only provide a
+bundle from a trusted source. Secret contents can include development evaluation
+metadata and must not be published. No model is trained or downloaded at startup.
+
+**Outstanding:** no reviewed mechanism currently supplies NASA FD001 input
+histories to a remote checkout. They are ignored by Git. The only packaged
+history is a clearly artificial example; it cannot
 demonstrate the P07 real-data gate. Deployment is not complete merely because a
 Streamlit health endpoint responds. Do not train at app startup or use the
 official test answers to work around missing files. Agree a secure model
