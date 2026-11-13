@@ -26,7 +26,6 @@ data/raw/*
 !data/raw/.gitkeep
 !data/demo/
 data/demo/*
-!data/demo/.gitkeep
 !data/demo/illustrative_history.txt
 !data/demo/fd001_training_prefixes.txt
 artifacts/*
