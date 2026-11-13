@@ -27,6 +27,8 @@ data/raw/*
 !data/demo/
 data/demo/*
 !data/demo/.gitkeep
+!data/demo/illustrative_history.txt
+!data/demo/fd001_training_prefixes.txt
 artifacts/*
 !artifacts/data_quality.json
 !artifacts/split_manifest.json
