@@ -122,6 +122,72 @@ offline prediction. He needs the trusted real bundle locally; its absence here
 is not evidence of parity. No display clipping should be applied to evaluation
 values. Taha can use the same raw service through the later presentation layer.
 
-The human inspection/discussion of saved service behavior is not yet confirmed.
-Keep #48 open until it is merged to dev and acceptance evidence is complete;
-contract agreement alone does not establish real-artifact parity or deployment.
+Abdullah subsequently confirmed the A1 output was inspected/discussed with a
+teammate; #48 is now closed after merge and supplied acceptance. This does not
+establish real-artifact parity or deployment; the real bundle is absent here.
+
+## Separate presentation/context contract (P07-A2 / #125)
+
+Abdullah confirmed on13November2026 that Shaheer and Taha agree these fields.
+`predict_rul` keeps its original one-field RawRULPrediction return. New
+`predict_rul_with_context` takes exactly the same keyword arguments and returns
+an immutable RULPrediction with:
+
+| Field | Meaning |
+| --- | --- |
+| raw_rul_cycles | Finite model output, unchanged even if negative; use for evaluation. |
+| displayed_rul_cycles | max(0.0,raw_rul_cycles), a separate display policy in cycles. |
+| model_name | Name from the validated saved manifest, currently decision-tree-rul. |
+| model_version | Validated saved model version, currently decision-tree-rul-v1. |
+| observed_cycle | Final observed cycle actually passed to feature extraction. |
+| input_window_rows | Number of observations actually used inside the saved cycle interval. |
+| warnings | Immutable tuple of stable warning codes described below. |
+
+Both APIs share a single internal validated inference operation; each call
+loads once and constructs one feature vector. The raw API does not clip its
+output or add presentation fields. Context is derived from that same verified
+artifact/input, avoiding an independent metadata read or a second prediction.
+Caller history remains unchanged; labels/targets remain forbidden inputs.
+
+Warning codes are returned in this deterministic order when applicable:
+
+- cycle_gaps: the existing raw-history validator reports missing cycles,
+  including an observed history starting after cycle1. No rows are filled in.
+- short_window: actual input_window_rows is less than the saved window_cycles;
+  this can result from a short prefix or gaps. It uses available observations.
+- display_clipped_at_zero: raw output was negative; displayed value is0.0,
+  while raw output remains untouched.
+
+Warnings describe these input/display conditions, not model uncertainty or a
+maintenance safety assessment. Lack of warnings does not guarantee accuracy.
+Configured cycle span and actual row count can differ: observed cycles1,3,6
+with a saved2-cycle window use only cycle6, so observed_cycle=6 and
+input_window_rows=1. No metadata/label is added to the numeric feature vector.
+
+### Actual A2 verification
+
+- `.venv/Scripts/python.exe -m ruff check .` initially reported RUF022 for
+  __all__ ordering. `.venv/Scripts/python.exe -m ruff check src/fleetpulse/services/__init__.py --fix`
+  fixed that single issue; final full Ruff check PASS.
+- `.venv/Scripts/python.exe -m pytest -q tests/test_predictor.py`:
+  **17passed in7.15s**, including all14 prior raw-service cases. New checks cover
+  context schema/model/window correspondence, unchanged raw API, short/gapped
+  observed counts and raw-negative/display-zero separation.
+- `.venv/Scripts/python.exe -m pytest -q`: **251passed in46.97s**.
+- `git diff --check`: PASS before commit.
+
+Actual temporary synthetic saved-tree outputs:
+
+```json
+{"raw_rul_cycles":5.5,"displayed_rul_cycles":5.5,"model_name":"decision-tree-rul","model_version":"decision-tree-rul-v1","observed_cycle":3,"input_window_rows":2,"warnings":[]}
+{"raw_rul_cycles":-2.5,"displayed_rul_cycles":0.0,"model_name":"decision-tree-rul","model_version":"decision-tree-rul-v1","observed_cycle":1,"input_window_rows":1,"warnings":["short_window","display_clipped_at_zero"]}
+```
+
+These used the same temporary toy artifact producer as A1, seed42, saved
+past-only-v1/custom sensor2,sensor1 order/window2. They are observed synthetic
+outputs, not FD001 results or metrics. Real P06 inference/reload NOT RUN: real
+bundle still absent; no real model retrained. Local Streamlit smoke NOT RUN:
+no app changes. No #49 parity, model-card, deployment or #198 compatibility
+packet implemented. Shaheer keeps using predict_rul/raw_rul_cycles for parity;
+Taha can consume the new context function for presentation. Independent human
+inspection/discussion of A2 output has been requested and remains pending.

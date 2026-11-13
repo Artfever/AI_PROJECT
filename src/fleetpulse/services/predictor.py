@@ -1,4 +1,4 @@
-"""P07-A1 raw Decision Tree inference; no scoring labels or display policy.
+"""Saved Decision Tree inference with separate raw and presentation contracts.
 
 Abdullah confirmed agreement with Shaheer and Taha on 13 November 2026:
 one observed engine prefix in the normalized 26-column schema, explicit
@@ -21,7 +21,7 @@ import sklearn
 from sklearn.tree import DecisionTreeRegressor
 
 from fleetpulse.data.quality import validate_engine_history
-from fleetpulse.features import FeatureConfig, engineer_features
+from fleetpulse.features import EngineFeatureVector, FeatureConfig, engineer_features
 from fleetpulse.models.train_tree import MODEL_VERSION
 from fleetpulse.models.tree_artifact import MODEL_FILENAME, TREE_ARTIFACT_SCHEMA
 
@@ -41,6 +41,28 @@ class RawRULPrediction:
     raw_rul_cycles: float
 
 
+@dataclass(frozen=True)
+class RULPrediction:
+    """Raw evaluation value alongside explicitly separate display/context fields."""
+
+    raw_rul_cycles: float
+    displayed_rul_cycles: float
+    model_name: str
+    model_version: str
+    observed_cycle: int
+    input_window_rows: int
+    warnings: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class _Inference:
+    raw_rul_cycles: float
+    model_name: str
+    model_version: str
+    vector: EngineFeatureVector
+    cycle_gaps: bool
+
+
 def _canonical(value: object) -> bytes:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")
 
@@ -50,7 +72,7 @@ def _require_artifact(condition: bool, message: str) -> None:
         raise PredictionArtifactError(message)
 
 
-def _load_model(manifest_path: str | Path) -> tuple[FeatureConfig, DecisionTreeRegressor]:
+def _load_model(manifest_path: str | Path) -> tuple[FeatureConfig, DecisionTreeRegressor, str, str]:
     """Read the existing P06 bundle without requiring any evaluation dataset.
 
     Only trusted project artifacts should be passed to joblib. Evaluation
@@ -136,16 +158,16 @@ def _load_model(manifest_path: str | Path) -> tuple[FeatureConfig, DecisionTreeR
         raise PredictionArtifactError(
             f"Cannot load a compatible saved Decision Tree: {error}"
         ) from error
-    return config, model
+    return config, model, info["name"], info["version"]
 
 
-def predict_rul(
+def _infer(
     history: Iterable[Mapping[str, object]],
     *,
     dataset_partition: str,
     unit_id: int,
     manifest_path: str | Path,
-) -> RawRULPrediction:
+) -> _Inference:
     """Validate one observed prefix and return its raw saved-model RUL estimate.
 
     The final supplied row is the observation cutoff; callers must truncate
@@ -172,7 +194,7 @@ def predict_rul(
     normalized = tuple(
         {**row, "unit_id": int(row["unit_id"]), "cycle": int(row["cycle"])} for row in rows
     )
-    config, model = _load_model(manifest_path)
+    config, model, model_name, model_version = _load_model(manifest_path)
     try:
         vector = engineer_features(
             normalized, dataset_partition=dataset_partition, unit_id=int(unit_id), config=config
@@ -194,4 +216,63 @@ def predict_rul(
         raise PredictionArtifactError(
             f"Saved model cannot predict these features: {error}"
         ) from error
-    return RawRULPrediction(raw_rul_cycles=float(predicted[0]))
+    return _Inference(
+        raw_rul_cycles=float(predicted[0]),
+        model_name=model_name,
+        model_version=model_version,
+        vector=vector,
+        cycle_gaps=any(finding.code == "cycle_gap" for finding in report.warnings),
+    )
+
+
+def predict_rul(
+    history: Iterable[Mapping[str, object]],
+    *,
+    dataset_partition: str,
+    unit_id: int,
+    manifest_path: str | Path,
+) -> RawRULPrediction:
+    """Return only the unclipped estimate; preserve the agreed P07-A1 interface.
+
+    Supply one raw observed prefix with no labels/future rows. This API is for
+    raw evaluation and does not apply a display policy or add context fields.
+    """
+    result = _infer(
+        history, dataset_partition=dataset_partition, unit_id=unit_id, manifest_path=manifest_path
+    )
+    return RawRULPrediction(raw_rul_cycles=result.raw_rul_cycles)
+
+
+def predict_rul_with_context(
+    history: Iterable[Mapping[str, object]],
+    *,
+    dataset_partition: str,
+    unit_id: int,
+    manifest_path: str | Path,
+) -> RULPrediction:
+    """Return raw and nonnegative display values plus validated model context.
+
+    Same observed-prefix input contract as predict_rul. Warning codes are
+    cycle_gaps, short_window (fewer observed rows than configured cycle span),
+    and display_clipped_at_zero. Abdullah confirmed both Shaheer and Taha
+    agreed these fields on 13 November 2026; the raw API stays unchanged.
+    """
+    result = _infer(
+        history, dataset_partition=dataset_partition, unit_id=unit_id, manifest_path=manifest_path
+    )
+    warnings = []
+    if result.cycle_gaps:
+        warnings.append("cycle_gaps")
+    if result.vector.window_row_count < result.vector.config.window_cycles:
+        warnings.append("short_window")
+    if result.raw_rul_cycles < 0:
+        warnings.append("display_clipped_at_zero")
+    return RULPrediction(
+        raw_rul_cycles=result.raw_rul_cycles,
+        displayed_rul_cycles=max(0.0, result.raw_rul_cycles),
+        model_name=result.model_name,
+        model_version=result.model_version,
+        observed_cycle=result.vector.selected_cycle,
+        input_window_rows=result.vector.window_row_count,
+        warnings=tuple(warnings),
+    )

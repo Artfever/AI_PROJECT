@@ -1,4 +1,4 @@
-"""P07-A1 component tests using temporary, explicitly synthetic saved trees."""
+"""P07 raw/context component tests using temporary synthetic saved trees."""
 
 import copy
 import hashlib
@@ -20,6 +20,7 @@ from fleetpulse.services import (
     PredictionInputError,
     RawRULPrediction,
     predict_rul,
+    predict_rul_with_context,
 )
 
 
@@ -164,3 +165,56 @@ def test_negative_raw_output_is_preserved_without_display_clipping(synthetic_bun
     document["payload"]["model"]["sha256"] = hashlib.sha256(model_path.read_bytes()).hexdigest()
     _write_manifest(manifest, document)
     assert _predict([_row(1)], manifest).raw_rul_cycles == -2.5
+    presentation = predict_rul_with_context(
+        [_row(1)],
+        dataset_partition="synthetic/P07-A2",
+        unit_id=99,
+        manifest_path=manifest,
+    )
+    assert presentation.raw_rul_cycles == -2.5
+    assert presentation.displayed_rul_cycles == 0.0
+    assert "display_clipped_at_zero" in presentation.warnings
+
+
+def test_context_fields_match_actual_saved_model_and_input_window(synthetic_bundle):
+    manifest, _ = synthetic_bundle
+    history = [_row(cycle) for cycle in (1, 2, 3)]
+    result = predict_rul_with_context(
+        iter(history),
+        dataset_partition="synthetic/P07-A2",
+        unit_id=99,
+        manifest_path=manifest,
+    )
+    assert result.raw_rul_cycles == _predict(history, manifest).raw_rul_cycles
+    assert result.displayed_rul_cycles == result.raw_rul_cycles
+    assert result.model_name == "decision-tree-rul"
+    assert result.model_version == "decision-tree-rul-v1"
+    assert result.observed_cycle == 3
+    assert result.input_window_rows == 2  # Saved config, not default30 or prefix length3.
+    assert result.warnings == ()
+    assert set(asdict(result)) == {
+        "raw_rul_cycles",
+        "displayed_rul_cycles",
+        "model_name",
+        "model_version",
+        "observed_cycle",
+        "input_window_rows",
+        "warnings",
+    }
+    assert set(asdict(_predict(history, manifest))) == {"raw_rul_cycles"}
+
+
+@pytest.mark.parametrize("cycles", [(7,), (1, 3, 6)])
+def test_context_reports_observed_cycle_actual_row_count_and_quality_warnings(
+    synthetic_bundle, cycles
+):
+    manifest, _ = synthetic_bundle
+    result = predict_rul_with_context(
+        [_row(cycle) for cycle in cycles],
+        dataset_partition="synthetic/P07-A2",
+        unit_id=99,
+        manifest_path=manifest,
+    )
+    assert result.observed_cycle == cycles[-1]
+    assert result.input_window_rows == 1  # Only final cycle falls inside saved2cycle window.
+    assert result.warnings == ("cycle_gaps", "short_window")
