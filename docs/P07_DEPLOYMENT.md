@@ -1,7 +1,7 @@
 # P07-T3 deployment preparation
 
 Issue [#245](https://github.com/Artfever/FleetpulseAI/issues/245) remains open.
-No remote app, deployed commit, or remote parity result has been verified yet.
+Taha reported the hosted results below match the local references. The deployed commit and the public-access discrepancy remain unverified; do not treat the phase gate as complete.
 
 ## Community Cloud configuration
 
@@ -41,11 +41,27 @@ SHA-256 is
 The source page does not state a dataset-specific redistribution license. This
 records the project owner's decision to package a limited demonstration subset,
 not a NASA license grant. Review `docs/data_policy.md` and
-`docs/fd001_provenance.md` for provenance and scope. Deployment and remote
-parity are still outstanding. Deployment is not complete merely because a
+`docs/fd001_provenance.md` for provenance and scope. Deployment identity and anonymous access remain unverified; the
+UI comparison is user-reported below. Deployment is not complete merely because a
 Streamlit health endpoint responds. Do not train at app startup or use official
 test answers. A checksum alone does not make a serialized model trustworthy.
 
+## User-reported hosted observations
+
+On 13 November 2026 Taha confirmed he selected **Packaged FD001/train parity
+subset** in the hosted app at https://fleetpulseai.streamlit.app/, and observed
+34.20, 158.16 and 184.36 cycles for engines/cycles 4/164, 5/58 and 12/7,
+respectively, with the short-window warning for 12/7. He reported model
+`decision-tree-rul` / `decision-tree-rul-v1`. These UI results match the local
+display values below; no independent remote raw-output comparison is claimed.
+
+Taha reports the deployed branch is `dev` and that the app opened without
+sign-in in an incognito window. Cloud startup logs he supplied name `dev` but
+not a deployed commit hash. The provided `44d3063` identifies an older P01
+commit and cannot establish the running revision. Unauthenticated requests from
+this environment returned HTTP 303 to Streamlit sign-in. Resolve that discrepancy
+and record the deployed commit before representing #245 and the shared gate as
+fully verified.
 ## Local reference predictions
 
 On 13 November 2026, `.venv/Scripts/python.exe scripts/p07_local_reference.py`
