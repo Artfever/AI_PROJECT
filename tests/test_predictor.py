@@ -101,6 +101,24 @@ def test_short_observed_histories_and_gaps_follow_saved_feature_contract(synthet
     assert isinstance(result.raw_rul_cycles, float)
 
 
+def test_one_row_prefix_is_accepted_and_context_marks_short_saved_window(synthetic_bundle):
+    manifest, _ = synthetic_bundle
+    history = [_row(7)]
+
+    raw = _predict(history, manifest)
+    contextual = predict_rul_with_context(
+        history,
+        dataset_partition="synthetic/P07-S2",
+        unit_id=99,
+        manifest_path=manifest,
+    )
+
+    assert isinstance(raw.raw_rul_cycles, float)
+    assert contextual.observed_cycle == 7
+    assert contextual.input_window_rows == 1
+    assert contextual.warnings == ("cycle_gaps", "short_window")
+
+
 @pytest.mark.parametrize("case", ["empty", "nonfinite", "mixed_engines", "target", "duplicate"])
 def test_invalid_history_fails_before_loading_any_artifact(tmp_path, case):
     history = [_row(1), _row(2)]
@@ -286,6 +304,7 @@ def test_unfitted_estimator_is_rejected_before_predicting(synthetic_bundle):
     "case,message",
     [
         ("artifact_schema", "Unsupported Decision Tree artifact schema"),
+        ("model_name", "Unsupported Decision Tree model name/version"),
         ("model_version", "Unsupported Decision Tree model name/version"),
         ("runtime_version", "scikit-learn version does not match"),
         ("parameters", "parameters differ from the manifest"),
@@ -297,6 +316,8 @@ def test_rehashed_incompatible_artifact_contract_fails_clearly(synthetic_bundle,
     payload = document["payload"]
     if case == "artifact_schema":
         payload["schema_version"] = "unsupported"
+    elif case == "model_name":
+        payload["model"]["name"] = "unknown-model"
     elif case == "model_version":
         payload["model"]["version"] = "unsupported"
     elif case == "runtime_version":
