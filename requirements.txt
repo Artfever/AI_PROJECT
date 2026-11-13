@@ -1,0 +1,2 @@
+# Streamlit Community Cloud installs this project and its pinned runtime dependencies.
+-e .
