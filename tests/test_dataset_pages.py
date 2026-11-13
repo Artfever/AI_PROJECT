@@ -56,7 +56,7 @@ def test_missing_or_malformed_data_is_explained_without_fake_counts(
 
     assert not app.exception
     assert any("Engine history data is not available" in item.value for item in app.warning)
-    assert any("train_FD001.txt" in item.value and "No packaged demo" in item.value for item in app.markdown)
+    assert any("train_FD001.txt" in item.value and "illustrative synthetic" in item.value for item in app.markdown)
     assert not app.metric
     assert not app.dataframe
 
@@ -70,6 +70,6 @@ def test_invalid_history_is_not_presented_as_valid(synthetic_training_root, monk
 
     assert not app.exception
     assert any("invalid records" in item.value for item in app.error)
-    assert any("No packaged demo" in item.value for item in app.markdown)
+    assert any("illustrative synthetic" in item.value for item in app.markdown)
     assert not app.metric
     assert not app.dataframe

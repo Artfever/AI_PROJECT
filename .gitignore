@@ -27,6 +27,7 @@ data/raw/*
 !data/demo/
 data/demo/*
 !data/demo/.gitkeep
+!data/demo/illustrative_history.txt
 artifacts/*
 !artifacts/data_quality.json
 !artifacts/split_manifest.json

@@ -13,6 +13,7 @@ import json
 import math
 from collections.abc import Iterable, Mapping
 from dataclasses import asdict, dataclass
+from functools import lru_cache
 from numbers import Integral, Real
 from pathlib import Path
 
@@ -70,6 +71,16 @@ def _canonical(value: object) -> bytes:
 def _require_artifact(condition: bool, message: str) -> None:
     if not condition:
         raise PredictionArtifactError(message)
+
+
+@lru_cache(maxsize=2)
+def _deserialize_tree(model_bytes: bytes) -> DecisionTreeRegressor:
+    """Reuse an estimator only for exactly the same verified model bytes."""
+    model = joblib.load(io.BytesIO(model_bytes))
+    _require_artifact(
+        isinstance(model, DecisionTreeRegressor), "Saved model is not a DecisionTreeRegressor."
+    )
+    return model
 
 
 def _load_model(manifest_path: str | Path) -> tuple[FeatureConfig, DecisionTreeRegressor, str, str]:
@@ -135,11 +146,8 @@ def _load_model(manifest_path: str | Path) -> tuple[FeatureConfig, DecisionTreeR
         ) from error
 
     try:
-        # Deserialize exactly the bytes whose hash was verified, not a second file read.
-        model = joblib.load(io.BytesIO(model_bytes))
-        _require_artifact(
-            isinstance(model, DecisionTreeRegressor), "Saved model is not a DecisionTreeRegressor."
-        )
+        # Integrity is checked on every call; only deserialization is cached by exact bytes.
+        model = _deserialize_tree(model_bytes)
         _require_artifact(
             model.n_features_in_ == len(config.output_schema) and model.n_outputs_ == 1,
             "Saved estimator dimensions do not match the feature schema.",

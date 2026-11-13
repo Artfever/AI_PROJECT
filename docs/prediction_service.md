@@ -1,5 +1,17 @@
 # Raw prediction service (P07-A1 / #48)
 
+## Model-loading cache (P07-T2)
+
+The service reads and verifies the manifest and sibling model bytes on every
+prediction. It keeps up to two deserialized estimators in a process-local cache,
+keyed by the complete verified model bytes; changed, corrupt, or missing files
+cannot silently reuse a stale model. The saved feature schema and estimator
+parameters are validated on every request. Cache lifetime is the Python process;
+separate workers load independently. This saves repeated deserialization, not
+file reads or feature calculation. Only trusted project model bundles may be
+deserialized; a checksum establishes integrity, not trust. The app never trains
+a replacement model on load or after a failure.
+
 Abdullah confirmed on **13 November 2026** that both Shaheer and Taha accept
 this input and return contract. This records supplied team agreement, not a
 GitHub approval or an automated message to either teammate.
