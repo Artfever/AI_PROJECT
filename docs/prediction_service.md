@@ -85,7 +85,38 @@ corrupt hashes, unsupported/inconsistent schema/runtime or failed estimator
 loading/prediction. Missing-file errors include the supplied manifest path.
 The service never attempts training to recover a missing artifact.
 
+## Short-history and model-identity checks (P07-S2 / #126)
+
+The service accepts a valid one-row observed prefix and builds features using
+the exact saved channel order and cycle window. If the prefix contributes fewer
+rows than the saved window, inference uses the observations that are available;
+it does not pad, impute, or extend the history. The raw API still returns only
+`raw_rul_cycles`. The context API reports the actual cutoff and number of rows
+used and includes `short_window` when that count is below `window_cycles`.
+Existing cycle-gap warnings remain independent and may appear with
+`short_window`.
+
+The saved model identity is validated before prediction. Unknown model names or
+versions raise `PredictionArtifactError` with the unsupported name/version
+message; the manifest checksum must be recomputed in the test when exercising
+that semantic validation, so the test reaches identity checking rather than
+failing earlier on integrity.
+
 ## Executed evidence (13 November 2026)
+
+P07-S2 contract checks on `feat/P07-S2-short-history-contract`:
+
+- `.venv/Scripts/python.exe -m pytest -q tests/test_predictor.py`: **32 passed**.
+- `.venv/Scripts/ruff.exe check .`: **PASS**.
+- `.venv/Scripts/python.exe -m pytest -q`: **271 passed**.
+- `git diff --check`: **PASS** (Git reported only expected LF-to-CRLF notices).
+
+The additional tests use temporary synthetic saved bundles. A one-row prefix
+returns a finite raw prediction; the context result reports its actual cycle,
+one input row and `cycle_gaps`/`short_window` warnings for the selected test
+history. Rehashed manifests with an unknown model name or version fail with
+`PredictionArtifactError`. The real ignored P06 bundle is absent in this
+checkout, so real-model inference/reload is **NOT RUN**.
 
 The existing declared dependencies were installed with
 `.venv/Scripts/python.exe -m pip install -e '.[dev]'` successfully. Python
