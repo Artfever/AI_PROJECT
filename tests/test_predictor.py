@@ -317,6 +317,46 @@ def test_manifest_checksum_detects_edited_configuration(synthetic_bundle):
         _predict([_row(1)], manifest)
 
 
+def test_cache_reuses_verified_bytes_but_detects_changes_and_missing_files(synthetic_bundle, monkeypatch):
+    from fleetpulse.services import predictor
+
+    manifest, _ = synthetic_bundle
+    model_path = manifest.parent / MODEL_FILENAME
+    original_load = predictor.joblib.load
+    calls = []
+
+    def counted_load(*args, **kwargs):
+        calls.append(1)
+        return original_load(*args, **kwargs)
+
+    predictor._deserialize_tree.cache_clear()
+    monkeypatch.setattr(predictor.joblib, "load", counted_load)
+    try:
+        first = _predict([_row(1)], manifest)
+        assert _predict([_row(1)], manifest) == first
+        assert len(calls) == 1
+        original_manifest = manifest.read_text(encoding="utf-8")
+        changed = json.loads(original_manifest)
+        changed["payload"]["training"]["parameters"]["max_depth"] = 9
+        _write_manifest(manifest, changed)
+        with pytest.raises(PredictionArtifactError, match="parameters differ from the manifest"):
+            _predict([_row(1)], manifest)
+        manifest.write_text(original_manifest, encoding="utf-8")
+        original_bytes = model_path.read_bytes()
+        model_path.write_bytes(original_bytes + b"corrupt")
+        with pytest.raises(PredictionArtifactError, match="model file hash mismatch"):
+            _predict([_row(1)], manifest)
+        model_path.unlink()
+        with pytest.raises(PredictionArtifactError, match="Cannot read"):
+            _predict([_row(1)], manifest)
+        model_path.write_bytes(original_bytes)
+        _install_negative_output_tree(manifest)
+        assert _predict([_row(1)], manifest).raw_rul_cycles == -2.5
+        assert len(calls) == 2
+    finally:
+        predictor._deserialize_tree.cache_clear()
+
+
 def test_invalid_model_serialization_fails_even_when_its_byte_hash_matches(synthetic_bundle):
     manifest, _ = synthetic_bundle
     model_path = manifest.parent / MODEL_FILENAME

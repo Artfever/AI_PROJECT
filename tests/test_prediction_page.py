@@ -29,8 +29,8 @@ def test_selected_engine_and_cutoff_reach_service_without_future_or_target(monke
     monkeypatch.setattr(services, "predict_rul_with_context", predict)
     page.run()
     assert not calls
-    page.selectbox[0].select(2).run()
     page.selectbox[1].select(2).run()
+    page.selectbox[2].select(2).run()
     page.button[0].click().run()
     assert not page.exception
     assert [row["cycle"] for row in calls[0][0]] == [1, 2]
@@ -41,7 +41,7 @@ def test_selected_engine_and_cutoff_reach_service_without_future_or_target(monke
     assert page.metric[0].value == "12.50"
     assert any("test-model" in item.value and "test-v1" in item.value for item in page.markdown)
     assert any("short" in item.value for item in page.warning)
-    page.selectbox[1].select(1).run()
+    page.selectbox[2].select(1).run()
     assert not page.metric
 
 
@@ -51,3 +51,29 @@ def test_missing_bundle_shows_error_without_fabricating_prediction(monkeypatch, 
     assert not page.exception
     assert not page.metric
     assert any("Prediction is unavailable" in item.value for item in page.warning)
+
+
+def test_packaged_illustrative_history_is_distinct_and_has_no_future_rows(monkeypatch, tmp_path):
+    page = _page(monkeypatch, tmp_path)
+    demo_dir = tmp_path / "data/demo"
+    demo_dir.mkdir(parents=True)
+    (demo_dir / "illustrative_history.txt").write_bytes(
+        (PROJECT_ROOT / "data/demo/illustrative_history.txt").read_bytes()
+    )
+    calls = []
+
+    def predict(history, **kwargs):
+        calls.append((history, kwargs))
+        return RULPrediction(3.0, 3.0, "test-model", "test-v1", 2, 2, ())
+
+    monkeypatch.setattr(services, "predict_rul_with_context", predict)
+    page.run()
+    page.selectbox[0].select("Illustrative synthetic example").run()
+    assert any("not NASA data" in item.value for item in page.warning)
+    page.selectbox[2].select(2).run()
+    page.button[0].click().run()
+    assert not page.exception
+    assert [row["cycle"] for row in calls[0][0]] == [1, 2]
+    assert calls[0][1]["dataset_partition"] == "illustrative/synthetic"
+    assert calls[0][1]["unit_id"] == 900001
+    assert page.metric[0].value == "3.00"

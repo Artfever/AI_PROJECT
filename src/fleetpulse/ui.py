@@ -32,7 +32,8 @@ def _render_training_data_help() -> None:
         "discovery-and-systems-health/pcoe/pcoe-data-set-repository/); "
         "see `docs/fd001_provenance.md` for the source and checksums. "
         "If a file already exists, verify it before replacing anything. "
-        "No packaged demo dataset is available yet."
+        "A separate illustrative synthetic example is available on RUL Prediction; "
+        "it is not NASA data."
     )
 
 
