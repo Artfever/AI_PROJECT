@@ -1,7 +1,7 @@
 # Model card: FleetPulse FD001 development Decision Tree
 
-**Status:** Development candidate; not approved for real maintenance decisions  
-**Model:** `decision-tree-rul` / `decision-tree-rul-v1`  
+**Status:** Development candidate; not approved for real maintenance decisions
+**Model:** `decision-tree-rul` / `decision-tree-rul-v1`
 **Last checked:** 13 November 2026
 
 ## Summary
