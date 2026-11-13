@@ -11,7 +11,9 @@ verified that the local training source matched the source hash recorded by
 the saved P06 model and oracle.
 
 All 20 raw service predictions exactly matched their saved P06 values. Maximum
-absolute difference was 0.0 cycles. The report with each engine, cutoff,
+absolute difference was 0.0 cycles. The script requires exactly 20 unique
+partition/engine/cycle identities and exits nonzero if any prediction differs
+or the report's counts do not match its rows. The report with each engine, cutoff,
 prediction, and label is written to the ignored local file
 `reports/p07_service_parity.json`; it is reproducible and is not committed.
 
@@ -43,5 +45,6 @@ present:
 The script checks the source and saved-oracle hashes, selects exactly the
 saved engine/cutoff prefixes, invokes the public `predict_rul` service, and
 writes the ignored JSON report. It fails on missing cycles, mismatched source
-provenance, changed oracle content, or a prediction difference reflected in
-the report.
+provenance, changed oracle content, duplicate or missing identities, or any
+nonzero prediction difference. A failed comparison still leaves the report
+available for diagnosis and returns a nonzero process status.
