@@ -16,10 +16,19 @@ from fleetpulse.services import (
 st.title("RUL Prediction")
 st.caption("Estimate remaining useful life in operating cycles using a saved development model.")
 
-source = st.selectbox("History source", ["Local FD001 training data", "Illustrative synthetic example"])
+source = st.selectbox(
+    "History source",
+    [
+        "Local FD001 training data",
+        "Packaged FD001/train parity subset",
+        "Illustrative synthetic example",
+    ],
+)
 partition = "FD001/train"
 if source == "Local FD001 training data":
     records = ui.render_training_data()
+elif source == "Packaged FD001/train parity subset":
+    records = ui.render_packaged_training_subset()
 else:
     partition = "illustrative/synthetic"
     st.warning(

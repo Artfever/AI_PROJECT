@@ -28,15 +28,23 @@ inference. This is not encryption or provenance verification: only provide a
 bundle from a trusted source. Secret contents can include development evaluation
 metadata and must not be published. No model is trained or downloaded at startup.
 
-**Outstanding:** no reviewed mechanism currently supplies NASA FD001 input
-histories to a remote checkout. They are ignored by Git. The only packaged
-history is a clearly artificial example; it cannot
-demonstrate the P07 real-data gate. Deployment is not complete merely because a
-Streamlit health endpoint responds. Do not train at app startup or use the
-official test answers to work around missing files. Agree a secure model
-provisioning path and review the provenance and redistribution of any real-data
-demo before a public deployment uses it. A checksum alone does not make a
-serialized model trustworthy.
+The repository owner approved a small real FD001/train subset for the public
+demo on 13 November 2026. `scripts/package_p07_training_subset.py` verifies the
+full local training-file SHA-256 before preserving only engines 4/164, 5/58,
+and 12/7 prefixes (229 rows) in `data/demo/fd001_training_prefixes.txt`. The
+app exposes it as **Packaged FD001/train parity subset**, clearly labeled as
+truncated training histories for the three parity examples. It does not include
+the full dataset, validation/test files, or RUL answers. The packed file's
+SHA-256 is
+`e31832ddbc23fa32b4093e1325f00fd6bed2cb2d3f6d03ca13ace44886390b6d`.
+
+The source page does not state a dataset-specific redistribution license. This
+records the project owner's decision to package a limited demonstration subset,
+not a NASA license grant. Review `docs/data_policy.md` and
+`docs/fd001_provenance.md` for provenance and scope. Deployment and remote
+parity are still outstanding. Deployment is not complete merely because a
+Streamlit health endpoint responds. Do not train at app startup or use official
+test answers. A checksum alone does not make a serialized model trustworthy.
 
 ## Local reference predictions
 
@@ -58,6 +66,11 @@ The model was `decision-tree-rul-v1`, scikit-learn 1.9.1, seed 42,
 Each service call received only that engine's raw rows through the selected
 cycle. No target was passed and no official test file was read. These are
 development-model outputs, not accuracy metrics or maintenance advice.
+
+The subset can be regenerated from a local original training file with
+`python scripts/package_p07_training_subset.py`. Observed package: 229 rows,
+three engines and SHA-256
+`e31832ddbc23fa32b4093e1325f00fd6bed2cb2d3f6d03ca13ace44886390b6d`.
 
 After provisioning and deployment, select the same data source, engine and
 cycle remotely and record each observed display, warning, URL, commit and model
