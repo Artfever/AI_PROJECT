@@ -5,6 +5,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -12,9 +14,44 @@ from fleetpulse import PROJECT_ROOT
 from fleetpulse.data.loader import load_engine_history
 from fleetpulse.services import predict_rul
 
+EXPECTED_VALIDATION_PREFIXES = 20
+
 
 def _canonical(value: Any) -> bytes:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+
+
+def validate_parity_report(report: dict[str, Any]) -> None:
+    """Reject incomplete, duplicated, or numerically different parity reports."""
+    predictions = report.get("predictions")
+    if not isinstance(predictions, list) or len(predictions) != EXPECTED_VALIDATION_PREFIXES:
+        actual = len(predictions) if isinstance(predictions, list) else 0
+        raise ValueError(
+            f"Expected {EXPECTED_VALIDATION_PREFIXES} validation prefixes; got {actual}."
+        )
+
+    identities = [
+        (row["dataset_partition"], int(row["unit_id"]), int(row["cutoff_cycle"]))
+        for row in predictions
+    ]
+    if len(set(identities)) != EXPECTED_VALIDATION_PREFIXES:
+        raise ValueError("Validation oracle must contain 20 unique partition/engine/cycle identities.")
+    if report.get("sample_count") != EXPECTED_VALIDATION_PREFIXES:
+        raise ValueError("Parity report sample_count does not match its 20 prediction rows.")
+
+    differences = [float(row["absolute_difference_cycles"]) for row in predictions]
+    if any(not math.isfinite(value) for value in differences):
+        raise ValueError("Parity report contains a non-finite prediction difference.")
+    maximum = max(differences)
+    if maximum != float(report["max_absolute_difference_cycles"]):
+        raise ValueError("Reported maximum difference does not match the prediction rows.")
+    exact_count = sum(value == 0.0 for value in differences)
+    if report.get("exact_match_count") != exact_count:
+        raise ValueError("Reported exact_match_count does not match the prediction rows.")
+    if maximum != 0.0:
+        raise ValueError(
+            f"Saved-service parity failed: maximum absolute difference is {maximum:.12f} cycles."
+        )
 
 
 def compare_saved_predictions(
@@ -103,7 +140,7 @@ def compare_saved_predictions(
     return payload
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--training", type=Path, default=PROJECT_ROOT / "data/raw/train_FD001.txt")
     parser.add_argument(
@@ -119,13 +156,18 @@ def main() -> None:
     parser.add_argument(
         "--output", type=Path, default=PROJECT_ROOT / "reports/p07_service_parity.json"
     )
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     result = compare_saved_predictions(
         training_path=args.training,
         model_manifest_path=args.model_manifest,
         offline_predictions_path=args.offline_predictions,
         output_path=args.output,
     )
+    try:
+        validate_parity_report(result)
+    except ValueError as error:
+        print(f"saved_service_parity: failed; {error}; report={args.output}", file=sys.stderr)
+        return 1
     print(
         "saved_service_parity: passed; "
         f"model={result['model']['name']}@{result['model']['version']}; "
@@ -134,7 +176,8 @@ def main() -> None:
         f"max_difference_cycles={result['max_absolute_difference_cycles']:.12f}; "
         f"report={args.output.relative_to(PROJECT_ROOT)}"
     )
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
