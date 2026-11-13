@@ -124,8 +124,10 @@ def _load_model(manifest_path: str | Path) -> tuple[FeatureConfig, DecisionTreeR
     except PredictionArtifactError:
         raise
     except OSError as error:
+        failed_path = error.filename if error.filename is not None else path
         raise PredictionArtifactError(
-            f"Cannot read saved Decision Tree bundle at {path}: {error}"
+            f"Cannot read saved Decision Tree bundle at {path}; "
+            f"unavailable file {failed_path}: {error.strerror or error}"
         ) from error
     except (KeyError, TypeError, ValueError, UnicodeError) as error:
         raise PredictionArtifactError(

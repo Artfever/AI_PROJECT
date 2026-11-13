@@ -7,6 +7,8 @@ from dataclasses import asdict, fields
 
 import joblib
 import pytest
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeRegressor
 
 from fleetpulse.data.quality import READING_COLUMNS
@@ -154,8 +156,7 @@ def test_no_scoring_dataset_or_evaluation_labels_are_needed_for_inference(synthe
     assert _predict([_row(1)], manifest) == before
 
 
-def test_negative_raw_output_is_preserved_without_display_clipping(synthetic_bundle):
-    manifest, _ = synthetic_bundle
+def _install_negative_output_tree(manifest):
     # An artificial negative-output estimator exercises the raw-output contract.
     toy = DecisionTreeRegressor(random_state=42, max_depth=8, min_samples_leaf=5)
     toy.fit([[0.0] * 8] * 5, [-2.5] * 5)
@@ -164,6 +165,11 @@ def test_negative_raw_output_is_preserved_without_display_clipping(synthetic_bun
     document = json.loads(manifest.read_text())
     document["payload"]["model"]["sha256"] = hashlib.sha256(model_path.read_bytes()).hexdigest()
     _write_manifest(manifest, document)
+
+
+def test_negative_raw_output_is_preserved_without_display_clipping(synthetic_bundle):
+    manifest, _ = synthetic_bundle
+    _install_negative_output_tree(manifest)
     assert _predict([_row(1)], manifest).raw_rul_cycles == -2.5
     presentation = predict_rul_with_context(
         [_row(1)],
@@ -218,3 +224,137 @@ def test_context_reports_observed_cycle_actual_row_count_and_quality_warnings(
     assert result.observed_cycle == cycles[-1]
     assert result.input_window_rows == 1  # Only final cycle falls inside saved2cycle window.
     assert result.warnings == ("cycle_gaps", "short_window")
+
+
+def _replace_saved_estimator(manifest, estimator):
+    model_path = manifest.parent / MODEL_FILENAME
+    joblib.dump(estimator, model_path)
+    document = json.loads(manifest.read_text())
+    document["payload"]["model"]["sha256"] = hashlib.sha256(model_path.read_bytes()).hexdigest()
+    _write_manifest(manifest, document)
+
+
+def test_missing_model_binary_fails_with_manifest_and_model_paths(synthetic_bundle):
+    manifest, _ = synthetic_bundle
+    model_path = manifest.parent / MODEL_FILENAME
+    model_path.unlink()
+    with pytest.raises(
+        PredictionArtifactError, match="Cannot read saved Decision Tree bundle"
+    ) as error:
+        _predict([_row(1)], manifest)
+    assert str(manifest) in str(error.value)
+    assert str(model_path) in str(error.value)
+
+
+@pytest.mark.parametrize("kind", ["scaler", "pipeline"])
+def test_scaler_or_preprocessing_pipeline_cannot_replace_the_plain_P06_tree(synthetic_bundle, kind):
+    manifest, _ = synthetic_bundle
+    X = [[0.0] * 8, [1.0] * 8]
+    if kind == "scaler":
+        replacement = StandardScaler().fit(X)
+    else:
+        replacement = Pipeline(
+            [
+                ("scale", StandardScaler()),
+                ("tree", DecisionTreeRegressor(random_state=42)),
+            ]
+        ).fit(X, [2, 4])
+    _replace_saved_estimator(manifest, replacement)
+    with pytest.raises(PredictionArtifactError, match="not a DecisionTreeRegressor"):
+        _predict([_row(1)], manifest)
+
+
+def test_estimator_feature_count_must_match_the_saved_schema(synthetic_bundle):
+    manifest, _ = synthetic_bundle
+    wrong_width = DecisionTreeRegressor(random_state=42, max_depth=8, min_samples_leaf=5)
+    wrong_width.fit([[0.0] * 4] * 5, [3] * 5)  # Saved config requires8 features.
+    _replace_saved_estimator(manifest, wrong_width)
+    with pytest.raises(PredictionArtifactError, match="dimensions do not match the feature schema"):
+        _predict([_row(1)], manifest)
+
+
+def test_unfitted_estimator_is_rejected_before_predicting(synthetic_bundle):
+    manifest, _ = synthetic_bundle
+    _replace_saved_estimator(manifest, DecisionTreeRegressor(random_state=42))
+    with pytest.raises(
+        PredictionArtifactError, match="Cannot load a compatible saved Decision Tree"
+    ):
+        _predict([_row(1)], manifest)
+
+
+@pytest.mark.parametrize(
+    "case,message",
+    [
+        ("artifact_schema", "Unsupported Decision Tree artifact schema"),
+        ("model_version", "Unsupported Decision Tree model name/version"),
+        ("runtime_version", "scikit-learn version does not match"),
+        ("parameters", "parameters differ from the manifest"),
+    ],
+)
+def test_rehashed_incompatible_artifact_contract_fails_clearly(synthetic_bundle, case, message):
+    manifest, _ = synthetic_bundle
+    document = json.loads(manifest.read_text())
+    payload = document["payload"]
+    if case == "artifact_schema":
+        payload["schema_version"] = "unsupported"
+    elif case == "model_version":
+        payload["model"]["version"] = "unsupported"
+    elif case == "runtime_version":
+        payload["model"]["scikit_learn_version"] = "incompatible-runtime"
+    else:
+        payload["training"]["parameters"]["max_depth"] = 9
+    _write_manifest(manifest, document)
+    with pytest.raises(PredictionArtifactError, match=message):
+        _predict([_row(1)], manifest)
+
+
+def test_manifest_checksum_detects_edited_configuration(synthetic_bundle):
+    manifest, _ = synthetic_bundle
+    document = json.loads(manifest.read_text())
+    document["payload"]["training"]["feature_config"]["window_cycles"] = 30
+    manifest.write_text(json.dumps(document), encoding="utf-8")  # Deliberately retain old checksum.
+    with pytest.raises(PredictionArtifactError, match="manifest content hash mismatch"):
+        _predict([_row(1)], manifest)
+
+
+def test_invalid_model_serialization_fails_even_when_its_byte_hash_matches(synthetic_bundle):
+    manifest, _ = synthetic_bundle
+    model_path = manifest.parent / MODEL_FILENAME
+    model_path.write_bytes(b"not a serialized model")
+    document = json.loads(manifest.read_text())
+    document["payload"]["model"]["sha256"] = hashlib.sha256(model_path.read_bytes()).hexdigest()
+    _write_manifest(manifest, document)
+    with pytest.raises(
+        PredictionArtifactError, match="Cannot load a compatible saved Decision Tree"
+    ):
+        _predict([_row(1)], manifest)
+
+
+def test_serialized_evaluation_record_keeps_raw_negative_value_separate_from_display(
+    synthetic_bundle, tmp_path
+):
+    manifest, _ = synthetic_bundle
+    _install_negative_output_tree(manifest)
+    history = [_row(1)]
+    raw = _predict(history, manifest)
+    context = predict_rul_with_context(
+        history,
+        dataset_partition="synthetic/P07-A3",
+        unit_id=99,
+        manifest_path=manifest,
+    )
+    record = {
+        "provenance": "synthetic temporary saved-tree test",
+        "units": "cycles",
+        "evaluation_prediction": asdict(raw),
+        "display_only": {
+            "displayed_rul_cycles": context.displayed_rul_cycles,
+            "policy": "max(0, raw_rul_cycles)",
+        },
+    }
+    path = tmp_path / "synthetic_raw_prediction.json"
+    path.write_text(json.dumps(record, allow_nan=False), encoding="utf-8")
+    restored = json.loads(path.read_text())
+    assert restored["evaluation_prediction"] == {"raw_rul_cycles": -2.5}
+    assert restored["display_only"]["displayed_rul_cycles"] == 0.0
+    assert raw.raw_rul_cycles == context.raw_rul_cycles == -2.5
