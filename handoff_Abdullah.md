@@ -1,5 +1,30 @@
 # Abdullah handoff
 
+## P07-A3 compatibility verification checkpoint - 13 November 2026
+
+- Inspected current status/AGENTS/owner handoff, exact198 and native blocker125 CLOSED; phase predecessor11 CLOSED. Preserved local acceptance/postmerge notes, pulled dev49aefa7 and created test/P07-A3-artifact-compatibility. Read actual model/feature loader and existing17tests. No competing198PR;344handOff PR separate. No real P06 bundle found recursively (featuretables/.gitkeep only); existing synthetic authorization applies.
+- Added12meaningful failure/record tests to tests/test_predictor.py: missing model binary, scaler/Pipeline substitution, wrong estimator width, unfitted tree, artifact/model/runtime versions, estimator params, manifest content drift, invalidserialization despite correcthash, and saved negative raw record separated from display. Existing guards already reject incompatible artifacts; no duplicate loader or preprocessing implementation. P06 has no scaler; explicitly rejected scaler/pipeline rather than inventing support.
+- New Windows-path assertion exposed modelpath only inside escaped OSError text. Small predictor.py fix explicitly names unavailablefile+underlying reason while preserving exceptioncause. Updated docs/prediction_service.md with cases, limits, prior125acceptance and actual outputs. No API/schema changes, model fitting feature, UI or other owner work.
+- Initial Ruff I001(importorder) fixed via `.venv/Scripts/python.exe -m ruff check tests/test_predictor.py --fix`; final fullRuff PASS. Initial focused1failed/28passed (including a repeat before pathfix) and full1failed/262passed in25.46s, all same Windows-path assertion. Fixed runtime message. Final `.venv/Scripts/python.exe -m pytest -q tests/test_predictor.py` **29passed in8.61s**; full `.venv/Scripts/python.exe -m pytest -q` **263passed in34.71s**; diffcheck PASS. No unresolved test failures.
+- Actual synthetic stdin run saved ignored reports/P07_A3_synthetic_checks.json: schema decision-tree-validation-v1/modeldecision-tree-rul-v1/featurepast-only-v1/seed42/sklearn1.9.1; observed scaler/width/missingbinary rejections; evaluation raw-2.5 retained afterJSONreload while separate labelleddisplay0. No FD001 result/metric. No real P06 model retraining, real service inference/reload NOT RUN:bundle absent. #49 parity NOT RUN/not implemented. Local Streamlit smoke NOT RUN:no app changes; full app tests pass.
+- Abdullah explicitly confirmed inspection/discussion of A3 synthetic failures/raw-display record and missing-real-bundle limitation with a teammate (unspecified). Existing field agreements supplied. Prepare Refs198 task PR to dev, five current-head CI and resolved conversations; normal merge authorized, no taskapproval. Close198 only after merge+complete evidence. P07 shared gate remains separate; no teammate messages sent. Record work/PR commits and nextready/blocker in substantive updates.
+
+
+## P07-A2 accepted and closed - 13 November 2026
+
+- Abdullah explicitly confirmed A2 synthetic outputs/limitations were inspected and discussed with a teammate: raw/display5.5/5.5 and-2.5/0, counts/warnings and missing-real-bundle limitation. Specific teammate unspecified; no GitHub approval or real-inference evidence invented.
+- Verified PR346 MERGED to dev49aefa7, then closed125 completed. A1 #48 and A2 #125 are CLOSED. Native #198 prerequisite125 now CLOSED; #198 is next Abdullah task, not implemented by this acceptance/status update. No runtime edits, so no repeated tests; final prior251PASS/RuffPASS/CIallfivePASS remain recorded evidence.
+- Real P06 bundle still absent; real service inference/parity NOT RUN, no retraining. Preserve this local acceptance/postmerge handoff for next substantive commit, avoiding hash-only PRs. No teammate messages sent.
+
+
+## P07-A2 implementation merged; output discussion pending - 13 November 2026
+
+- PR346 MERGED normally to dev as49aefa78cb4f21d29fc23cedaa67b1a57c55a2f0 at2026-11-13T03:46:46Z. Final head86b91974fe44ef033272890ae412e83e02417b52 had all five checks SUCCESS (run43360992989), zero threads and CLEAN. Worka8220ce/handoff86b9197 included in squash. Pulled dev49aefa7; main unchanged; no approval/admin bypass claimed.
+- #48 CLOSED after supplied teammate output-discussion confirmation. Both Shaheer/Taha A2 field agreement supplied. #125 remains OPEN pending requested human inspection/discussion of A2 context outputs; no response yet, no invented acceptance. Existing raw predict_rul one-field contract preserved; new predict_rul_with_context has seven agreed fields including raw/unclipped vs displaymax0 and actual observed/window context plus warnings. Shaheer keeps raw API for49; Taha can use context layer.
+- Final local focused17PASS in7.15s/full251PASS in46.97s; initial Ruff RUF022 export-order issue corrected and final full Ruff PASS; diffcheck PASS. Synthetic actual raw/display5.5/5.5 and-2.5/0 verified; raw eval value not overwritten. Real bundle absent; real P06 inference/reload NOT RUN/no retraining. Local Streamlit smoke NOT RUN:no app edits; required remote smoke PASS. No parity/modelcard/deployment/#198 work or teammate messages.
+- Next: after supplied context-output acceptance, close125 using merged evidence; inspect198/native blockers as separate task before work. Shared P07 still separate. This local postmerge handoff accompanies next substantive commit rather than a hash-only PR.
+
+
 ## P07-A2 prediction context checkpoint - 13 November 2026
 
 - Abdullah confirmed A1 output inspection/discussion with a teammate. Verified PR345 merged7d5c60e then closed48 completed; P07-A2 #125 blocker48 CLOSED and phase predecessor11 CLOSED. Read exact125/current AGENTS/ownerhandOff and actual raw-service/artifact contracts; preserved local A1 postmerge handoff, pulled current dev7d5c60e, created feat/P07-A2-prediction-context. No competing125 PR; teammate344 handoff PR left alone.

@@ -189,5 +189,79 @@ outputs, not FD001 results or metrics. Real P06 inference/reload NOT RUN: real
 bundle still absent; no real model retrained. Local Streamlit smoke NOT RUN:
 no app changes. No #49 parity, model-card, deployment or #198 compatibility
 packet implemented. Shaheer keeps using predict_rul/raw_rul_cycles for parity;
-Taha can consume the new context function for presentation. Independent human
-inspection/discussion of A2 output has been requested and remains pending.
+Taha can consume the new context function for presentation. Abdullah confirmed independent inspection/discussion of A2 output with a
+teammate; #125 is closed after its implementation merged to dev.
+
+## Compatibility and raw-record verification (P07-A3 / #198)
+
+The current P06 artifact is a plain DecisionTreeRegressor using unscaled saved
+features. There is no supported scaler file or preprocessing stage to recreate
+or pair with the model. Tests explicitly substitute a fitted StandardScaler
+and a scaler/tree Pipeline into the model slot, with valid updated byte/content
+hashes. Both fail the supported-model type check. This verifies rejection of
+unexpected preprocessing, not support for loading a scaler. No preprocessing
+or training fallback was added.
+
+The twelve additional cases in tests/test_predictor.py exercise:
+
+| Case | Observed behavior |
+| --- | --- |
+| Missing model binary | PredictionArtifactError names both manifest and unavailable model paths. |
+| Scaler or preprocessing Pipeline in model slot | Saved model is not a DecisionTreeRegressor. |
+| Estimator width differs from saved config | Saved estimator dimensions do not match the feature schema. |
+| Unfitted tree | Clear compatible-model loading error; no prediction returned. |
+| Unsupported artifact/model/runtime version | Specific compatibility error. |
+| Estimator parameters differ from manifest | Parameter mismatch error. |
+| Edited config with stale manifest checksum | Manifest content hash mismatch. |
+| Invalid serialization with updated byte checksum | Compatible-model loading error. |
+| Saved raw/display record | Reloaded raw stays-2.5; separately labelled display stays0.0. |
+
+Prior cases continue to cover a missing manifest, changed model-byte hash,
+wrong feature names/order/version, invalid raw input and label exclusion.
+No new public interface or return-shape decision was required. Model failures
+never produce a guessed or fallback RUL value.
+
+A new Windows-path test initially failed because the unavailable model path
+appeared only inside an escaped OSError representation. The small runtime fix
+now explicitly prints the failed file path and underlying reason. Existing
+callers still receive PredictionArtifactError with the original exception cause.
+The other compatibility guards already existed and were verified directly.
+
+### Executed checks (13 November 2026)
+
+- `.venv/Scripts/python.exe -m ruff check .` initially reported I001 import
+  ordering. `.venv/Scripts/python.exe -m ruff check tests/test_predictor.py --fix`
+  corrected that issue; final full Ruff PASS.
+- Initial focused runs:1failed/28passed, the missing-model Windows path assertion.
+  Initial full run:1failed/262passed in25.46s. The explicit-path fix resolved it.
+- Final `.venv/Scripts/python.exe -m pytest -q tests/test_predictor.py`:
+  **29passed in8.61s**.
+- Final `.venv/Scripts/python.exe -m pytest -q`: **263passed in34.71s**.
+- `git diff --check`: PASS before commit.
+
+An actual temporary-fixture execution saved
+`reports/P07_A3_synthetic_checks.json` (ignored), with provenance, seed42,
+artifact/model/feature versions, sklearn1.9.1, observed error messages and:
+
+```json
+{
+  "evaluation_prediction": {"raw_rul_cycles": -2.5},
+  "display_only": {
+    "displayed_rul_cycles": 0.0,
+    "policy": "max(0, raw_rul_cycles)"
+  }
+}
+```
+
+This is synthetic compatibility evidence, not FD001 predictions or metrics.
+The observed errors included "Saved model is not a DecisionTreeRegressor."
+and "Saved estimator dimensions do not match the feature schema." The missing
+binary message explicitly named decision_tree_model.joblib. Temporary artifacts
+were deleted; no raw/model/test artifact was committed.
+
+Abdullah confirmed the saved outputs and limitations were inspected/discussed
+with a teammate; the teammate was not specified. Both return-field agreements
+remain as recorded above. No GitHub approval or automated teammate message is
+claimed. Real P06 inference/reload and #49 parity NOT RUN here: the real bundle
+is absent and was not retrained. Local Streamlit smoke NOT RUN:no app changes;
+full app tests pass. P07 model-card/deployment/parity remain other owners' work.
